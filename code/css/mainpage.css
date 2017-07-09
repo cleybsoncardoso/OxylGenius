@@ -1,0 +1,101 @@
+.menu {
+    margin-left: 400px;
+}
+
+.elemento_menu {
+    margin-left: 60px;
+}
+
+.title1 {
+    margin-left: -95px;
+}
+
+.mdl-cell {
+    height: 450px;
+}
+
+.android-slogan {
+    font-size: 60px;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    color: #767777;
+    font-weight: 500;
+}
+
+.android-sub-slogan {
+    font-size: 21px;
+    padding-top: 24px;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    color: #767777;
+    font-weight: 500;
+}
+
+.demo-list-item {
+    width: 300px;
+}
+
+.item-nov {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    color: #767777;
+}
+
+.title-section-novs {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    color: #767777;
+    font-size: 29px;
+    text-align: center;
+}
+
+.logo {
+    margin-top: 36px;
+    width: 40px;
+    height: 40px;
+}
+
+.mdl-mini-footer {
+    height: 10px;
+}
+
+.mdl-layout__content {
+    height: 450px;
+}
+
+.col-md-9 {
+    margin-top: -40px;
+}
+
+.col-md-3 {
+    margin-top: 30px;
+}
+
+.container {
+    margin-bottom: 80px;
+}
+
+.mdl-mini-footer {
+    color: yellow;
+}
+
+.text-footer {
+    color: #fff;
+}
+
+.mdl-mini-footer {
+    bottom: 0;
+}
+
+@media (max-width: 900px) {
+    .text-footer {
+        margin-top: -25px;
+        font-size: 10pt;
+    }
+}
+
+@media (min-height: 1024px) {
+    .mdl-mini-footer {
+        bottom: 0;
+        position: fixed;
+        width: 100%;
+    }
+}

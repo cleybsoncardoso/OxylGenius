@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <!-- Assets do projeto -->
+    <script src="vendor.min.js"></script>
+    <script src="app.min.js"></script>
+    <link rel="stylesheet" href="vendor.min.css">
+    <link rel="stylesheet" href="app.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="dashboard" class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+            <header class="mdl-layout__header mdl-color--white mdl-color-text--grey-700">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">{{selected.nome}}</span>
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <div class="usuario-perfil">
+                    <div class="usuario-foto">
+                        <i class="mdl-color-text--grey-700 material-icons">account_circle</i>
+                    </div>
+                    <div class="usuario-nome mdl-color-text--grey-700">Username</div>
+                    <button class="logout-button mdl-button mdl-js-button mdl-button--colored mdl-color--red-400 mdl-color-text--white">
+                        Sair
+                    </button>
+                </div>
+                <hr style="margin: 0" />
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="#" id="1" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons" >account_circle</i> Perfil
+                    </a>
+                    <a class="mdl-navigation__link" href="#" id="2" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons">filter_list</i> Items
+                    </a>
+                    <a class="mdl-navigation__link" href="#" id="3" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons">group</i> Usuários Cadastrados
+                    </a>
+                    <a class="mdl-navigation__link" href="#" id="4" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons">assignment_turned_in</i> Avaliações Pendentes
+                    </a>
+                </nav>
+            </div>
+            <main class="mdl-layout__content mdl-color--grey-300">
+                <!-- Conteudo -->
+                <perfil-view v-show="selected.id == 1"></perfil-view>
+                <itens-view v-show="selected.id == 2"></itens-view>
+                <usuarios-view v-show="selected.id == 3"></usuarios-view>
+            </main>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    selected: {
+                        nome: 'Perfil',
+                        id: 1
+                    }
+                }
+            },
+            methods: {
+                select: function (ev) {
+                    this.selected = {
+                        nome: ev.currentTarget.innerText.split(' ')[1],
+                        id: ev.currentTarget.id
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

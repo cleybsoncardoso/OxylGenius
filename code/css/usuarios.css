@@ -1,0 +1,37 @@
+#usuarios-view{
+    width: 100%;
+    max-width: 900px;
+    margin: 16px auto;
+    display: block;
+}
+
+#usuarios-view #seachbar{
+    margin-top: 16px;
+}
+
+#usuarios-view #seachbar button{
+    margin: 0 4px;
+}
+
+#usuarios-view #search-input{
+    padding: 0;
+    flex-grow: 1;
+}
+
+#usuarios-view #search-input input{
+    border-bottom: none;
+}
+
+#usuarios-view #search-input label{
+    top: 5px;
+    color: grey;
+}
+
+#usuarios-view #search-input label:after{
+    background: none;
+}
+
+#usuarios-view .usuarios-list{
+    margin: 0;
+    padding: 0;
+}
