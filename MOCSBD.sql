@@ -1,8 +1,12 @@
+create database MOCS
+default character set utf8
+default collate utf8_general_ci;
 
 
-use id2171616_oxylgenius;
+use MOCS;
 create table usuario (
 ID int primary key auto_increment,
+tokenAcesso int(10),
 Login varchar(30) ,
 Senha varchar (10) NOT NULL,
 Nome varchar(30) NOT NULL,
@@ -28,13 +32,22 @@ ID_Autor int NOT NULL,
 Nota float
 ) Default charset = utf8;
 
-create table mudanca(
-ID_mudanca int primary key NOT NULL auto_increment,
+create table mudancaEmpregado(
+ID_mudancaEmpregado int primary key NOT NULL auto_increment,
+ID_Autor int,
+ID_Empregado int,
+conteudo varchar(10),
+DataAlteracao date
+)Default charset = utf8;
+
+create table mudancaObra(
+ID_mudancaObra int primary key NOT NULL auto_increment,
 ID_Autor int,
 ID_Obra int,
-DtadeCriacao date
+conteudo varchar(300),
+DataAlteracao date
 )Default charset = utf8;
-use id2171616_oxylgenius;
+use MOCS;
 create table obra(
 ID_Obra int primary key NOT NULL auto_increment,
 ft_frente  longblob,
@@ -92,27 +105,6 @@ ADD foreign key (idsupervisao)
 references usuario(ID);
 
 ALTER TABLE usuario
-ADD COLUMN idavaliacao int;
-
-ALTER TABLE usuario
-ADD foreign key (idavaliacao)
-references avaliacao(ID_avaliacao);
-
-ALTER TABLE usuario
-ADD COLUMN idnotificacao int;
-
-ALTER TABLE usuario
-ADD foreign key (idnotificacao)
-references notificacao(ID_notificacao);
-
-ALTER TABLE usuario
-ADD COLUMN idmudanca int;
-
-ALTER TABLE usuario
-ADD foreign key (idmudanca)
-references mudanca(ID_mudanca);
-
-ALTER TABLE usuario
 ADD COLUMN idobra int;
 
 ALTER TABLE usuario
@@ -127,8 +119,20 @@ ALTER TABLE avaliacao
 ADD foreign key (ID_Autor)
 references usuario(ID);
 
-ALTER TABLE mudanca
+ALTER TABLE mudancaObra
 ADD foreign key (ID_Autor)
+references usuario(ID);
+
+ALTER TABLE mudancaObra
+ADD foreign key (ID_Obra)
+references obra(ID_Obra);
+
+ALTER TABLE mudancaEmpregado
+ADD foreign key (ID_Autor)
+references usuario(ID);
+
+ALTER TABLE mudancaEmpregado
+ADD foreign key (ID_Empregado)
 references usuario(ID);
 
 ALTER TABLE obra
