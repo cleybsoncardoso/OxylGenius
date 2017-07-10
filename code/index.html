@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="css/mainpage.css">
+    <link rel="stylesheet" href="css/modal_login.css">
+    <link rel="stylesheet" href="css/login-fb-google.css">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,16 +25,14 @@
 
     <script src="app.min.js"></script>
     <script src="j1.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.0/css/mdb.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.0/js/mdb.min.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="app.min.css">
+
 </head>
 
 <body>
-
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
@@ -41,7 +41,42 @@
                     <nav class="mdl-navigation mdl-layout--large-screen-only">
                         <div class="elemento_menu"><a href="#" class="mdl-navigation__link">Sobre</a></div>
                         <div class="elemento_menu"><a href="#" class="mdl-navigation__link"> Galeria</a></div>
-                        <div class="elemento_menu"><a href="login.html" class="mdl-navigation__link"> Entrar</a></div>
+                        <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id01').style.display='block'">Entrar</a></div>
+
+                        <div id="id01" class="modal">
+                            <div id="perfil-view" class="card-view mdl-card mdl-shadow--2dp">
+
+                                <div class="mdl-card__supporting-text">
+
+                                    <button class="loginBtn loginBtn--facebook">
+                                        Login pelo Facebook
+                                    </button>
+
+                                    <button class="loginBtn loginBtn--google">
+                                        Login pelo Google
+                                    </button>
+
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" id="username_input">
+                                        <label class="mdl-textfield__label" for="username_input">Email</label>
+                                    </div>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="password" id="pass_input">
+                                        <label class="mdl-textfield__label" for="pass_input">Senha</label>
+                                    </div>
+
+                                </div>
+                                <div class="mdl-card__actions mdl-card--border" style="display: flex">
+                                    <div style="flex-grow: 1"></div>
+                                    <a v-on:click="load()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                                        Entrar
+                                </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
                         <div class="elemento_menu "><a href="#" class="mdl-navigation__link "> Cadastrar</a></div>
                     </nav>
                 </div>
@@ -94,7 +129,6 @@
                             </ul>
 
                         </div>
-
                         <div class="col-md-9 ">
                             <div class="body-section mdl-typography--text-center ">
                                 <div class="logo-font android-slogan ">O seu museu agora em versão digital!</div>
@@ -103,11 +137,7 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
-
             </main>
 
             <footer class="mdl-mini-footer ">
@@ -115,8 +145,6 @@
             </footer>
         </div>
     </div>
-
-
 
     <script>
         $(document).ready(function() {
@@ -129,7 +157,15 @@
     </script>
 
 
-
+    <script>
+        var modal = document.getElementById('id01');
+        //fecha quando o user clica fora
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 
