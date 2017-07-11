@@ -24,7 +24,6 @@
     <script src="vendor.min.js"></script>
 
     <script src="app.min.js"></script>
-    <script src="j1.js"></script>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -33,7 +32,7 @@
 </head>
 
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="app">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <img class="title1" src="imagens/logo.png">
@@ -43,38 +42,8 @@
                         <div class="elemento_menu"><a href="#" class="mdl-navigation__link"> Galeria</a></div>
                         <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id01').style.display='block'">Entrar</a></div>
 
-                        <div id="id01" class="modal">
-                            <div id="perfil-view" class="card-view mdl-card mdl-shadow--2dp">
-
-                                <div class="mdl-card__supporting-text">
-
-                                    <button class="loginBtn loginBtn--facebook">
-                                        Login pelo Facebook
-                                    </button>
-
-                                    <button class="loginBtn loginBtn--google">
-                                        Login pelo Google
-                                    </button>
-
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="text" id="username_input">
-                                        <label class="mdl-textfield__label" for="username_input">Email</label>
-                                    </div>
-                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                        <input class="mdl-textfield__input" type="password" id="pass_input">
-                                        <label class="mdl-textfield__label" for="pass_input">Senha</label>
-                                    </div>
-
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border" style="display: flex">
-                                    <div style="flex-grow: 1"></div>
-                                    <a v-on:click="load()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                                        Entrar
-                                </a>
-                                </div>
-
-                            </div>
-
+                        <div id="id01" class="obfuscator">
+                            <login-modal class="animate-zoom"></login-modal>
                         </div>
 
                         <div class="elemento_menu "><a href="#" class="mdl-navigation__link "> Cadastrar</a></div>
@@ -133,7 +102,6 @@
                             <div class="body-section mdl-typography--text-center ">
                                 <div class="logo-font android-slogan ">O seu museu agora em versão digital!</div>
                                 <div class="logo-font android-sub-slogan ">Confira as obras disponíveis e tenha acesso à visualização 3D</div>
-
                             </div>
                         </div>
                     </div>
@@ -147,7 +115,19 @@
     </div>
 
     <script>
-        $(document).ready(function() {
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                }
+            },
+            methods: {
+            }
+        })
+    </script>
+
+    <script>
+        $(document).ready(function () {
             $('.owl-carousel').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -156,11 +136,10 @@
         });
     </script>
 
-
     <script>
         var modal = document.getElementById('id01');
         //fecha quando o user clica fora
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }

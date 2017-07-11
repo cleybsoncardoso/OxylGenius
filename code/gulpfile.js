@@ -28,13 +28,13 @@ gulp.task('js', function () {
 
     gulp.src('vendor/**/*.js')
         .pipe(concat('vendor.min.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest(''));
 });
 
 gulp.task('watch', function () {
-    gulp.watch('js/**/*.js', ['js']),
-        gulp.watch('css/**/*.css', ['css']);
+    gulp.watch('js/**/*.js', ['js']);
+    gulp.watch('css/**/*.css', ['css']);
 });
 
 gulp.task('default', ['css', 'js', 'watch']);
