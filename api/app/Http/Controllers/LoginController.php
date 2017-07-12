@@ -35,11 +35,11 @@ class LoginController extends Controller
 
             do{
                 $token = md5(rand(0,$max)) . '-' . sha1(rand(0,$max));
-                $buscar = DB::SELECT('SELECT * FROM usuario WHERE token = ?', [$token]);
+                $buscar = DB::SELECT('SELECT * FROM usuario WHERE tokenAcesso = ?', [$token]);
                 if ($buscar == null)
                     $again = false;
             } while($again);
-            $update = DB::UPDATE('UPDATE usuario SET token =  ? WHERE ID = ?', [$token, $usuario->ID]);
+            $update = DB::UPDATE('UPDATE usuario SET tokenAcesso =  ? WHERE ID = ?', [$token, $usuario->ID]);
 
             $aux = array();
             $aux['token'] = $token;
