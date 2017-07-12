@@ -42,7 +42,7 @@ Vue.component('login-modal', {
                 senha: this.password,
             }
 
-            this.$http.post('url', params).then((response) => {
+            this.$http.post('http://oxylgenius.000webhostapp.com/api/public/login', params).then((response) => {
                 //foi
             }, () => {
                 //nao
