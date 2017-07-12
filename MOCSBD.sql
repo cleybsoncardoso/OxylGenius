@@ -1,9 +1,4 @@
-create database MOCS
-default character set utf8
-default collate utf8_general_ci;
-
-
-use MOCS;
+use id2171616_oxylgenius;
 create table usuario (
 ID int primary key auto_increment,
 tokenAcesso int(10),
@@ -47,7 +42,7 @@ ID_Obra int,
 conteudo varchar(300),
 DataAlteracao date
 )Default charset = utf8;
-use MOCS;
+use id2171616_oxylgenius;
 create table obra(
 ID_Obra int primary key NOT NULL auto_increment,
 ft_frente  longblob,
@@ -104,12 +99,6 @@ ALTER TABLE usuario
 ADD foreign key (idsupervisao)
 references usuario(ID);
 
-ALTER TABLE usuario
-ADD COLUMN idobra int;
-
-ALTER TABLE usuario
-ADD foreign key (idobra)
-references obra(ID_Obra);
 
 ALTER TABLE notificacao
 ADD foreign key (ID_Autor)
