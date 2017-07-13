@@ -17,39 +17,49 @@ class LoginController extends Controller
         return $array;
     }
 
+    /**
+    Função que loga com o login e senha
+    */
     public function logar(Request $request){
-        $dados = $request->all();
-        $dados = $this->againstSQL($dados);
+        $dados = $request->all();                   //pega os parametros que foram passados na requisição
+        $dados = $this->againstSQL($dados);         //testa sql inject
 
-        $dados['senha'] = base64_encode($dados['senha']);
+        $dados['senha'] = base64_encode($dados['senha']); //criptografa senha
 
         $usuario = DB::SELECT('SELECT * FROM usuario WHERE Login = ? AND Senha = ?',
-        [$dados['login'], $dados['senha']]);
+        [$dados['login'], $dados['senha']]); //procura o usuario no banco utilizando o Facades, procurando atra-
+                                            //vés dos dados login e senha que foram passados pela requisição
 
         if ($usuario == null){
-            return response()->json(404);
+            return response()->json(404);   //retorna erro se nao encontrar o usuario
         } else {
             $usuario = $usuario[0];
-            $max = getrandmax();
-            $again = true;
+            $max = getrandmax();        //gera o maior valor aleatório possivel
+            $again = true;              //chave que verifica se esse token ja existe
 
-            do{
-                $token = md5(rand(0,$max)) . '-' . sha1(rand(0,$max));
+            do{ //loop verifica se o token ja existe, caso exista, um novo numero aleatorio é sorteado
+                $token = md5(rand(0,$max)) . '-' . sha1(rand(0,$max)); //criptografa o numero aleatorio, gerando mais segurança, por aumentar o tamanho do token e envolver caracteres
                 $buscar = DB::SELECT('SELECT * FROM usuario WHERE tokenAcesso = ?', [$token]);
                 if ($buscar == null)
                     $again = false;
             } while($again);
-            $update = DB::UPDATE('UPDATE usuario SET tokenAcesso =  ? WHERE ID = ?', [$token, $usuario->ID]);
+            $update = DB::UPDATE('UPDATE usuario SET tokenAcesso =  ? WHERE ID = ?', [$token, $usuario->ID]); //atualiza o token do usuario
 
             $aux = array();
             $aux['token'] = $token;
+            $aux['tipo'] = $usuario->Tipo;
             return response()->json($aux);
         }
     }
 
+    /**
+        Função que loga com o facebook
+    */
     public function logarFacebook(Request $request){
-        $dados = $request->all();
+        $dados = $request->all();           
         $dados = $this->againstSQL($dados);
+
+        //Veiga vai jogar a api dele aqui, e salvar os dados dentro das variaveis  $dados['facebook'], $dados['nome'] e da de fotos que ainda nao tem, e o resto euja implementei
 
         $usuario = DB::SELECT('SELECT * FROM usuario WHERE LoginFacebook = ?',
         [$dados['facebook']]);
@@ -80,7 +90,7 @@ class LoginController extends Controller
     public function logarGoogle(Request $request){
         $dados = $request->all();
         $dados = $this->againstSQL($dados);
-
+//crystal vai jogar a api dele aqui, e salvar os dados dentro das variaveis  $dados['facebook'], $dados['nome'] e da de fotos que ainda nao tem, e o resto euja implementei
         $usuario = DB::SELECT('SELECT * FROM usuario WHERE LoginGoogle = ?',
         [$dados['google']]);
 

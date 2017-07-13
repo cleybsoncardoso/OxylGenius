@@ -38,14 +38,15 @@ Vue.component('login-modal', {
         },
         login: function () {
             var params = {
-                nome: this.name,
+                login: this.name,
                 senha: this.password,
             }
-
             this.$http.post('http://oxylgenius.000webhostapp.com/api/public/login', params).then((response) => {
                 //foi
-            }, () => {
+                console.log(response.data);
+            }, (error) => {
                 //nao
+                console.log(error);
             })
         }
     }
