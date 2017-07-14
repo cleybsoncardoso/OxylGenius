@@ -61,20 +61,12 @@
     height: 450px;
 }
 
-.col-md-9 {
-    margin-top: -40px;
-}
-
 .col-md-3 {
     margin-top: 30px;
 }
 
 .container {
     margin-bottom: 80px;
-}
-
-.mdl-mini-footer {
-    color: yellow;
 }
 
 .text-footer {
