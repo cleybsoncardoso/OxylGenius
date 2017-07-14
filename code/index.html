@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="css/mainpage.css">
     <link rel="stylesheet" href="css/modal_login.css">
     <link rel="stylesheet" href="css/login-fb-google.css">
-    <link rel="stylesheet" href="css/register.css">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,12 +46,7 @@
                         <div id="id01" class="obfuscator">
                             <login-modal class="animate-zoom"></login-modal>
                         </div>
-
-                        <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id02').style.display='block'">Cadastrar</a></div>
-
-                        <div id="id02" class="obfuscator">
-                            <register class="animate-zoom"></register>
-                        </div>
+                        <div class="elemento_menu"><a href="cadastrar.html" class="mdl-navigation__link">Cadastrar</a></div>
 
 
                     </nav>
@@ -66,6 +60,7 @@
                 <a class="mdl-navigation__link " href=" ">Sobre</a>
                 <a class="mdl-navigation__link " href=" ">Galeria</a>
                 <a href="# " class="mdl-navigation__link "> Entrar</a>
+                <a class="mdl-navigation__link " href="_">Cadastrar</a>
 
             </nav>
         </div>
@@ -153,15 +148,6 @@
         }
     </script>
 
-    <script>
-        var modal = document.getElementById('id02');
-        //fecha quando o user clica fora
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 </body>
 
 </html>
