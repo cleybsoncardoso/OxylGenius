@@ -7,18 +7,15 @@ Vue.component('itens-view', {
                 <input class="mdl-textfield__input" type="text" id="search" v-model="searchText">
                 <label class="mdl-textfield__label" for="search">Pesquisar por uma obra</label>
             </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised" :disabled="!searchText">
-                Pesquisar
-            </button>
 
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            <button v-on:click="addItem()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                 Adicionar Item
             </button>
         </div>
     </div>
 
-    <div class="itens-grid mdl-grid">
-        <div class="mdl-cell mdl-cell--4-col">
+    <div class="row">
+        <div class="col-md-4">
             <div class="item mdl-card mdl-shadow--4dp">
                 <div class="obra-foto" style="background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
                 </div>
@@ -31,7 +28,7 @@ Vue.component('itens-view', {
                 </div>
             </div>
         </div>
-        <div class="mdl-cell mdl-cell--4-col">
+        <div class="col-md-4">
             <div class="item mdl-card mdl-shadow--4dp">
                 <div class="obra-foto" style="background-image: url('https://ogimg.infoglobo.com.br/in/10364026-b86-5bf/FT1500A/550/2013101455102.jpg')">
                 </div>
@@ -45,13 +42,22 @@ Vue.component('itens-view', {
             </div>
         </div>
     </div>
+
+    <div class="mocs-obfuscator" v-show="openItemModal">
+        <add-item class="zoonIn" @closeModalAdd="openItemModal = false"></add-item>
+    </div>
 </div>
     `,
     data: function () {
         return {
-            searchText: ''
+            searchText: '',
+            openItemModal: false
         }
     },
     methods: {
+        addItem: function(){
+            this.openItemModal = true;
+            $('#dashboard_main').addClass('noscroll');
+        }
     }
 });

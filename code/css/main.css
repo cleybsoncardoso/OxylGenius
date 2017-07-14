@@ -44,6 +44,26 @@ a, a:hover{
     width: 100%;
 }
 
+.mocs-obfuscator{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    overflow-y: auto;
+    top: 0;
+    left: 0; 
+    height: 100%;
+    width: 100%;
+    z-index: 4;
+    /* visibility: hidden; */
+    transition-property: background-color;
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    justify-content: center;
+}
+
+.noscroll{
+    overflow: hidden;
+}
 /*-------- Animações --------*/
 .zoomIn {
     animation: zoomIn 0.1s 0s 1 linear alternate;

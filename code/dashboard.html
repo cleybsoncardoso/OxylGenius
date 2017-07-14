@@ -44,11 +44,11 @@
                         <i class="mdl-color-text--grey-700 material-icons">group</i> Usuários Cadastrados
                     </a>
                     <a class="mdl-navigation__link" href="#" id="4" v-on:click="select($event)">
-                        <i class="mdl-color-text--grey-700 material-icons">assignment_turned_in</i> Avaliações Pendentes
+                        <i class="mdl-color-text--grey-700 material-icons">history</i> Logs do Sistema
                     </a>
                 </nav>
             </div>
-            <main class="mdl-layout__content mdl-color--grey-300">
+            <main id="dashboard_main" class="mdl-layout__content mdl-color--grey-300">
                 <!-- Conteudo -->
                 <perfil-view v-show="selected.id == 1"></perfil-view>
                 <itens-view v-show="selected.id == 2"></itens-view>
@@ -69,13 +69,31 @@
             },
             methods: {
                 select: function (ev) {
+                    var split = ev.currentTarget.innerText.split(' ');
+                    var title = split[1];
+
+                    if (split[2]) {
+                        for (var i = 1; i < split.length; i++) {
+                            if (i > 1) {
+                                title += ' ' + split[i];
+                            }
+                        }
+                    }
+
                     this.selected = {
-                        nome: ev.currentTarget.innerText.split(' ')[1],
+                        nome: title,
                         id: ev.currentTarget.id
+                    }
+
+
+                    
+                    if($('.mdl-layout__obfuscator').hasClass('is-visible')){
+                        $('.mdl-layout__drawer, .mdl-layout__obfuscator').toggleClass('is-visible');
                     }
                 }
             }
-        })
+        });
+        var URL_API = 'http://oxylgenius.000webhostapp.com/api/public/';
     </script>
 </body>
 

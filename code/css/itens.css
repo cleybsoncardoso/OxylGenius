@@ -31,16 +31,11 @@
     background: none;
 }
 
-#itens-view .itens-grid{
-    padding: 16px 0;
+#itens-view .row{
     margin-top: 16px;
-    position: relative;
-    right: 8px;
-    max-width: 908px;
-    width: 100%;
 }
 
-#itens-view .itens-grid .item{
+#itens-view .row .item{
     width: 100%;
 }
 
