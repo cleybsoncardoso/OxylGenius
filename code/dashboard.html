@@ -86,14 +86,22 @@
                     }
 
 
-                    
-                    if($('.mdl-layout__obfuscator').hasClass('is-visible')){
+
+                    if ($('.mdl-layout__obfuscator').hasClass('is-visible')) {
                         $('.mdl-layout__drawer, .mdl-layout__obfuscator').toggleClass('is-visible');
                     }
                 }
             }
         });
         var URL_API = 'http://oxylgenius.000webhostapp.com/api/public/';
+
+        function isUserAuth() {
+            var storage = new Storage();
+
+            if (!storage.existe('user')) {
+                window.location.href = "error.html";
+            }
+        }
     </script>
 </body>
 
