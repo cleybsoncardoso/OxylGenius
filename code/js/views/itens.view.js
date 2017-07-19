@@ -16,11 +16,11 @@ Vue.component('itens-view', {
 
     <div class="row">
         <div class="col-sm-4">
-            <div class="item mdl-card mdl-shadow--4dp">
+            <div class="item mdl-card mdl-shadow--4dp" @click="openItem()">
                 <div class="obra-foto" style="background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
                 </div>
                 <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">Obra A</h2>
+                    <h2 class="mdl-card__title-text">Obra A </h2>
                 </div>
                 <div class="mdl-card__supporting-text">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -42,22 +42,35 @@ Vue.component('itens-view', {
             </div>
         </div>
     </div>
-
+    
     <div class="mocs-obfuscator" v-show="openItemModal">
-        <add-item class="zoonIn" @closeModalAdd="openItemModal = false"></add-item>
+        <add-item class="zoonIn" :item="selectedItem" @closeModalAdd="modalClosed"></add-item>
     </div>
 </div>
     `,
     data: function () {
         return {
             searchText: '',
-            openItemModal: false
+            openItemModal: false,
+            selectedItem: ''
         }
     },
     methods: {
-        addItem: function(){
+        addItem: function () {
             this.openItemModal = true;
             $('#dashboard_main').addClass('noscroll');
+        },
+        openItem: function () {
+            this.selectedItem = {
+                imagem: "https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg",
+                titulo: "Obra A",
+                descricao: "orem ipsum dolor sit amet, consectetur adipiscing elit Mauris sagittis pellentesque lacus eleifend lacinia"
+            }
+            this.addItem();
+        },
+        modalClosed: function () {
+            this.selectedItem = '';
+            this.openItemModal = false
         }
     }
 });

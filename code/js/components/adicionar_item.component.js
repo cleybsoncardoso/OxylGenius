@@ -1,8 +1,12 @@
 Vue.component('add-item', {
+    props: ['item'],
     template: `
     <div id="add-item" class="card-view mdl-card mdl-shadow--2dp">
         <div class="mdl-card__title mdl-card--border">
-            <h2 class="mdl-card__title-text">Adicionar uma obra</h2>
+            <h2 class="mdl-card__title-text">
+                <span v-show="item">Editar obra</span>
+                <span v-show="!item"> Adicionar uma obra</span>
+            </h2>
         </div>
         <div class="mdl-card__supporting-text" style="width: 100%">
             <div class="row">
@@ -46,9 +50,9 @@ Vue.component('add-item', {
     `,
     data: function () {
         return {
-            imagem: "",
-            titulo: "",
-            descricao: "",
+            imagem: this.item ? this.item.imagem : "",
+            titulo: this.item ? this.item.titulo : "",
+            descricao: this.item ? this.item.descricao : "",
             error: {
                 type: 'success',
                 message: ''
@@ -82,15 +86,29 @@ Vue.component('add-item', {
             this.imagem = "";
             document.getElementById('image-input').value = "";
         },
-        valido: function(){
+        valido: function () {
             return this.imagem && this.titulo && this.descricao ? true : false;
         },
-        close: function(){
+        close: function () {
+            this.imagem = "";
+            this.titulo = "";
+            this.descricao = "";
+            this.item = "";
             this.$emit('closeModalAdd');
+            $('#add-item .mdl-textfield').removeClass('is-dirty');
             $('#dashboard_main').removeClass('noscroll');
         }
     },
+    watch: {
+        item: function () {
+            if (this.item) {
+                this.imagem = this.item.imagem;
+                this.titulo = this.item.titulo;
+                this.descricao = this.item.titulo;
+                $('#add-item .mdl-textfield').addClass('is-dirty');
+            }
+        }
+    },
     created: function () {
-        this.$emit('noscroll');
     }
 });

@@ -34,25 +34,25 @@
                 </div>
                 <hr style="margin: 0" />
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="#" id="1" v-on:click="select($event)">
+                    <a class="mdl-navigation__link" href="#perfil" id="perfil" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons" >account_circle</i> Perfil
                     </a>
-                    <a class="mdl-navigation__link" href="#" id="2" v-on:click="select($event)">
+                    <a class="mdl-navigation__link" href="#itens" id="itens" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons">filter_list</i> Items
                     </a>
-                    <a class="mdl-navigation__link" href="#" id="3" v-on:click="select($event)">
+                    <a class="mdl-navigation__link" href="#usuarios" id="usuarios" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons">group</i> Usuários Cadastrados
                     </a>
-                    <a class="mdl-navigation__link" href="#" id="4" v-on:click="select($event)">
+                    <a class="mdl-navigation__link" href="#logs" id="logs" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons">history</i> Logs do Sistema
                     </a>
                 </nav>
             </div>
             <main id="dashboard_main" class="mdl-layout__content mdl-color--grey-300">
                 <!-- Conteudo -->
-                <perfil-view v-show="selected.id == 1"></perfil-view>
-                <itens-view v-show="selected.id == 2"></itens-view>
-                <usuarios-view v-show="selected.id == 3"></usuarios-view>
+                <perfil-view v-show="selected.id == 'perfil'"></perfil-view>
+                <itens-view v-show="selected.id == 'itens'"></itens-view>
+                <usuarios-view v-show="selected.id == 'usuarios'"></usuarios-view>
             </main>
         </div>
     </div>
@@ -63,13 +63,13 @@
                 return {
                     selected: {
                         nome: 'Perfil',
-                        id: 1
+                        id: 'perfil'
                     }
                 }
             },
             methods: {
-                select: function (ev) {
-                    var split = ev.currentTarget.innerText.split(' ');
+                select: function (ev, target) {
+                    var split = ev ? ev.currentTarget.innerText.split(' ') : target.innerText.split(' ');
                     var title = split[1];
 
                     if (split[2]) {
@@ -82,13 +82,23 @@
 
                     this.selected = {
                         nome: title,
-                        id: ev.currentTarget.id
+                        id: ev ? ev.currentTarget.id : target.id
                     }
-
-
 
                     if ($('.mdl-layout__obfuscator').hasClass('is-visible')) {
                         $('.mdl-layout__drawer, .mdl-layout__obfuscator').toggleClass('is-visible');
+                    }
+                }
+            },
+            created: function () {
+                var url = window.location.href;
+                var categoria = url.split('#')[1];
+                if (categoria) {
+                    var links = $('#dashboard .mdl-navigation__link');
+                    for (var i = 0; i < links.length; i++) {
+                        if (links[i].id.toUpperCase() == categoria.toUpperCase()) {
+                            this.select(null, links[i]);
+                        }
                     }
                 }
             }
