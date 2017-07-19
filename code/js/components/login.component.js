@@ -41,7 +41,7 @@ Vue.component('login-modal', {
                 login: this.name,
                 senha: this.password,
             }
-            this.$http.post('api/public/login', params).then((response) => {
+            this.$http.post(URL_API + 'login', params).then((response) => {
                 //foi
                 console.log(response.data);
             }, (error) => {

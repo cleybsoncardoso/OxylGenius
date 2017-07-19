@@ -1,3 +1,5 @@
+var URL_API = 'http://mocs.freeiz.com/api/public/';
+
 var Storage = (() => {
     var prefix = "mocs_";
 
@@ -8,7 +10,7 @@ var Storage = (() => {
     }
 
     Storage.prototype.recuperar = function (entidade) {
-        return this.existe(entidade) ? JSON.getItem(entidade) : null;
+        return this.existe(entidade) ? JSON.parse(localStorage.getItem(entidade)) : null;
     }
 
     Storage.prototype.existe = function (entidade) {
@@ -17,3 +19,11 @@ var Storage = (() => {
 
     return Storage;
 })();
+
+function isUserAuth() {
+    var storage = new Storage();
+
+    if (!storage.existe('token')) {
+        window.location.href = "error.html";
+    }
+}
