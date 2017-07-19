@@ -10,11 +10,11 @@ var Storage = (() => {
     }
 
     Storage.prototype.recuperar = function (entidade) {
-        return this.existe(entidade) ? JSON.parse(localStorage.getItem(entidade)) : null;
+        return this.existe(entidade) ? JSON.parse(localStorage.getItem(prefix + entidade)) : null;
     }
 
     Storage.prototype.existe = function (entidade) {
-        return localStorage.getItem(entidade) ? true : false;
+        return localStorage.getItem(prefix + entidade) ? true : false;
     }
 
     return Storage;
