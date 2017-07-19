@@ -44,6 +44,8 @@ Vue.component('login-modal', {
             this.$http.post(URL_API + 'login', params).then((response) => {
                 //foi
                 console.log(response.data);
+                var storage = new Storage();
+                storage.gravar('token', response.data);
             }, (error) => {
                 //nao
                 console.log(error);
