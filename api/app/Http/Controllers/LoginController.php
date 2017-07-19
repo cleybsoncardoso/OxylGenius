@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 require_once ('libraries/Google/autoload.php');
 use Illuminate\Http\Request;
@@ -86,6 +87,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['code'])){
       if(isset($user->email) && $user->email){
         $dados['nome'] = $user->name;
         $dados['facebook'] = $user->id;
+
         $usuario = DB::SELECT('SELECT * FROM usuario WHERE LoginFacebook = ?',
         [$dados['facebook']]);
 
