@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard</title>
+    <!-- Assets do projeto -->
+    <script src="vendor.min.js"></script>
+    <script src="app.min.js"></script>
+    <link rel="stylesheet" href="vendor.min.css">
+    <link rel="stylesheet" href="app.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="dashboard" class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+            <header class="mdl-layout__header mdl-color--white mdl-color-text--grey-700">
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout-title">{{selected.nome}}</span>
+                    <div class="mdl-layout-spacer"></div>
+                </div>
+            </header>
+            <div class="mdl-layout__drawer">
+                <div class="usuario-perfil">
+                    <div class="usuario-foto">
+                        <i class="mdl-color-text--grey-700 material-icons">account_circle</i>
+                    </div>
+                    <div class="usuario-nome mdl-color-text--grey-700">Username</div>
+                    <button class="logout-button mdl-button mdl-js-button mdl-button--colored mdl-color--red-400 mdl-color-text--white">
+                        Sair
+                    </button>
+                </div>
+                <hr style="margin: 0" />
+                <nav class="mdl-navigation">
+                    <a class="mdl-navigation__link" href="#perfil" id="perfil" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons" >account_circle</i> Perfil
+                    </a>
+                    <a class="mdl-navigation__link" href="#itens" id="itens" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons">filter_list</i> Items
+                    </a>
+                    <a class="mdl-navigation__link" href="#usuarios" id="usuarios" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons">group</i> Usuários Cadastrados
+                    </a>
+                    <a class="mdl-navigation__link" href="#logs" id="logs" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons">history</i> Logs do Sistema
+                    </a>
+                </nav>
+            </div>
+            <main id="dashboard_main" class="mdl-layout__content mdl-color--grey-300">
+                <!-- Conteudo -->
+                <perfil-view v-show="selected.id == 'perfil'"></perfil-view>
+                <itens-view v-show="selected.id == 'itens'"></itens-view>
+                <usuarios-view v-show="selected.id == 'usuarios'"></usuarios-view>
+            </main>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    selected: {
+                        nome: 'Perfil',
+                        id: 'perfil'
+                    }
+                }
+            },
+            methods: {
+                select: function (ev, target) {
+                    var split = ev ? ev.currentTarget.innerText.split(' ') : target.innerText.split(' ');
+                    var title = split[1];
+
+                    if (split[2]) {
+                        for (var i = 1; i < split.length; i++) {
+                            if (i > 1) {
+                                title += ' ' + split[i];
+                            }
+                        }
+                    }
+
+                    this.selected = {
+                        nome: title,
+                        id: ev ? ev.currentTarget.id : target.id
+                    }
+
+                    if ($('.mdl-layout__obfuscator').hasClass('is-visible')) {
+                        $('.mdl-layout__drawer, .mdl-layout__obfuscator').toggleClass('is-visible');
+                    }
+                }
+            },
+            created: function () {
+                var url = window.location.href;
+                var categoria = url.split('#')[1];
+                if (categoria) {
+                    var links = $('#dashboard .mdl-navigation__link');
+                    for (var i = 0; i < links.length; i++) {
+                        if (links[i].id.toUpperCase() == categoria.toUpperCase()) {
+                            this.select(null, links[i]);
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

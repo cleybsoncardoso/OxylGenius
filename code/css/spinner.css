@@ -1,0 +1,12 @@
+.loading {
+    -webkit-animation: rotate 2000ms linear infinite both;
+    animation: rotate 2000ms linear infinite both;
+}
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

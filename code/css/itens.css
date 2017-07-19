@@ -1,0 +1,49 @@
+#itens-view{
+    width: 100%;
+    max-width: 900px;
+    margin: 16px auto;
+    display: block;
+}
+
+#itens-view #seachbar{
+    margin-top: 16px;
+}
+
+#itens-view #seachbar button{
+    margin: 0 4px;
+}
+
+#itens-view #search-input{
+    padding: 0;
+    flex-grow: 1;
+}
+
+#itens-view #search-input input{
+    border-bottom: none;
+}
+
+#itens-view #search-input label{
+    top: 5px;
+    color: grey;
+}
+
+#itens-view #search-input label:after{
+    background: none;
+}
+
+#itens-view .row{
+    margin-top: 16px;
+}
+
+#itens-view .row .item{
+    width: 100%;
+}
+
+.item .obra-foto{
+    width: 100%;
+    height: auto;
+    padding-bottom: 100%;
+    background-repeat: none;
+    background-size: cover;
+    background-position: center center;
+}

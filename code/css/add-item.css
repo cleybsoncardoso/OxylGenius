@@ -1,0 +1,42 @@
+#add-item {}
+
+#add-item .mdl-textfield, #add-item .mdl-card__supporting-text{
+    width: 100%;
+}
+
+#add-item .imagem-preview{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: -40px;
+}
+#add-item .imagem-preview img{
+    width: 100%;
+    max-width: 200px;
+}
+
+#add-item .imagem-preview .imagem-content{
+    width: 200px;
+    height: 150px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+    border: 1px solid grey;
+    margin: 12px 0 4px 0;
+} 
+
+#add-item #remove-foto{
+    position: relative;
+    top: -50px;
+}
+
+#add-item input[type="file"] {
+    display: none;
+}
+
+#add-item .enviar-imagem{
+    margin: 0 auto;
+    display: block;
+    max-width: 160px;
+}
