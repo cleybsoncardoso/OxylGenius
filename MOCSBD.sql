@@ -7,6 +7,7 @@ Senha varchar (10) NOT NULL,
 Nome varchar(30) NOT NULL,
 LoginFacebook varchar(30),
 LoginGoogle varchar(30),
+FotoUsuario longtext,
 Telefone varchar(11),
 Tipo enum ('U', 'F', 'G')
 
@@ -45,8 +46,6 @@ DataAlteracao date
 use id2171616_oxylgenius;
 create table obra(
 ID_Obra int primary key NOT NULL auto_increment,
-ft_frente  longblob,
-ft_verso longblob,
 descricao varchar(30),
 historico varchar(30),
 marcas varchar(30),
@@ -58,6 +57,10 @@ nome varchar (30),
 n_de_visulizacoes int
 )Default charset = utf8;
 
+create table FotoObra(
+ID_Foto int primary key NOT NULL,
+linkFoto longtext
+)Default charset = utf8;
 create table identificacao(
 n_no_inventario int primary key NOT NULL,
 colecao varchar(20),
@@ -99,6 +102,9 @@ ALTER TABLE usuario
 ADD foreign key (idsupervisao)
 references usuario(ID);
 
+ALTER TABLE FotoObra
+ADD foreign key (ID_Obra)
+references obra(ID_Obra);
 
 ALTER TABLE notificacao
 ADD foreign key (ID_Autor)

@@ -41,10 +41,8 @@
 }
 
 .title-section-novs {
-    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
-    color: #767777;
-    font-size: 29px;
-    text-align: center;
+    margin: auto 185px 15px 15px;
+    /*top, right, bottom, and left*/
 }
 
 .logo {
@@ -61,20 +59,12 @@
     height: 450px;
 }
 
-.col-md-9 {
-    margin-top: -40px;
-}
-
 .col-md-3 {
     margin-top: 30px;
 }
 
 .container {
     margin-bottom: 80px;
-}
-
-.mdl-mini-footer {
-    color: yellow;
 }
 
 .text-footer {

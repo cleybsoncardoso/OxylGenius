@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+require_once ('libraries/Google/autoload.php');
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -90,7 +90,43 @@ class LoginController extends Controller
     public function logarGoogle(Request $request){
         $dados = $request->all();
         $dados = $this->againstSQL($dados);
-//crystal vai jogar a api dele aqui, e salvar os dados dentro das variaveis  $dados['facebook'], $dados['nome'] e da de fotos que ainda nao tem, e o resto euja implementei
+		
+        $client_id = '1089341364114-6cbeh38r6dllkl2jo41je8a6q8fl2lnm.apps.googleusercontent.com';
+        $client_secret = '1HiV8feRw0l8ODnx6xp-2oMl';
+        $redirect_uri = 'http://mocs.freeiz.com/';
+                
+        $gClient = new Google_Client();
+        $gClient->setClientId($client_id);
+        $gClient->setClientSecret($client_secret);
+        $gClient->setRedirectUri($redirect_uri);
+        $gClient->addScope("email");
+        $gClient->addScope("profile");
+        $google_oauthV2 = new Google_Oauth2Service($gClient);
+        
+        if(isset($_GET['code'])){
+        	$gClient->authenticate($_GET['code']);
+        	$_SESSION['token'] = $gClient->getAccessToken();
+        	header('Location: ' . filter_var($redirectURL, FILTER_SANITIZE_URL));
+        }
+        
+        if (isset($_SESSION['token'])) {
+        	$gClient->setAccessToken($_SESSION['token']);
+        }
+        
+        if ($gClient->getAccessToken()) {
+        	$gpUserProfile = $google_oauthV2->userinfo->get();
+        	$dados = array(
+        			'oauth_provider'=> 'google',
+        			'google'     => $gpUserProfile['id'],
+        			'nome'    => $gpUserProfile['given_name'].' '.$gpUserProfile['family_name'],
+        			'email'         => $gpUserProfile['email'],
+        			'sexo'        => $gpUserProfile['gender'],
+        			'localizacao'        => $gpUserProfile['locale'],
+        			'foto'       => $gpUserProfile['picture'],
+        			'link'          => $gpUserProfile['link']
+        	);
+        }
+        
         $usuario = DB::SELECT('SELECT * FROM usuario WHERE LoginGoogle = ?',
         [$dados['google']]);
 
