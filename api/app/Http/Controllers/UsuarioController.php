@@ -54,11 +54,11 @@ class UsuarioController extends Controller
         return false;
     }
 
-    public function update(){
+    public function update(Request $request){
         $dados = $request->all();
         $dados = $this->againstSQL($dados);
         $usuario_update = DB::UPDATE('UPDATE usuario set Login = ?, Nome = ?, LoginFacebook = ?, LoginGoogle = ?, FotoUsuario = ?, Telefone = ?, Tipo = ? WHERE tokenAcesso = ?', [$dados['login']],[$dados['nome']],[$dados['loginfacebook']],[$dados['logingoogle']],[$dados['fotousuario']],[$dados['telefone']],[$dados['tipo']],[$dados['token']] );           
-        if ($usuario_update == null){
+        if ($usuario_update){
             return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
          }
         else{
