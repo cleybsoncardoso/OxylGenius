@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 require_once ('libraries/Google/autoload.php');
+require_once ('libraries/Google/Client.php');
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Http\Controllers\Cript;
+
 
 class LoginController extends Controller
 {
@@ -61,33 +64,6 @@ class LoginController extends Controller
 
         //Veiga vai jogar a api dele aqui, e salvar os dados dentro das variaveis  $dados['facebook'], $dados['nome'] e da de fotos que ainda nao tem, e o resto euja implementei
 
-if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['code'])){
- 
-  $appId = '817345081770182';
- 
-  $appSecret = 'deffd05b1c5a32bae59ef300e39b3f02';
- 
-  $redirectUri = urlencode('http://oxylgenius.freeiz.com/');
- 
-  $code = $_GET['code'];
- 
-  $token_url = "http://graph.facebook.com/oauth/access_token?"
-  . "client_id=" . $appId . "&redirect_uri=" . $redirectUri
-  . "&client_secret=" . $appSecret . "&code=" . $code;
- 
-  $response = @file_get_contents($token_url);
-  if($response){
-    $params = null;
-    parse_str($response, $params);
-    if(isset($params['access_token']) && $params['access_token']){
-      $graph_url = "http://graph.facebook.com/me?access_token="
-      . $params['access_token'];
-      $user = json_decode(file_get_contents($graph_url));
- 
-      if(isset($user->email) && $user->email){
-        $dados['nome'] = $user->name;
-        $dados['facebook'] = $user->id;
-
         $usuario = DB::SELECT('SELECT * FROM usuario WHERE LoginFacebook = ?',
         [$dados['facebook']]);
 
@@ -111,20 +87,6 @@ if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['code'])){
         $aux = array();
         $aux['token'] = $token;
         return response()->json($aux);
-        echo "Arrocha";
-      }    
-    }else{
-      echo "Erro de conex�o com Facebook";
-      exit(0);
-    }
-  }else{
-    echo "Erro de conex�o com Facebook";
-    exit(0);
-  }
-}else if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['error'])){
-  echo 'Permiss�o n�o concedida';
-}
-
     }
 
 
