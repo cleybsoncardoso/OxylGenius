@@ -2,6 +2,7 @@ use id2171616_oxylgenius;
 create table usuario (
 ID int primary key auto_increment,
 tokenAcesso int(10),
+estadoUsuario boolean,
 Login varchar(30) ,
 Senha varchar (10) NOT NULL,
 Nome varchar(30) NOT NULL,
@@ -18,6 +19,7 @@ ID_Notificacao int primary key NOT NULL auto_increment,
 ID_Autor int NOT NULL,
 Conteudo varchar(100),
 Dta_de_criacao date,
+estadoNotificacao boolean,
 ID_Objeto int NOT NULL
 )Default charset = utf8;
 
@@ -46,7 +48,8 @@ DataAlteracao date
 use id2171616_oxylgenius;
 create table obra(
 ID_Obra int primary key NOT NULL auto_increment,
-descricao varchar(30),
+descricao varchar(200),
+estadoObra boolean,
 historico varchar(30),
 marcas varchar(30),
 inconologia varchar(30),
