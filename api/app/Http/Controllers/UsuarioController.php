@@ -50,8 +50,37 @@ class UsuarioController extends Controller
         return false;
     }
 
-    public function create(){
-        return false;
+
+    /* 
+    *  ==== Possiveis valores de Retorno ====
+    * 100 - Cadastro finalizado com sucesso
+    * 101 - E-mail com formato invalido ou incorreto
+    * 102 - E-mail já cadastrado no Banco de Dados
+    * 103 - Senha e RepetirSenha nao coincidem
+    * 104 - Comprimento da senha ultrapassa o valor limite
+    */
+    public function create(Request $request){
+        $dados = $request->all();               //pega parametros passados na requisição
+        $dados = $this->againstSQL($dados);     //testa sql inject
+
+        $busca = DB::SELECT('SELECT * FROM usuario WHERE Login = ?',
+            [$dados['email']]);                 //Busca no banco de dados se já existe uma conta
+                                                //cadastrada com o mesmo e-mail
+
+        if (filter_var($dados['email'], FILTER_VALIDATE_EMAIL) == false){   //verifica integridade do email inserido
+            return response()->json(101);
+        } else if ($busca != null) {                                //verifica disponibilidde do email inserido
+            return response()->json(102);
+        } else if ($dados['password'] != $dados['passwordRepeat']){  //verifica igualdade entre senha e repetir senha
+            return response()->json(103);
+        } else if (strlen($dados['password']) > 10) {               //verifica comprimento da senha
+            return response()->json(104);
+        } else {
+            $dados['password'] = base64_encode($dados['password']);                 //codifica a senha
+            $sql = DB::INSERT('INSERT INTO usuario(Login, Senha) VALUES (?,?)',      //registra o usuario no BD
+                [$dados['email'], $dados['password']]);
+        }
+        return response()->json(100);
     }
 
     public function update(Request $request){
