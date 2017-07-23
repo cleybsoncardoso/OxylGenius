@@ -43,16 +43,17 @@ Vue.component('add-item', {
             </a>
             <div style="flex-grow: 1"></div>
             <a id="add-obra-button" :disabled="!valido()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
-                Adicionar Obra
+                <span v-show="item">Salvar obra</span>
+                <span v-show="!item">Adicionar Obra</span>
             </a>
         </div>
     </div>
     `,
     data: function () {
         return {
-            imagem: this.item ? this.item.imagem : "",
-            titulo: this.item ? this.item.titulo : "",
-            descricao: this.item ? this.item.descricao : "",
+            imagem: "",
+            titulo: "",
+            descricao: "",
             error: {
                 type: 'success',
                 message: ''
@@ -104,7 +105,7 @@ Vue.component('add-item', {
             if (this.item) {
                 this.imagem = this.item.imagem;
                 this.titulo = this.item.titulo;
-                this.descricao = this.item.titulo;
+                this.descricao = this.item.descricao;
                 $('#add-item .mdl-textfield').addClass('is-dirty');
             }
         }

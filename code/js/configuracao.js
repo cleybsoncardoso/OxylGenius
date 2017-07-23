@@ -17,6 +17,10 @@ var Storage = (() => {
         return localStorage.getItem(prefix + entidade) ? true : false;
     }
 
+    Storage.prototype.remover = function (entidade) {
+        localStorage.removeItem(prefix + entidade);
+    }
+
     return Storage;
 })();
 
@@ -27,3 +31,4 @@ function isUserAuth() {
         window.location.href = "error.html";
     }
 }
+

@@ -1,14 +1,13 @@
 Vue.component('login-modal', {
     template: `
-    <div id="login-modal" class="card-view mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__supporting-text">
+    <modal id="login-modal">
+        <div slot="modal-body">
             <button class="loginBtn loginBtn--facebook">
                 Login pelo Facebook
             </button>
             <button class="loginBtn loginBtn--google">
                 Login pelo Google
             </button>
-
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                 <input class="mdl-textfield__input" type="text" v-model="name" id="username_input">
                 <label class="mdl-textfield__label" for="username_input">Email</label>
@@ -18,13 +17,13 @@ Vue.component('login-modal', {
                 <label class="mdl-textfield__label" for="pass_input">Senha</label>
             </div>
         </div>
-        <div class="mdl-card__actions mdl-card--border" style="display: flex">
-            <div style="flex-grow: 1"></div>
-            <a v-on:click="login()" :disabled="!valido()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <div slot="modal-actions" style="display: flex;">
+            <span style="flex-grow: 1"></span>
+            <a v-on:click="login()" :disabled="!valido()" style="float: right" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                 Entrar
             </a>
         </div>
-    </div>
+    </modal>
     `,
     data: function () {
         return {

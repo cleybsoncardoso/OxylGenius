@@ -64,7 +64,7 @@ Vue.component('itens-view', {
             this.selectedItem = {
                 imagem: "https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg",
                 titulo: "Obra A",
-                descricao: "orem ipsum dolor sit amet, consectetur adipiscing elit Mauris sagittis pellentesque lacus eleifend lacinia"
+                descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit Mauris sagittis pellentesque lacus eleifend lacinia"
             }
             this.addItem();
         },
