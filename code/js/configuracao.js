@@ -1,4 +1,4 @@
-var URL_API = 'http://mocs.freeiz.com/api/public/';
+var URL_API = 'http://mocs.000webhostapp.com/api/public/';
 
 var Storage = (() => {
     var prefix = "mocs_";

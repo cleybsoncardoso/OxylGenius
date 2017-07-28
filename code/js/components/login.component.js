@@ -40,15 +40,12 @@ Vue.component('login-modal', {
                 login: this.name,
                 senha: this.password,
             }
-            this.$http.post(URL_API + 'login', params).then((response) => {
-                //foi
-                console.log(response.data);
-                var storage = new Storage();
-                storage.gravar('token', response.data);
-            }, (error) => {
-                //nao
+            $.post(URL_API + 'login', params)
+            .done(function (data) {
+                console.log(data);
+            }).fail(function (error) {
                 console.log(error);
-            })
+            });
         }
     }
 });
