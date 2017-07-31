@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>MOCS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/mainpage.css">
+    <link rel="stylesheet" href="css/modal_login.css">
+    <link rel="stylesheet" href="css/login-fb-google.css">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script src="https://vuejs.org/js/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.3.0/vue-resource.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="vendor.min.css">
+    <script src="vendor.min.js"></script>
+
+    <script src="app.min.js"></script>
+
+    <link rel="stylesheet" href="app.min.css">
+
+</head>
+<style>
+    @media (max-width: 365px) {
+        .mdl-card {
+            width: 250px;
+            height: 430px;
+        }
+        .main {
+            margin-top: -10px;
+        }
+    }
+    
+    @media (min-height: 640px) {
+        .mdl-mini-footer {
+            bottom: 0px;
+            position: fixed;
+            width: 100%;
+        }
+    }
+    
+    @media(min-height: 768px) {
+        .main {
+            margin-top: 170px;
+        }
+    }
+    
+    @media (min-width: 1366px) {
+        .mdl-card {
+            width: 580px;
+        }
+        form {
+            margin-left: 130px;
+        }
+        .mdl-button {
+            margin-left: 130px;
+        }
+        .mdl-card__title-text {
+            margin-left: 210px;
+        }
+    }
+</style>
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="app">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <a href="index.html"><img class="title1" src="imagens/logo.png" style="width:200px; height:45px; margin-left:10px; margin-bottom:5px;"></a>
+                <div class="menu" style="margin-left:215px">
+                    <nav class="mdl-navigation mdl-layout--large-screen-only">
+
+                        <div class="elemento_menu"><a href="FaleConosco.html" class="mdl-navigation__link">Fale Conosco</a></div>
+                        <div class="elemento_menu"><a href="galeria.html" class="mdl-navigation__link"> Galeria</a></div>
+                        <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id01').style.display='block'">Entrar</a></div>
+
+                        <div id="id01" class="obfuscator">
+                            <login-modal class="animate-zoom"></login-modal>
+                        </div>
+                        <div class="elemento_menu"><a href="cadastrar.html" class="mdl-navigation__link">Cadastrar</a></div>
+
+
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="mdl-layout__drawer mdl-layout--small-screen-only ">
+            <nav class="mdl-navigation ">
+                <a class="mdl-navigation__link " href="FaleConosco.html">Fale Conosco</a>
+                <a class="mdl-navigation__link " href="galeria.html">Galeria</a>
+                <a href="login-mobile.html" class="mdl-navigation__link ">Entrar</a>
+            </nav>
+        </div>
+
+        <div class="mdl-layout__content">
+
+            <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+                <main class="main">
+                    <div class="container">
+
+                        <div class="jumbotron">
+                            <h1>Galeria</h1>
+                        </div>
+
+                        <div class="row" id="linha1">
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra A</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://s-media-cache-ak0.pinimg.com/236x/e4/45/0d/e4450ddc4f23b828f0977d03f84a7763.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra B</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('http://historylists.org/images/the-scream.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra C</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg/370px-Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra D</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row" id="linha2">
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra A</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://s-media-cache-ak0.pinimg.com/236x/e4/45/0d/e4450ddc4f23b828f0977d03f84a7763.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra B</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('http://historylists.org/images/the-scream.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra C</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg/370px-Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra D</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row" id="linha3">
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra A</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://s-media-cache-ak0.pinimg.com/236x/e4/45/0d/e4450ddc4f23b828f0977d03f84a7763.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra B</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('http://historylists.org/images/the-scream.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra C</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg/370px-Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg')">
+                                    <div class="mdl-card__title">
+                                        <h2 class="mdl-card__title-text">Obra D</h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    <footer class="mdl-mini-footer">
+                        <div class="text-footer ">Avenida Transnordestina, s/n - Novo Horizonte CEP 44036-900 - Feira de Santana - Bahia - (75)3161-8000</div>
+                    </footer>
+                </main>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+
+            data() {
+                return {
+                    nomeObra: [],
+                    fotoObra: [],
+                }
+            },
+
+            ready: function(){
+                this.pegarNome();
+                this.pegarFoto();
+            },
+
+            methods: {
+                pegarNome: function(){
+                    this.$https.get('url').then(response => {
+                        this.nomeObra = response.data;
+                    })
+                    .catch(response => {
+                        //erro ao pegar dados
+                    });
+
+                },
+                pegarFoto: function(){
+                    this.$https.get('url').then(response => {
+                        this.fotoObra = response.data;
+                    })
+                    .catch(response => {
+                        //erro ao pegar dados
+                    });
+
+                },
+
+            },
+
+        })
+    </script>
+
+    <script>
+        var modal = document.getElementById('id01');
+        //fecha quando o user clica fora
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none ";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
