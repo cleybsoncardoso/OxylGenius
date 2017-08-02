@@ -16,6 +16,22 @@ class ObraController extends Controller
         return $array;
     }
 
+    public function change(){
+     $getinfo = DB::UPDATE('UPDATE obra SET nome =  ?, local_data = ?, referencias = ?, estado = ?, inconologia = ?, descricao = ?, historico = ?, marcas = ?, estadoAtivo = ? WHERE ID = ?', [$dados['nome'], $dados['local_data'], $dados['referencias'], $dados['inconologia'], $dados['estado'], $dados['descricao'], $dados['historico'], $dados['marcas'], $dados['estadoAtivo'], $obra[0]->ID_Obra]); 
+
+    }
+
+    public function all(){
+    $obras = DB::SELECT('SELECT o.*,a.*,c.*,d.*,df.*,i.* FROM obra o inner join aquisicao a on o.ID_Aqui = a.ID_Aqui inner join caracteristicas c on c.ID_caracteristica = o.ID_caracteristica inner join dimensoes d on d.ID_Dim = o.ID_Dim inner join documentacao_fotografica df on df.ID_Doc_fot = o.ID_Doc_fot inner join identificacao i on i.n_no_inventario = o.n_no_inventario');
+        if(isset($obras)){
+        foreach($obras as $obraatual){
+        $fotodeobra = DB::SELECT('SELECT * FROM fotoobra where ID_Obra = ?',[$obraatual->ID_Obra]);
+        $obraatual->foto = $fotodeobra;
+        }
+        }
+    return response()->json($obras);
+    }
+
     public function criar(Request $request){
         $dados = $request->all();
         $dados = $this->againstSQL($dados); //teste sql inject
@@ -67,18 +83,26 @@ class ObraController extends Controller
         [$dados['colecao'], $dados['nome'], $dados['titulo'], $dados['procedencia'], $dados['funcao']]);
         $dados['n_no_inventario'] = $identificacao[0]->n_no_inventario ;
 
-        $add = DB::INSERT('INSERT INTO obra (ID_Aqui,ID_Doc_fot,ID_Dim,ID_caracteristica,n_no_inventario,iduploader,n_de_visulizacoes,nome,local_data,referencias,estado,inconologia,ft_verso,ft_frente,descricao, historico, marcas) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-        [$dados['ID_Aqui'],$dados['ID_Doc_fot'],$dados['ID_Dim'],$dados['ID_caracteristica'],$dados['n_no_inventario'],$dados['iduploader'],$dados['n_de_visulizacoes'],$dados['nome'],$dados['local_data'],$dados['referencias'],$dados['estado'],$dados['inconologia'],$dados['ft_verso'],$dados['ft_frente'],$dados['descricao'], $dados['historico'], $dados['marcas']]);
+        $add = DB::INSERT('INSERT INTO obra (ID_Aqui,ID_Doc_fot,ID_Dim,ID_caracteristica,n_no_inventario,iduploader,n_de_visulizacoes,nome,local_data,referencias,estado,inconologia,descricao, historico, marcas, estadoAtivo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+        [$dados['ID_Aqui'],$dados['ID_Doc_fot'],$dados['ID_Dim'],$dados['ID_caracteristica'],$dados['n_no_inventario'],$dados['iduploader'],$dados['n_de_visulizacoes'],$dados['nome'],$dados['local_data'],$dados['referencias'],$dados['estado'],$dados['inconologia'],$dados['descricao'], $dados['historico'], $dados['marcas'], $dados['estadoAtivo']]);
     
-        $obra = DB::SELECT('SELECT * FROM obra WHERE nome = ? AND referencias = ? AND ft_verso = ? AND ft_frente = ? AND ID_Aqui = ?',
-        [$dados['nome'], $dados['referencias'], $dados['ft_verso'], $dados['ft_frente'], $dados['ID_Aqui']]); 
+        $obra = DB::SELECT('SELECT * FROM obra WHERE nome = ? AND referencias = ? AND ID_Aqui = ?',
+        [$dados['nome'], $dados['referencias'], $dados['ID_Aqui']]);
+
+
+        if(isset($dados['linkfoto'])){
+        foreach($dados['linkfoto'] as $fotoatual){
+        $add = DB::INSERT('INSERT INTO fotoobra (linkfoto, ID_Obra) VALUES (?,?)',
+        [$fotoatual, $obra[0]->ID_Obra]);
+        }
+        }
 
         if ($obra == null){
             return response()->json(404); 
         } else {
             $obra = $obra[0]; 
             $dados['ID_mudancaObra'] = $obra->ID_Obra;
-            $add = DB::INSERT('INSERT INTO mudancaObra (ID_Autor, ID_Obra, conteudo, DataAlteracao) VALUES (?,?,?,?)',
+            $add = DB::INSERT('INSERT INTO mudancaobra (ID_Autor, ID_Obra, conteudo, DataAlteracao) VALUES (?,?,?,?)',
             [$dados['iduploader'], $dados['ID_mudancaObra'], $dados['conteudo'], $dados['DataAlteracao']]);
         }
 
@@ -87,6 +111,7 @@ class ObraController extends Controller
                 
             }
         }
+
     }
 }
 
