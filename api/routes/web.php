@@ -17,11 +17,11 @@
 
 
 $app->group(['prefix' => 'usuario'], function () use ($app){
-    $app->get('/', 'UsuarioController@all'); //todos os usuarios
+    $app->get('/', 'UsuarioController@all'); //todos os usuarios { ?token}, retorno: {}
     $app->get('/{id}', 'UsuarioController@read'); //usuario unico
     $app->delete('/{id}', 'UsuarioController@deletar'); //deletar usuario
     $app->post('/', 'UsuarioController@create'); //criar usuario 
-    $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario 
+    $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario  //{token: 11111}, retorno: {nome:string,tipo('U','F','G'),foto:base64}
     $app->put('/{id}', 'UsuarioController@update'); //atualizar dados usuario 
     $app->put('/facebook/{id}', 'UsuarioController@vincularFacebook'); //adicionar face do usuario 
     $app->put('/google/{id}', 'UsuarioController@vincularGoole'); //adicionar google de usuario 

@@ -33,13 +33,31 @@ class UsuarioController extends Controller
             $aux = array();
             $aux['nome'] = $usuario->Nome;
             $aux['tipo'] = $usuario->Tipo;
+            $aux['foto'] = $usuario->FotoUsuario;
             return response()->json($aux);
         }
     }
 
-    public function all(){
-        $usuario = DB::SELECT('SELECT * FROM usuario');
-        return response()->json($usuario);
+    public function all(Request $request){
+        $dados = $request->all();
+        $dados = $this->againstSQL($dados);
+
+        if($dados['token'] != undefined){
+            $usuario = DB::SELECT('SELECT Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+            [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
+        
+            if ($usuario == null){
+                return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+            } else {
+                $usuarios = DB::SELECT('SELECT Nome, Tipo, FotoUsuario FROM usuario WHERE ativo = 1');
+                $aux = array();
+                $aux['usuarios'] = $usuarios;
+                return response()->json($aux);
+            }
+        }
+        else {
+            return response()->json("Informe o token");
+        }
     }
 
     public function read(){

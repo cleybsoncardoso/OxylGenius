@@ -43,10 +43,12 @@ class LoginController extends Controller
             do{ //loop verifica se o token ja existe, caso exista, um novo numero aleatorio é sorteado
                 $token = md5(rand(0,$max)) . '-' . sha1(rand(0,$max)); //criptografa o numero aleatorio, gerando mais segurança, por aumentar o tamanho do token e envolver caracteres
                 $buscar = DB::SELECT('SELECT * FROM usuario WHERE tokenAcesso = ?', [$token]);
-                if ($buscar == null)
+                if ($buscar == null){
                     $again = false;
+                }
             } while($again);
-            $update = DB::UPDATE('UPDATE usuario SET tokenAcesso =  ? WHERE ID = ?', [$token, $usuario->ID]); //atualiza o token do usuario
+
+            DB::UPDATE('UPDATE usuario SET tokenAcesso =  ? WHERE ID = ?', [$token, $usuario->ID]); //atualiza o token do usuario
 
             $aux = array();
             $aux['token'] = $token;
