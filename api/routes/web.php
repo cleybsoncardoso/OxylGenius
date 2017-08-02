@@ -21,7 +21,7 @@ $app->group(['prefix' => 'usuario'], function () use ($app){
     //retorno: {"usuarios": [ {"Nome": "cleybson","Tipo": "G", "ID": "1", "FotoUsuario": "A.jpg"}]}
     $app->get('/{id}', 'UsuarioController@read'); //usuario unico
     //retorno: "usuario": {"ID": "1","Nome": "cleybson","Tipo": "G","FotoUsuario": "A.jpg","Login": "cley","LoginFacebook": null,"LoginGoogle": null,"Telefone": null,"idsupervisao": null}
-    $app->delete('/{id}', 'UsuarioController@deletar'); //deletar usuario
+    $app->delete('/{id}/token/{token}', 'UsuarioController@deletar'); //deletar usuario
     $app->post('/', 'UsuarioController@create'); //criar usuario 
     $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario  //{token: 11111}, retorno: {nome:string,tipo('U','F','G'),foto:base64}
     $app->post('/{id}', 'UsuarioController@update'); //atualizar dados usuario 
@@ -56,16 +56,10 @@ $app->group(['prefix' => 'adm'], function () use ($app){
 $app->group(['prefix' => 'noticia'], function () use ($app){
     $app->get('/', 'NoticiaController@all');        //Todas noticias
     $app->get('/{id}', 'NoticiaController@ler');    //ler noticia
-    $app->put('/', 'NoticiaController@update');  //atualizar dados
-    $app->post('/', 'NoticiaController@criar');     //criar dados
+    $app->post('/{id}', 'NoticiaController@update');  //atualizar dados
+    $app->post('/', 'NoticiaController@criar');     //criar dados {token:string, Conteudo: string, Dta_de_criacao: string(yyyy-mm-dd),ID_Objeto: id } retorno true
 });
 
-$app->group(['prefix' => 'Evento'], function () use ($app){
-    $app->get('/', 'EventoController@all');        //Todas Eventos
-    $app->get('/{id}', 'EventoController@ver');    //ver Evento
-    $app->put('/', 'EventoController@update');  //atualizar dados
-    $app->post('/', 'EventoController@criar');     //criar dados
-});
 
 $app->group(['prefix' => 'avaliar'], function () use ($app){
     $app->post('/', 'AvaliacaoController@criar');     //criar avaliacao

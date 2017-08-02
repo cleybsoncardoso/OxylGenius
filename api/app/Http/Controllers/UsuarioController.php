@@ -86,7 +86,23 @@ class UsuarioController extends Controller
         }
     }
 
-    public function deletar(){
+    public function deletar($id, $token){
+        
+        if(isset($token)){
+            $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+            [$token]); //retorna um array se tiver algum usuario ou null caso não encontre o token
+            if ($usuario == null){
+                return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+            } else if($usuario[0]->Tipo != 'G' && $usuario[0]->Tipo != 'F'){
+                return response()->json('Voce não é o administrador'); //caso nao encontre o usuario, retorna o erro 404
+            } else {
+                DB::UPDATE('UPDATE usuario SET ativo =  0 WHERE ID = ?', [$id]);
+                return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+            }
+        }
+        else {
+            return response()->json("Informe o token do usuario");
+        }
         return false;
     }
 
