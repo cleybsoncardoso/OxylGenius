@@ -17,12 +17,15 @@
 
 
 $app->group(['prefix' => 'usuario'], function () use ($app){
-    $app->get('/', 'UsuarioController@all'); //todos os usuarios { ?token}, retorno: {}
+    $app->get('/', 'UsuarioController@all'); //todos os usuarios { ?token}, 
+    //retorno: {"usuarios": [ {"Nome": "cleybson","Tipo": "G", "ID": "1", "FotoUsuario": "A.jpg"}]}
     $app->get('/{id}', 'UsuarioController@read'); //usuario unico
+    //retorno: "usuario": {"ID": "1","Nome": "cleybson","Tipo": "G","FotoUsuario": "A.jpg","Login": "cley","LoginFacebook": null,"LoginGoogle": null,"Telefone": null,"idsupervisao": null}
     $app->delete('/{id}', 'UsuarioController@deletar'); //deletar usuario
     $app->post('/', 'UsuarioController@create'); //criar usuario 
     $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario  //{token: 11111}, retorno: {nome:string,tipo('U','F','G'),foto:base64}
-    $app->put('/{id}', 'UsuarioController@update'); //atualizar dados usuario 
+    $app->post('/{id}', 'UsuarioController@update'); //atualizar dados usuario 
+    //nome:string, foto:base64, login:string, telefone:string, token:string
     $app->put('/facebook/{id}', 'UsuarioController@vincularFacebook'); //adicionar face do usuario 
     $app->put('/google/{id}', 'UsuarioController@vincularGoole'); //adicionar google de usuario 
 });

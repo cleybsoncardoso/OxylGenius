@@ -42,26 +42,48 @@ class UsuarioController extends Controller
         $dados = $request->all();
         $dados = $this->againstSQL($dados);
 
-        if($dados['token'] != undefined){
+        if(isset($dados['token'])){
             $usuario = DB::SELECT('SELECT Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
             [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
         
             if ($usuario == null){
                 return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
             } else {
-                $usuarios = DB::SELECT('SELECT Nome, Tipo, FotoUsuario FROM usuario WHERE ativo = 1');
+                $usuarios = DB::SELECT('SELECT ID, Nome, Tipo, FotoUsuario FROM usuario WHERE ativo = 1');
                 $aux = array();
                 $aux['usuarios'] = $usuarios;
                 return response()->json($aux);
             }
         }
         else {
-            return response()->json("Informe o token");
+            return response()->json("Informe o token do usuario");
         }
     }
 
-    public function read(){
-        return false;
+    public function read($id, Request $request){
+        $dados = $request->all();
+        $dados = $this->againstSQL($dados);
+        
+        if(isset($dados['token'])){
+            $usuario = DB::SELECT('SELECT Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+            [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
+        
+            if ($usuario == null){
+                return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+            } else {
+                $usuarioBusca = DB::SELECT('SELECT ID, Nome, Tipo, FotoUsuario, Login, LoginFacebook, LoginGoogle, Telefone, idsupervisao FROM usuario WHERE ativo = 1 and ID = ?', [$id]);
+                $aux = array();
+                if ($usuarioBusca){
+                    $aux['usuario'] = $usuarioBusca[0];
+                    return response()->json($aux);
+                } else {
+                    return response()->json(404);
+                }
+            }
+        }
+        else {
+            return response()->json("Informe o token do usuario");
+        }
     }
 
     public function deletar(){
@@ -101,15 +123,25 @@ class UsuarioController extends Controller
         return response()->json(100);
     }
 
-    public function update(Request $request){
+    public function update($id, Request $request){
         $dados = $request->all();
         $dados = $this->againstSQL($dados);
-        $usuario_update = DB::UPDATE('UPDATE usuario set Login = ?, Nome = ?, LoginFacebook = ?, LoginGoogle = ?, FotoUsuario = ?, Telefone = ?, Tipo = ? WHERE tokenAcesso = ?', [$dados['login']],[$dados['nome']],[$dados['loginfacebook']],[$dados['logingoogle']],[$dados['fotousuario']],[$dados['telefone']],[$dados['tipo']],[$dados['token']] );           
-        if ($usuario_update){
-            return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
-         }
-        else{
-            return 1;
+        
+        if(isset($dados['token'])){
+            $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+            [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
+        
+            if ($usuario == null){
+                return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+            } else if($usuario[0]->ID != $id){
+                return response()->json('Voce não é o usuario'); //caso nao encontre o usuario, retorna o erro 404
+            } else {
+                DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Login = ?, Telefone = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['login'], $dados['telefone'], $usuario[0]->ID]);
+                return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+            }
+        }
+        else {
+            return response()->json("Informe o token do usuario");
         }
     }
 
