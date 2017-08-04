@@ -121,22 +121,16 @@ class UsuarioController extends Controller
         $dados = $request->all();               //pega parametros passados na requisição
         $dados = $this->againstSQL($dados);     //testa sql inject
 
-        $busca = DB::SELECT('SELECT * FROM usuario WHERE Login = ?',
+        $busca = DB::SELECT('SELECT * FROM usuario WHERE Email = ?',
             [$dados['email']]);                 //Busca no banco de dados se já existe uma conta
                                                 //cadastrada com o mesmo e-mail
 
-        if (filter_var($dados['email'], FILTER_VALIDATE_EMAIL) == false){   //verifica integridade do email inserido
-            return response()->json(101);
-        } else if ($busca != null) {                                //verifica disponibilidde do email inserido
+        if ($busca != null) {                                //verifica disponibilidde do email inserido
             return response()->json(102);
-        } else if ($dados['password'] != $dados['passwordRepeat']){  //verifica igualdade entre senha e repetir senha
-            return response()->json(103);
-        } else if (strlen($dados['password']) > 10) {               //verifica comprimento da senha
-            return response()->json(104);
         } else {
             $dados['password'] = base64_encode($dados['password']);                 //codifica a senha
-            $sql = DB::INSERT('INSERT INTO usuario(Login, Senha) VALUES (?,?)',      //registra o usuario no BD
-                [$dados['email'], $dados['password']]);
+            $sql = DB::INSERT('INSERT INTO usuario(Email, Senha, Nome, FotoUsuario, Tipo, ativo) VALUES (?,?,?,"https://www.portalmaritimo.com/wp-content/uploads/2010/08/anonimo.jpg","U", 1)',      //registra o usuario no BD
+                [$dados['email'], $dados['password'], $dados['nome']]);
         }
         return response()->json(100);
     }
@@ -177,7 +171,7 @@ class UsuarioController extends Controller
         return false;
     }
 
-    public function vincularGoole(){
+    public function vincularGoogle(){
         return false;
     }
 

@@ -23,18 +23,19 @@ $app->group(['prefix' => 'usuario'], function () use ($app){
     //retorno: "usuario": {"ID": "1","Nome": "cleybson","Tipo": "G","FotoUsuario": "A.jpg","Login": "cley","LoginFacebook": null,"LoginGoogle": null,"Telefone": null,"idsupervisao": null}
     $app->delete('/{id}/token/{token}', 'UsuarioController@deletar'); //deletar usuario
     $app->post('/', 'UsuarioController@create'); //criar usuario 
+    //{email, nome, password}
     $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario  //{token: 11111}, retorno: {nome:string,tipo('U','F','G'),foto:base64}
     $app->post('/update', 'UsuarioController@update'); //atualizar dados usuario 
     //nome:string, foto:base64, login:string, telefone:string, token:string
     $app->put('/facebook/{id}', 'UsuarioController@vincularFacebook'); //adicionar face do usuario 
-    $app->put('/google/{id}', 'UsuarioController@vincularGoole'); //adicionar google de usuario 
+    $app->put('/google/{id}', 'UsuarioController@vincularGoogle'); //adicionar google de usuario 
 });
 
 
 $app->group(['prefix' => 'obra'], function () use ($app){
     $app->get('/', 'ObraController@all'); //todas obras
     $app->get('/{id}', 'ObraController@ler'); //obra unica
-    $app->delete('/{id}', 'ObraController@deletar'); //deletar obra
+    $app->delete('/{id}/token/{token}', 'ObraController@deletar'); //deletar obra
     $app->post('/', 'ObraController@criar'); //criar obra 
     $app->put('/{id}', 'ObraController@update'); //atualizar dados de obra 
 });
