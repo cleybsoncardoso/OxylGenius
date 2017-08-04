@@ -24,7 +24,7 @@ $app->group(['prefix' => 'usuario'], function () use ($app){
     $app->delete('/{id}/token/{token}', 'UsuarioController@deletar'); //deletar usuario
     $app->post('/', 'UsuarioController@create'); //criar usuario 
     $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario  //{token: 11111}, retorno: {nome:string,tipo('U','F','G'),foto:base64}
-    $app->post('/{id}', 'UsuarioController@update'); //atualizar dados usuario 
+    $app->post('/update', 'UsuarioController@update'); //atualizar dados usuario 
     //nome:string, foto:base64, login:string, telefone:string, token:string
     $app->put('/facebook/{id}', 'UsuarioController@vincularFacebook'); //adicionar face do usuario 
     $app->put('/google/{id}', 'UsuarioController@vincularGoole'); //adicionar google de usuario 

@@ -23,7 +23,7 @@ class UsuarioController extends Controller
         $dados = $request->all();
         $dados = $this->againstSQL($dados); //teste sql inject
 
-        $usuario = DB::SELECT('SELECT Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+        $usuario = DB::SELECT('SELECT Nome, Tipo, FotoUsuario, Email, Telefone FROM usuario WHERE tokenAcesso = ?',
         [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
 
         if ($usuario == null){
@@ -31,9 +31,11 @@ class UsuarioController extends Controller
         } else {
             $usuario = $usuario[0]; 
             $aux = array();
+            $aux['email'] = $usuario->Email;
             $aux['nome'] = $usuario->Nome;
             $aux['tipo'] = $usuario->Tipo;
             $aux['foto'] = $usuario->FotoUsuario;
+            $aux['telefone'] = $usuario->Telefone;
             return response()->json($aux);
         }
     }
@@ -139,7 +141,7 @@ class UsuarioController extends Controller
         return response()->json(100);
     }
 
-    public function update($id, Request $request){
+    public function update(Request $request){
         $dados = $request->all();
         $dados = $this->againstSQL($dados);
         
@@ -149,10 +151,8 @@ class UsuarioController extends Controller
         
             if ($usuario == null){
                 return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
-            } else if($usuario[0]->ID != $id){
-                return response()->json('Voce não é o usuario'); //caso nao encontre o usuario, retorna o erro 404
             } else {
-                DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Login = ?, Telefone = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['login'], $dados['telefone'], $usuario[0]->ID]);
+                DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Email = ?, Telefone = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['email'], $dados['telefone'], $usuario[0]->ID]);
                 return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
             }
         }

@@ -17,7 +17,8 @@ class ObraController extends Controller
     }
 
     public function change(){
-     $getinfo = DB::UPDATE('UPDATE obra SET nome =  ?, local_data = ?, referencias = ?, estado = ?, inconologia = ?, descricao = ?, historico = ?, marcas = ?, estadoAtivo = ? WHERE ID = ?', [$dados['nome'], $dados['local_data'], $dados['referencias'], $dados['inconologia'], $dados['estado'], $dados['descricao'], $dados['historico'], $dados['marcas'], $dados['estadoAtivo'], $obra[0]->ID_Obra]); 
+        
+     $getinfo = DB::UPDATE('UPDATE obra SET nome =  ?, local_data = ?, referencias = ?, estado = ?, inconologia = ?, descricao = ?, historico = ?, marcas = ?, estadoAtivo = ? WHERE ID = ?', [$dados['nome'], $dados['local_data'], $dados['referencias'], $dados['inconologia'], $dados['estado'], $dados['descricao'], $dados['historico'], $dados['marcas'], $dados['estadoAtivo'], $dados["ID_Obra"]]); 
 
     }
 

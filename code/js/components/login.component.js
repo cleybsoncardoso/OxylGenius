@@ -32,7 +32,7 @@ Vue.component('login-modal', {
         }
     },
     methods: {
-        valido: function(){
+        valido: function () {
             return this.name && this.password;
         },
         login: function () {
@@ -41,11 +41,19 @@ Vue.component('login-modal', {
                 senha: this.password,
             }
             $.post(URL_API + 'login', params)
-            .done(function (data) {
-                console.log(data);
-            }).fail(function (error) {
-                console.log(error);
-            });
+                .done(function (data) {
+                    if (data.token) {
+                        localStorage.setItem("token", data.token);
+                        location.href = "dashboard.html";
+                    } else {
+                        console.log(data);
+                        if(data == 404){
+                            // document.getElementById("alertaErro").innerHTML=`<div class="alert alert-danger" id="alert">Usuario ou senha incorreta</div>`;
+                        }
+                    }
+                }).fail(function (error) {
+                    console.log(error);
+                });
         }
     }
 });
