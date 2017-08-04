@@ -146,14 +146,26 @@ class UsuarioController extends Controller
         $dados = $this->againstSQL($dados);
         
         if(isset($dados['token'])){
-            $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
-            [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
-        
-            if ($usuario == null){
-                return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+            if(isset($dados['senha'])){
+                $usuarioSenha = DB::SELECT('SELECT * FROM usuario WHERE tokenAcesso = ? and Senha = ?',
+                [$dados['token'], base64_encode($dados['senha'])]);
+
+                if ($usuarioSenha == null){
+                    return response()->json("senha incorreta"); //caso nao encontre o usuario, retorna o erro 404
+                } else {
+                    DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Email = ?, Telefone = ?, Senha = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['email'], $dados['telefone'], base64_encode($dados['senhaNova']), $usuarioSenha[0]->ID]);
+                    return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+                }
             } else {
-                DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Email = ?, Telefone = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['email'], $dados['telefone'], $usuario[0]->ID]);
-                return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+                $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+                [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
+            
+                if ($usuario == null){
+                    return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+                } else {
+                    DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Email = ?, Telefone = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['email'], $dados['telefone'], $usuario[0]->ID]);
+                    return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+                }
             }
         }
         else {
