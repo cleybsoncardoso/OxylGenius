@@ -110,7 +110,20 @@
                             <h1>Galeria</h1>
                         </div>
 
-                        <div class="row" id="linha1">
+                        <div id="seachbar" class="card-view mdl-card mdl-shadow--6dp" style="width:500px; margin-left:650px">
+                            <div class="mdl-card__title">
+                                 <div class="mdl-textfield mdl-js-textfield" id="search-input">
+                                     <input class="mdl-textfield__input" type="text" id="search" v-model="searchText">
+                                     <label class="mdl-textfield__label" for="search">Pesquisar</label>
+                                </div>
+
+                                <button v-on:click="pesquisarObra()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-left:10px">
+                                    Pesquisar Obra
+                                </button>
+                            </div>
+                         </div>
+
+                        <div class="row" id="linha1" style="margin-top:20px">
                             <div class="col-sm-3">
                                 <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
                                     <div class="mdl-card__title">
@@ -224,8 +237,8 @@
 
             data() {
                 return {
-                    nomeObra: [],
-                    fotoObra: [],
+                    obra:[],
+                    searchText: '',
                 }
             },
 
