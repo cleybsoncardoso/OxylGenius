@@ -22,7 +22,7 @@ Vue.component('perfil-view', {
             <label class="mdl-textfield__label" for="pass_input">Senha Antiga</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password_new" id="pass_input" v-model="conta.senhaNova">
+            <input class="mdl-textfield__input" type="password" id="pass_input" v-model="conta.senhaNova">
             <label class="mdl-textfield__label" for="pass_input_new">Senha Nova</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">

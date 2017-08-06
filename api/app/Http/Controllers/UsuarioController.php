@@ -121,22 +121,16 @@ class UsuarioController extends Controller
         $dados = $request->all();               //pega parametros passados na requisição
         $dados = $this->againstSQL($dados);     //testa sql inject
 
-        $busca = DB::SELECT('SELECT * FROM usuario WHERE Login = ?',
+        $busca = DB::SELECT('SELECT * FROM usuario WHERE Email = ?',
             [$dados['email']]);                 //Busca no banco de dados se já existe uma conta
                                                 //cadastrada com o mesmo e-mail
 
-        if (filter_var($dados['email'], FILTER_VALIDATE_EMAIL) == false){   //verifica integridade do email inserido
-            return response()->json(101);
-        } else if ($busca != null) {                                //verifica disponibilidde do email inserido
+        if ($busca != null) {                                //verifica disponibilidde do email inserido
             return response()->json(102);
-        } else if ($dados['password'] != $dados['passwordRepeat']){  //verifica igualdade entre senha e repetir senha
-            return response()->json(103);
-        } else if (strlen($dados['password']) > 10) {               //verifica comprimento da senha
-            return response()->json(104);
         } else {
             $dados['password'] = base64_encode($dados['password']);                 //codifica a senha
-            $sql = DB::INSERT('INSERT INTO usuario(Login, Senha) VALUES (?,?)',      //registra o usuario no BD
-                [$dados['email'], $dados['password']]);
+            $sql = DB::INSERT('INSERT INTO usuario(Email, Senha, Nome, FotoUsuario, Tipo, ativo) VALUES (?,?,?,"https://www.portalmaritimo.com/wp-content/uploads/2010/08/anonimo.jpg","U", 1)',      //registra o usuario no BD
+                [$dados['email'], $dados['password'], $dados['nome']]);
         }
         return response()->json(100);
     }
@@ -146,14 +140,26 @@ class UsuarioController extends Controller
         $dados = $this->againstSQL($dados);
         
         if(isset($dados['token'])){
-            $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
-            [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
-        
-            if ($usuario == null){
-                return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+            if(isset($dados['senha'])){
+                $usuarioSenha = DB::SELECT('SELECT * FROM usuario WHERE tokenAcesso = ? and Senha = ?',
+                [$dados['token'], base64_encode($dados['senha'])]);
+
+                if ($usuarioSenha == null){
+                    return response()->json("senha incorreta"); //caso nao encontre o usuario, retorna o erro 404
+                } else {
+                    DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Email = ?, Telefone = ?, Senha = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['email'], $dados['telefone'], base64_encode($dados['senhaNova']), $usuarioSenha[0]->ID]);
+                    return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+                }
             } else {
-                DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Email = ?, Telefone = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['email'], $dados['telefone'], $usuario[0]->ID]);
-                return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+                $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+                [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
+            
+                if ($usuario == null){
+                    return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+                } else {
+                    DB::UPDATE('UPDATE usuario SET Nome =  ?, FotoUsuario = ?, Email = ?, Telefone = ? WHERE ID = ?', [$dados['nome'], $dados['foto'], $dados['email'], $dados['telefone'], $usuario[0]->ID]);
+                    return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+                }
             }
         }
         else {
@@ -165,7 +171,7 @@ class UsuarioController extends Controller
         return false;
     }
 
-    public function vincularGoole(){
+    public function vincularGoogle(){
         return false;
     }
 
