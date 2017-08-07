@@ -2,72 +2,19 @@
 <html lang="pt-br">
 
 <head>
-    <title>MOCS</title>
+    <title>Visualizar obra</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" href="css/mainpage.css">
-    <link rel="stylesheet" href="css/modal_login.css">
-    <link rel="stylesheet" href="css/login-fb-google.css">
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="https://vuejs.org/js/vue.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/vue.resource/1.3.0/vue-resource.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-indigo.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="vendor.min.css">
-    <script src="vendor.min.js"></script>
-
-    <script src="app.min.js"></script>
-
     <link rel="stylesheet" href="app.min.css">
-
+    <script src="vendor.min.js"></script>
+    <script src="app.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 </head>
-<style>
-    @media (max-width: 365px) {
-        .mdl-card {
-            width: 250px;
-            height: 430px;
-        }
-        .main {
-            margin-top: -10px;
-        }
-    }
-    
-    @media (min-height: 640px) {
-        .mdl-mini-footer {
-            bottom: 0px;
-            position: fixed;
-            width: 100%;
-        }
-    }
-    
-    @media(min-height: 768px) {
-        .main {
-            margin-top: 170px;
-        }
-    }
-    
-    @media (min-width: 1366px) {
-        .mdl-card {
-            width: 580px;
-        }
-        form {
-            margin-left: 130px;
-        }
-        .mdl-button {
-            margin-left: 130px;
-        }
-        .mdl-card__title-text {
-            margin-left: 210px;
-        }
-    }
-</style>
+
 
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" id="app">
@@ -103,7 +50,7 @@
         <div class="mdl-layout__content">
 
             <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
-                <main class="main" >
+                <main class="main">
                     <div class="container-fluid" style="width:100%">
 
                         <header class="row">
@@ -118,7 +65,7 @@
                     </div>
                     <div class="container-fluid" style="width:100%">
                         <div class="row">
-                            <div class="col-sm-12" >
+                            <div class="col-sm-12">
                                 <div class="mdl-card  mdl-color--grey-100" style="text-align:center;width:100%px; margin:auto; margin-bottom:20px">
                                     Fotógrafo da Obra:
                                 </div>
@@ -138,11 +85,48 @@
                                 </div>
                             </div>
                         </div>
-                        
-                    </div> 
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="btn1" style="margin-left:570px;">
+                                   Ver imagem em 3D
+                                </button>
+                                <div id="container" style="margin-left: 450px;">
+                                    <ul class="list" style="list-style-type: none;">
+                                        <li id="frame"><img src="imagens/image1_1.jpg" /></li>
+                                        <!--Frames do objeto 3D -->
+                                        <!-- Exemplo temporário-->
+                                        <li ><img src="imagens/image1_2.jpg" /></li>
+                                        <li> <img src="imagens/image1_3.jpg"> </li>
+                                        <li> <img src="imagens/image1_4.jpg"> </li>
+                                        <li> <img src="imagens/image1_5.jpg"> </li>
+                                        <li> <img src="imagens/image1_6.jpg"> </li>
+                                        <li> <img src="imagens/image1_7.jpg"> </li>
+                                        <li> <img src="imagens/image1_8.jpg"> </li>
+                                        <li> <img src="imagens/image1_9.jpg"> </li>
+                                        <li> <img src="imagens/image1_10.jpg"> </li>
+                                        <li> <img src="imagens/image1_11.jpg"> </li>
+                                        <li> <img src="imagens/image1_12.jpg"> </li>
+                                        <li> <img src="imagens/image1_13.jpg"> </li>
+                                        <li> <img src="imagens/image1_14.jpg"> </li>
+                                        <li> <img src="imagens/image1_15.jpg"> </li>
+                                        <li> <img src="imagens/image1_16.jpg"> </li>
+                                        <li> <img src="imagens/image1_17.jpg"> </li>
+                                        <li> <img src="imagens/image1_18.jpg"> </li>
+                                    </ul>
+                                </div>
+
+
+                            </div>
+                            <div class="col-sm-12">
+                                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="btn2" style="margin-left:570px;">
+                                   Fechar visualização 3D
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <footer class="mdl-mini-footer">
                         <div class="text-footer ">Avenida Transnordestina, s/n - Novo Horizonte CEP 44036-900 - Feira de Santana - Bahia - (75)3161-8000</div>
-                    </footer>   
+                    </footer>
                 </main>
             </div>
 
@@ -156,33 +140,33 @@
 
             data() {
                 return {
-                    nomeObra:[],
-                    fotoObra:[],
-                    fotografoObra:[],
-                    dataFoto:[],
-                    formaAquisicao:[],
-                    dataAquisicao:[],
-                    autorObra:[],
-                    observacoesObra:[],
-                    materialObra:[],
-                    tecnicaObra:[],
-                    alturaObra:[],
-                    larguraObra:[],
-                    comprimentoObra:[],
-                    nNoInventarioObra:[],
-                    colecaoObra:[],
-                    procedenciaObra:[],
-                    funcaoObra:[],
-                    descricaoObra:[],
-                    estadoObra:[],
-                    historicoObra:[],
-                    marcasObra:[],
-                    iconologiaObra:[],
-                    referenciasObra:[],
+                    nomeObra: [],
+                    fotoObra: [],
+                    fotografoObra: [],
+                    dataFoto: [],
+                    formaAquisicao: [],
+                    dataAquisicao: [],
+                    autorObra: [],
+                    observacoesObra: [],
+                    materialObra: [],
+                    tecnicaObra: [],
+                    alturaObra: [],
+                    larguraObra: [],
+                    comprimentoObra: [],
+                    nNoInventarioObra: [],
+                    colecaoObra: [],
+                    procedenciaObra: [],
+                    funcaoObra: [],
+                    descricaoObra: [],
+                    estadoObra: [],
+                    historicoObra: [],
+                    marcasObra: [],
+                    iconologiaObra: [],
+                    referenciasObra: [],
                 }
             },
 
-            ready: function(){
+            ready: function() {
                 this.pegarNome();
                 this.pegarFoto();
                 this.pegarFotografoObra();
@@ -205,216 +189,216 @@
                 this.pegarHistoricoOBra();
                 this.pegarMarcasObras();
                 this.pegarIconologiaObra();
-                this.pegarReferenciasObras();   
-                
+                this.pegarReferenciasObras();
+
             },
 
             methods: {
-                pegarNome: function(){
+                pegarNome: function() {
                     this.$https.get('url').then(response => {
-                        this.nomeObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.nomeObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarFoto: function(){
+                pegarFoto: function() {
                     this.$https.get('url').then(response => {
-                        this.fotoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.fotoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarFotografoObra: function(){
+                pegarFotografoObra: function() {
                     this.$https.get('url').then(response => {
-                        this.fotografoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.fotografoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarDataFoto: function(){
+                pegarDataFoto: function() {
                     this.$https.get('url').then(response => {
-                        this.dataFoto = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.dataFoto = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarFormaAquisicao: function(){
+                pegarFormaAquisicao: function() {
                     this.$https.get('url').then(response => {
-                        this.formaAquisicao = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.formaAquisicao = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                dataAquisicao: function(){
+                dataAquisicao: function() {
                     this.$https.get('url').then(response => {
-                        this.dataAquisicao = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.dataAquisicao = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarAutorObra: function(){
+                pegarAutorObra: function() {
                     this.$https.get('url').then(response => {
-                        this.autorObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.autorObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarObservacoesObra: function(){
+                pegarObservacoesObra: function() {
                     this.$https.get('url').then(response => {
-                        this.observacoesObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.observacoesObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarMaterialObra: function(){
+                pegarMaterialObra: function() {
                     this.$https.get('url').then(response => {
-                        this.materialObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.materialObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarTecnicaObra: function(){
+                pegarTecnicaObra: function() {
                     this.$https.get('url').then(response => {
-                        this.tecnicaObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.tecnicaObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarAlturaObra: function(){
+                pegarAlturaObra: function() {
                     this.$https.get('url').then(response => {
-                        this.alturaObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.alturaObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarLarguraObra: function(){
+                pegarLarguraObra: function() {
                     this.$https.get('url').then(response => {
-                        this.larguraObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.larguraObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarComprimentoObra: function(){
+                pegarComprimentoObra: function() {
                     this.$https.get('url').then(response => {
-                        this.comprimentoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.comprimentoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarNinventarioObra: function(){
+                pegarNinventarioObra: function() {
                     this.$https.get('url').then(response => {
-                        this.nNoInventarioObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.nNoInventarioObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarColecaoObra: function(){
+                pegarColecaoObra: function() {
                     this.$https.get('url').then(response => {
-                        this.colecaoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.colecaoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarProcedenciaObra: function(){
+                pegarProcedenciaObra: function() {
                     this.$https.get('url').then(response => {
-                        this.procedenciaObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.procedenciaObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarFuncaoObra: function(){
+                pegarFuncaoObra: function() {
                     this.$https.get('url').then(response => {
-                        this.funcaoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.funcaoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarDescricaoObra: function(){
+                pegarDescricaoObra: function() {
                     this.$https.get('url').then(response => {
-                        this.descricaoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.descricaoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarEstadoObra: function(){
+                pegarEstadoObra: function() {
                     this.$https.get('url').then(response => {
-                        this.estadoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.estadoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarHistoricoOBra: function(){
+                pegarHistoricoOBra: function() {
                     this.$https.get('url').then(response => {
-                        this.historicoObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.historicoObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarMarcasObras: function(){
+                pegarMarcasObras: function() {
                     this.$https.get('url').then(response => {
-                        this.marcasObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.marcasObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarIconologiaObra: function(){
+                pegarIconologiaObra: function() {
                     this.$https.get('url').then(response => {
-                        this.iconologiaObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.iconologiaObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
-                pegarReferenciasObras: function(){
+                pegarReferenciasObras: function() {
                     this.$https.get('url').then(response => {
-                        this.referenciasObra = response.data;
-                    })
-                    .catch(response => {
-                        //erro ao pegar dados
-                    });
+                            this.referenciasObra = response.data;
+                        })
+                        .catch(response => {
+                            //erro ao pegar dados
+                        });
 
                 },
 
@@ -433,6 +417,53 @@
             }
         }
     </script>
+
+    <!-- CÓDIGO DO 3D -->
+    <script>
+        //pega o botão, o primeiro frame e o container que abriga objeto
+        var btn1 = document.getElementById('btn1');
+        var frame1 = document.getElementById('frame');
+        var cont = document.getElementById('container');
+        frame1.style.display = "none";
+        cont.style.display = "none";
+
+        btn1.onclick = function() {
+             frame1.style.display = "block";
+            cont.style.display = "block";
+            var pic_X = $('.list').offset().left;
+            var pic_Y = $('.list').offset().top;
+            var pic_W = $('.list').width() / 2;
+            var pic_H = $('.list').height() / 2;
+            var center_X = pic_X + pic_W;
+            var center_Y = pic_Y + pic_H;
+            var movestop = pic_W / 10;
+
+            $('.list').mousemove(function(event) {
+                var mouse_X = event.pageX;
+                var mouse_Y = event.pageY;
+                if (mouse_X - center_X <= 0) {
+                    moveImg(mouse_X, mouse_Y, 'left')
+                } else {
+                    moveImg(mouse_X, mouse_Y)
+                }
+            });
+
+            function moveImg(m_X, m_Y, dir) {
+                var index = Math.ceil(Math.abs(m_X - center_X) / movestop);
+                if (dir) {
+                    $('.list li').eq(index).show().siblings().hide();
+                } else {
+                    $('.list li').eq(18 - index).show().siblings().hide();
+                }
+            }
+        }
+        //clique para fechar a visualização
+        btn2.onclick = function() {
+            frame1.style.display = "none";
+            cont.style.display = "none";
+        }
+    </script>
+    <!-- FECha CÓDIGO DO 3D -->
 
 </body>
 
