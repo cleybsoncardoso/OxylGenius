@@ -37,9 +37,9 @@ $app->group(['prefix' => 'usuario'], function () use ($app){
 $app->group(['prefix' => 'obra'], function () use ($app){
     $app->get('/', 'ObraController@all'); //todas obras
     $app->get('/{id}', 'ObraController@ler'); //obra unica
-    $app->delete('/{id}/token/{token}', 'ObraController@deletar'); //deletar obra
+    $app->post('/delete', 'ObraController@deletar'); //deletar obra
     $app->post('/', 'ObraController@criar'); //criar obra 
-    $app->put('/{id}', 'ObraController@update'); //atualizar dados de obra 
+    $app->post('/update/{id}', 'ObraController@update'); //atualizar dados de obra 
 });
 
 $app->group(['prefix' => 'login'], function () use ($app){
@@ -50,14 +50,14 @@ $app->group(['prefix' => 'login'], function () use ($app){
 });
 
 $app->group(['prefix' => 'adm'], function () use ($app){
-    $app->post('/{id}', 'AdmController@adm'); //dar e tirar gerencia
-    $app->get('/avaliacoes', 'AvaliacaoController@all');     //criar todas avaliacoes
-    $app->get('/avaliacoes/{id}', 'AvaliacaoController@ler');     //ler avaliacao
-    $app->delete('/avaliacoes/{id}', 'AvaliacaoController@deletar');     //deletar avaliacao
+    $app->get('/avaliacoes', 'AvaliacaoController@all');                //criar todas avaliacoes
+    $app->get('/avaliacoes/{id}', 'AvaliacaoController@ler');           //ler avaliacao
+    $app->post('/avaliacoes/delete', 'AvaliacaoController@deletar');    //deletar avaliacao
 });
 
 $app->group(['prefix' => 'noticia'], function () use ($app){
     $app->get('/', 'NoticiaController@all');        //Todas noticias
+    $app->post('/delete', 'NoticiaController@deletar'); //deletar obra
     $app->get('/{id}', 'NoticiaController@ler');    //ler noticia
     $app->post('/{id}', 'NoticiaController@update');  //atualizar dados
     $app->post('/', 'NoticiaController@criar');     //criar dados {token:string, Conteudo: string, Dta_de_criacao: string(yyyy-mm-dd),ID_Objeto: id } retorno true
