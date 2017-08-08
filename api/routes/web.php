@@ -27,6 +27,8 @@ $app->group(['prefix' => 'usuario'], function () use ($app){
     $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario  //{token: 11111}, retorno: {nome:string,tipo('U','F','G'),foto:base64}
     $app->post('/update', 'UsuarioController@update'); //atualizar dados usuario 
     //nome:string, foto:base64, login:string, telefone:string, token:string
+    $app->post('/updatePermissao', 'UsuarioController@updatePermissao'); //atualizar permissao de usuario 
+    //{{tipo: 'G','U','F', token}}
     $app->put('/facebook/{id}', 'UsuarioController@vincularFacebook'); //adicionar face do usuario 
     $app->put('/google/{id}', 'UsuarioController@vincularGoogle'); //adicionar google de usuario 
 });

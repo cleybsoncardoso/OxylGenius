@@ -167,6 +167,27 @@ class UsuarioController extends Controller
         }
     }
 
+    public function updatePermissao(Request $request){
+        $dados = $request->all();
+        $dados = $this->againstSQL($dados);
+        
+        if(isset($dados['token'])){
+            $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+            [$dados['token']]); //retorna um array se tiver algum usuario ou null caso não encontre o token
+            
+            if ($usuario == null){
+                return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
+            } else {
+                $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
+                    [$dados['id']]);
+                DB::UPDATE('UPDATE usuario SET Tipo =  ? WHERE ID = ?', [$dados['tipo'], $usuario[0]->ID]);
+                return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+            }
+        } else {
+            return response()->json("Informe o token do usuario");
+        }
+    }
+
     public function vincularFacebook(){
         return false;
     }
