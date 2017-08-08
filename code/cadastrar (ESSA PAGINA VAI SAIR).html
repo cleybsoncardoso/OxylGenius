@@ -62,6 +62,11 @@
                             
                             <div class="mdl-card__supporting-text">
                                 <form action="#">
+                                    <div class="mdl-textfield mdl-js-textfield ">
+                                        <input class="mdl-textfield__input" type="text" id="name" >
+                                        <label class="mdl-textfield__label" for="name_input">Nome</label>
+                                    </div>
+                                    <br>
                                     <div class="mdl-textfield mdl-js-textfield">
                                         <div class="mdl-textfield mdl-js-textfield " >
                                             <input class="mdl-textfield__input" type="email" id="email" >
@@ -77,7 +82,7 @@
                                     <div class="mdl-textfield mdl-js-textfield ">
                                         <input class="mdl-textfield__input" type="password" id="passwordRepeat" >
                                         <label class="mdl-textfield__label" for="pass_repeat_input">Confirmação da Senha</label>
-                                    </div>                                 
+                                    </div>
                                 </form> 
                             </div>
                             <div class="mdl-textfield mdl-js-textfield ">
@@ -103,6 +108,7 @@
             el: '#app',
             data: function () {
             return {
+                name: '',
                 email: '',
                 password: '',
                 passwordRepeat: ''
@@ -122,15 +128,16 @@
                 },
                 cadastrar: function () {
                     var dados = {
-                        nome: this.email,
-                        senha: this.password,
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
                     }
 
-                    this.$http.post('url', dados).then((response) => {
-                        //cadastrou
-                    }, () => {
-                        //nao cadastrou
-                    })
+                    $.post('http://mocs.000webhostapp.com/api/public/usuario', dados, function(response) {
+                        if (repsonse.getJSON() == 100) {
+                            $(location).attr('href', "dashboard.html");
+                        } //falta mensagens de erro
+                    });
                 }
             }
         })
