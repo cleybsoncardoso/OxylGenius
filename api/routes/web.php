@@ -65,3 +65,7 @@ $app->group(['prefix' => 'noticia'], function () use ($app){
 $app->group(['prefix' => 'avaliar'], function () use ($app){
     $app->post('/', 'AvaliacaoController@criar');     //criar avaliacao
 });
+
+$app->group(['prefix' => 'log'], function () use ($app){
+    $app->post('/', 'LogController@read');     //criar avaliacao
+});
