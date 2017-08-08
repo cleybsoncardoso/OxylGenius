@@ -69,155 +69,61 @@
                             </div>
                         </div>
 
-                        <div class="row" id="linha1" style="margin-top:20px">
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
+                        <div class="row" id="linha" style="margin-top:20px" ready()>
+                            <div class="col-sm-3" v-for="obra in obras">
+                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('{{obra.linkFoto}}')">
                                     <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra A</h2>
+                                        <h2 class="mdl-card__title-text">{{obra.nome}}</h2>
                                     </div>
 
                                 </div>
 
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://s-media-cache-ak0.pinimg.com/236x/e4/45/0d/e4450ddc4f23b828f0977d03f84a7763.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra B</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('http://historylists.org/images/the-scream.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra C</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg/370px-Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra D</h2>
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
-
-                        <div class="row" id="linha2">
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra A</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://s-media-cache-ak0.pinimg.com/236x/e4/45/0d/e4450ddc4f23b828f0977d03f84a7763.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra B</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('http://historylists.org/images/the-scream.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra C</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg/370px-Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra D</h2>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row" id="linha3">
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra A</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://s-media-cache-ak0.pinimg.com/236x/e4/45/0d/e4450ddc4f23b828f0977d03f84a7763.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra B</h2>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('http://historylists.org/images/the-scream.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra C</h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg/370px-Creaci%C3%B3n_de_Ad%C3%A1n_%28Miguel_%C3%81ngel%29.jpg')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">Obra D</h2>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
                     </div>
 
                 </main>
-                <footer class="mdl-mini-footer">
-                    <div class="text-footer ">Avenida Transnordestina, s/n - Novo Horizonte CEP 44036-900 - Feira de Santana - Bahia - (75)3161-8000</div>
-                </footer>
+                
             </div>
 
         </div>
-
+        <footer class="mdl-mini-footer">
+            <div class="text-footer ">Avenida Transnordestina, s/n - Novo Horizonte CEP 44036-900 - Feira de Santana - Bahia - (75)3161-8000</div>
+        </footer>
     </div>
 
     <script>
+        var URL_API = 'http://mocs.000webhostapp.com/api/public/';
         var app = new Vue({
             el: '#app',
 
             data() {
                 return {
-                    obra: [],
+                    obras: [],
                     searchText: '',
                 }
             },
 
-            ready: function() {
-                this.pegarNome();
-                this.pegarFoto();
+            ready: function(){
+                this.pegarObras();
             },
 
             methods: {
-                pegarNome: function() {
-                    this.$https.get('url').then(response => {
-                            this.nomeObra = response.data;
+                pegarObras: function() {
+                    this.$https.get(URL_API + 'obra/').then(response => {
+                            this.obras = response.data;
+                            console.log(response.data);
                         })
                         .catch(response => {
                             //erro ao pegar dados
+                            console.log(response.data);
+
                         });
 
                 },
-                pegarFoto: function() {
-                    this.$https.get('url').then(response => {
-                            this.fotoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-
-            },
+                
+            },         
 
         })
     </script>

@@ -51,10 +51,10 @@
 
             <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
                 <main class="main">
-                    <div class="container-fluid" style="width:100%">
+                    <div class="container-fluid" style="width:100%" ready()>
 
                         <header class="row">
-                            <h2 style="text-align:center">Nome da Obra</h2>
+                            <h2 style="text-align:center">Nome da Obra: {{obra.nome}}</h2>
                         </header>
                         <div class="row">
                             <div class="col-sm-12">
@@ -74,14 +74,14 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="mdl-card  mdl-color--grey-100" style="text-align:center;width:auto; height:auto; margin:auto; margin-bottom:20px">
-                                    Data da Foto:
+                                    Data da Foto:{{obra.dta}}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="mdl-card  mdl-color--grey-100" style="text-align:center;width:auto; height:auto; margin:auto; margin-bottom:20px">
-                                    Forma de Aquisição da Obra:
+                                    Forma de Aquisição da Obra:{{obra.Forma}}
                                 </div>
                             </div>
                         </div>
@@ -135,273 +135,32 @@
     </div>
 
     <script>
+        var URL_API = 'http://mocs.000webhostapp.com/api/public/';
         var app = new Vue({
             el: '#app',
 
             data() {
                 return {
-                    nomeObra: [],
-                    fotoObra: [],
-                    fotografoObra: [],
-                    dataFoto: [],
-                    formaAquisicao: [],
-                    dataAquisicao: [],
-                    autorObra: [],
-                    observacoesObra: [],
-                    materialObra: [],
-                    tecnicaObra: [],
-                    alturaObra: [],
-                    larguraObra: [],
-                    comprimentoObra: [],
-                    nNoInventarioObra: [],
-                    colecaoObra: [],
-                    procedenciaObra: [],
-                    funcaoObra: [],
-                    descricaoObra: [],
-                    estadoObra: [],
-                    historicoObra: [],
-                    marcasObra: [],
-                    iconologiaObra: [],
-                    referenciasObra: [],
+                    obra: [],
                 }
             },
 
             ready: function() {
-                this.pegarNome();
-                this.pegarFoto();
-                this.pegarFotografoObra();
-                this.pegarDataFoto();
-                this.pegarFormaAquisicao();
-                this.pegarDataAquisicao();
-                this.pegarAutorObra();
-                this.pegarObservacoesObra();
-                this.pegarMaterialObra();
-                this.pegarTecnicaObra();
-                this.pegarAlturaObra();
-                this.pegarLarguraObra();
-                this.pegarComprimentoObra();
-                this.pegarNinventarioObra();
-                this.pegarColecaoObra();
-                this.pegarProcedenciaObra();
-                this.pegarFuncaoObra();
-                this.pegarDescricaoObra();
-                this.pegarEstadoObra();
-                this.pegarHistoricoOBra();
-                this.pegarMarcasObras();
-                this.pegarIconologiaObra();
-                this.pegarReferenciasObras();
-
+                this.pegarObra();
             },
 
             methods: {
-                pegarNome: function() {
-                    this.$https.get('url').then(response => {
-                            this.nomeObra = response.data;
+                pegarObra: function() {
+                    this.$https.get(URL_API + 'obra/{id}').then(response => {
+                            this.obra = response.data;
+                            console.log(response.data);
                         })
                         .catch(response => {
                             //erro ao pegar dados
+                            console.log(response.data);
                         });
 
                 },
-                pegarFoto: function() {
-                    this.$https.get('url').then(response => {
-                            this.fotoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarFotografoObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.fotografoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarDataFoto: function() {
-                    this.$https.get('url').then(response => {
-                            this.dataFoto = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarFormaAquisicao: function() {
-                    this.$https.get('url').then(response => {
-                            this.formaAquisicao = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                dataAquisicao: function() {
-                    this.$https.get('url').then(response => {
-                            this.dataAquisicao = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarAutorObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.autorObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarObservacoesObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.observacoesObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarMaterialObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.materialObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarTecnicaObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.tecnicaObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarAlturaObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.alturaObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarLarguraObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.larguraObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarComprimentoObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.comprimentoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarNinventarioObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.nNoInventarioObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarColecaoObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.colecaoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarProcedenciaObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.procedenciaObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarFuncaoObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.funcaoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarDescricaoObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.descricaoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarEstadoObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.estadoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarHistoricoOBra: function() {
-                    this.$https.get('url').then(response => {
-                            this.historicoObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarMarcasObras: function() {
-                    this.$https.get('url').then(response => {
-                            this.marcasObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarIconologiaObra: function() {
-                    this.$https.get('url').then(response => {
-                            this.iconologiaObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-                pegarReferenciasObras: function() {
-                    this.$https.get('url').then(response => {
-                            this.referenciasObra = response.data;
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                        });
-
-                },
-
 
             },
 
