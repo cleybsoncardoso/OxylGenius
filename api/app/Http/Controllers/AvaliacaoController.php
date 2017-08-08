@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Cript;
 
-class NoticiaController extends Controller
+class AvaliacaoController extends Controller
 {
     private function againstSQL($array){
         $array = array_map(function($value){
@@ -27,17 +27,12 @@ class NoticiaController extends Controller
             return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
         } else {
             $usuario = $usuario[0]; 
-            if($usuario->Tipo == 'G' || $usuario->Tipo == 'F'){
-                $dados['ID_Autor'] = $usuario->ID;
+            $dados['ID_Autor'] = $usuario->ID;
 
-                DB::INSERT('INSERT INTO notificacao  (ID_Autor, Conteudo, Dta_de_criacao, ativo, ID_Objeto) VALUES (?,?,?, 1,?)',
-                    [$dados['ID_Autor'], $dados['Conteudo'], $dados['Dta_de_criacao'], $dados['ID_Objeto']]);
+            DB::INSERT('INSERT INTO avaliacao (ID_Autor, Nota, Dta) VALUES (?,?,?)',
+                [$dados['ID_Autor'], $dados['Nota'], $dados['Dta']]);
 
-                return response()->json(true); //caso cadastre
-            } else {
-            return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
-                
-            }
+            return response()->json(true); //caso cadastre
         }
     }
 
@@ -54,7 +49,7 @@ class NoticiaController extends Controller
             } else if($usuario[0]->Tipo != 'G' && $usuario[0]->Tipo != 'F'){
                 return response()->json('Voce não é o usuario administrador'); //caso nao encontre o usuario, retorna o erro 404
             } else {
-                DB::UPDATE('UPDATE notificacao SET Conteudo =  ? WHERE ID_Notificacao = ?', [$dados['Conteudo'], $id]);
+                DB::UPDATE('UPDATE avaliacao SET Conteudo =  ? WHERE ID_avaliacao = ?', [$dados['Conteudo'], $id]);
                 return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
             }        
         }
@@ -64,17 +59,17 @@ class NoticiaController extends Controller
     }
 
     public function all(){                                           
-        $noticias = DB::SELECT('SELECT * FROM notificacao WHERE ativo = 1');
-        return response()->json($noticias);
+        $avaliacoes = DB::SELECT('SELECT * FROM avaliacao');
+        return response()->json($avaliacoes);
             
     }
 
     public function ler($id){
-        $noticia = DB::SELECT('SELECT * FROM notificacao WHERE ativo = 1 and ID_Notificacao = ?', [$id]);
-        if($noticia == null){
+        $avaliacao = DB::SELECT('SELECT * FROM avaliacao WHERE ID_avaliacao = ?', [$id]);
+        if($avaliacao == null){
             return response()->json(404);  
         } else {
-            return response()->json($noticia[0]);
+            return response()->json($avaliacao[0]);
         }
             
     }
@@ -90,12 +85,12 @@ class NoticiaController extends Controller
         } else {
             $usuario = $usuario[0]; 
             if($usuario->Tipo == 'G' || $usuario->Tipo == 'F'){
-                $notificacao = DB::SELECT('SELECT * FROM notificacao WHERE ID_Notificacao = ?', [$dados['ID_Notificacao']]);
-                if ($notificacao == null){
+                $avaliacao = DB::SELECT('SELECT * FROM avaliacao WHERE ID_avaliacao = ?', [$dados['ID_avaliacao']]);
+                if ($avaliacao == null){
                     return response()->json(404); 
                 } else {
-                    $notificacao = $notificacao[0]; 
-                    DB::UPDATE('UPDATE notificacao SET ativo =  0 WHERE ID_Notificacao = ?', [$dados['ID_Notificacao']]);
+                    $avaliacao = $avaliacao[0]; 
+                    DB::DELETE('DELETE FROM avaliacao WHERE ID_avaliacao = ?', [$dados['ID_avaliacao']]);
                     return response()->json(true); 
                 }
 

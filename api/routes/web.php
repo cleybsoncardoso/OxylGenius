@@ -27,6 +27,8 @@ $app->group(['prefix' => 'usuario'], function () use ($app){
     $app->post('/perfil', 'UsuarioController@perfil'); //perfil do usuario  //{token: 11111}, retorno: {nome:string,tipo('U','F','G'),foto:base64}
     $app->post('/update', 'UsuarioController@update'); //atualizar dados usuario 
     //nome:string, foto:base64, login:string, telefone:string, token:string
+    $app->post('/updatePermissao', 'UsuarioController@updatePermissao'); //atualizar permissao de usuario 
+    //{{tipo: 'G','U','F', token}}
     $app->put('/facebook/{id}', 'UsuarioController@vincularFacebook'); //adicionar face do usuario 
     $app->put('/google/{id}', 'UsuarioController@vincularGoogle'); //adicionar google de usuario 
 });
@@ -35,9 +37,9 @@ $app->group(['prefix' => 'usuario'], function () use ($app){
 $app->group(['prefix' => 'obra'], function () use ($app){
     $app->get('/', 'ObraController@all'); //todas obras
     $app->get('/{id}', 'ObraController@ler'); //obra unica
-    $app->delete('/{id}/token/{token}', 'ObraController@deletar'); //deletar obra
+    $app->post('/delete', 'ObraController@deletar'); //deletar obra
     $app->post('/', 'ObraController@criar'); //criar obra 
-    $app->put('/{id}', 'ObraController@update'); //atualizar dados de obra 
+    $app->post('/update/{id}', 'ObraController@update'); //atualizar dados de obra 
 });
 
 $app->group(['prefix' => 'login'], function () use ($app){
@@ -48,14 +50,14 @@ $app->group(['prefix' => 'login'], function () use ($app){
 });
 
 $app->group(['prefix' => 'adm'], function () use ($app){
-    $app->post('/{id}', 'AdmController@adm'); //dar e tirar gerencia
-    $app->get('/avaliacoes', 'AvaliacaoController@all');     //criar todas avaliacoes
-    $app->get('/avaliacoes/{id}', 'AvaliacaoController@ler');     //ler avaliacao
-    $app->delete('/avaliacoes/{id}', 'AvaliacaoController@deletar');     //deletar avaliacao
+    $app->get('/avaliacoes', 'AvaliacaoController@all');                //criar todas avaliacoes
+    $app->get('/avaliacoes/{id}', 'AvaliacaoController@ler');           //ler avaliacao
+    $app->post('/avaliacoes/delete', 'AvaliacaoController@deletar');    //deletar avaliacao
 });
 
 $app->group(['prefix' => 'noticia'], function () use ($app){
     $app->get('/', 'NoticiaController@all');        //Todas noticias
+    $app->post('/delete', 'NoticiaController@deletar'); //deletar obra
     $app->get('/{id}', 'NoticiaController@ler');    //ler noticia
     $app->post('/{id}', 'NoticiaController@update');  //atualizar dados
     $app->post('/', 'NoticiaController@criar');     //criar dados {token:string, Conteudo: string, Dta_de_criacao: string(yyyy-mm-dd),ID_Objeto: id } retorno true
@@ -64,4 +66,8 @@ $app->group(['prefix' => 'noticia'], function () use ($app){
 
 $app->group(['prefix' => 'avaliar'], function () use ($app){
     $app->post('/', 'AvaliacaoController@criar');     //criar avaliacao
+});
+
+$app->group(['prefix' => 'log'], function () use ($app){
+    $app->post('/', 'LogController@read');     //criar avaliacao
 });

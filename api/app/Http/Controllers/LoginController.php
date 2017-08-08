@@ -70,11 +70,11 @@ class LoginController extends Controller
         [$dados['facebook']]);
 
         if ($usuario == null){
-        $add = DB::INSERT('INSERT INTO usuario (Nome, LoginFacebook, Tipo) VALUES (?,?,?)',
-            [$dados['nome'], $dados['facebook'], 0]);
-           
-        $usuario = DB::SELECT('SELECT * FROM usuario WHERE LoginFacebook = ?',
-        [$dados['facebook']]);
+            $add = DB::INSERT('INSERT INTO usuario (Nome, LoginFacebook, Tipo) VALUES (?,?,?)',
+                [$dados['nome'], $dados['facebook'], 0]);
+            
+            $usuario = DB::SELECT('SELECT * FROM usuario WHERE LoginFacebook = ?',
+            [$dados['facebook']]);
         } 
         $usuario = $usuario[0];
         $max = getrandmax();

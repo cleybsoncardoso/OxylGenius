@@ -28,7 +28,7 @@
                         <i class="mdl-color-text--grey-700 material-icons">account_circle</i>
                     </div>
                     <div class="usuario-nome mdl-color-text--grey-700">Username</div>
-                    <button class="logout-button mdl-button mdl-js-button mdl-button--colored mdl-color--red-400 mdl-color-text--white">
+                    <button class="logout-button mdl-button mdl-js-button mdl-button--colored mdl-color--red-400 mdl-color-text--white" v-onclick="logout()">
                         Sair
                     </button>
                 </div>
@@ -52,6 +52,7 @@
                 <perfil-view v-show="selected.id == 'perfil'"></perfil-view>
                 <itens-view v-show="selected.id == 'itens'"></itens-view>
                 <usuarios-view v-show="selected.id == 'usuarios'"></usuarios-view>
+                <log-view v-show="selected.id == 'logs'"></log-view>
             </main>
         </div>
     </div>
@@ -87,6 +88,13 @@
                     if ($('.mdl-layout__obfuscator').hasClass('is-visible')) {
                         $('.mdl-layout__drawer, .mdl-layout__obfuscator').toggleClass('is-visible');
                     }
+                },
+                logout: function (){
+                    $.post('url', data).done(function(data){
+                        $(location).attr('href', "index.html");
+                    }).fail (function (error){
+                        alert("error");
+                    });
                 }
             },
             created: function () {
