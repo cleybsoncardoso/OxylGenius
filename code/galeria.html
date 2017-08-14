@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="app.min.css">
     <script src="vendor.min.js"></script>
     <script src="app.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    
 
 </head>
 
@@ -30,8 +30,11 @@
                         <div id="id01" class="obfuscator">
                             <login-modal class="animate-zoom"></login-modal>
                         </div>
-                        <div class="elemento_menu"><a href="cadastrar.html" class="mdl-navigation__link">Cadastrar</a></div>
-
+                        
+                        <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id02').style.display='block'">Cadastrar</a></div>
+                        <div id="id02" class="obfuscator">
+                            <cadastrar-modal class="animate-zoom"></cadastrar-modal>
+                        </div>
 
                     </nav>
                 </div>
@@ -43,6 +46,7 @@
                 <a class="mdl-navigation__link " href="FaleConosco.html">Fale Conosco</a>
                 <a class="mdl-navigation__link " href="galeria.html">Galeria</a>
                 <a href="login-mobile.html" class="mdl-navigation__link ">Entrar</a>
+                <a href="cadastrar-mobile.html" class="mdl-navigation__link ">Cadastrar</a>
             </nav>
         </div>
 
@@ -93,6 +97,21 @@
         </footer>
     </div>
 
+     <script>
+        var modal = document.getElementById('id01');
+        var cadmodal = document.getElementById ('id02');
+        
+        //fecha quando o user clica fora
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none ";
+            } else if (event.target == cadmodal){
+                cadmodal.style.display ="none";
+            }
+        }
+    </script>
+
+
     <script>
         var URL_API = 'http://mocs.000webhostapp.com/api/public/';
         var app = new Vue({
@@ -128,15 +147,7 @@
         })
     </script>
 
-    <script>
-        var modal = document.getElementById('id01');
-        //fecha quando o user clica fora
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none ";
-            }
-        }
-    </script>
+  
 
 
 </body>

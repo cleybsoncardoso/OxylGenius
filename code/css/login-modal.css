@@ -4,11 +4,26 @@
     display: block;
 }
 
+#cadastrar-modal{
+    max-width: 400px;
+    margin: 16px auto;
+    display: block;
+}
+
 #login-modal .mdl-card__supporting-text{
     width: 100%;
 }
 
+#cadastrar-modal .mdl-card__supporting-text{
+    width: 100%;
+}
+
+
 #login-modal .loginBtn{
+    width: 100%;
+}
+
+#cadastrar-modal .loginBtn{
     width: 100%;
 }
 

@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title>Fale Conosco</title>
+    <title>Cadastrar</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -12,6 +12,7 @@
     <script src="vendor.min.js"></script>
     <script src="app.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
 </head>
 <style>
     @media (max-width: 365px) {
@@ -59,30 +60,15 @@
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row">
                 <a href="index.html"><img class="title1" src="imagens/logo.png" style="width:200px; height:45px; margin-left:10px; margin-bottom:5px;"></a>
-                <div class="menu">
-                    <nav class="mdl-navigation mdl-layout--large-screen-only">
 
-                        <div class="elemento_menu"><a href="galeria.html" class="mdl-navigation__link"> Galeria</a></div>
-                        <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id01').style.display='block'">Entrar</a></div>
-
-                        <div id="id01" class="obfuscator">
-                            <login-modal class="animate-zoom"></login-modal>
-                        </div>
-                       <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id02').style.display='block'">Cadastrar</a></div>
-                        <div id="id02" class="obfuscator">
-                            <cadastrar-modal class="animate-zoom"></cadastrar-modal>
-                        </div>
-
-                    </nav>
-                </div>
             </div>
         </header>
 
         <div class="mdl-layout__drawer mdl-layout--small-screen-only ">
             <nav class="mdl-navigation ">
+                <a class="mdl-navigation__link " href="faleConosco.html">Fale Conosco</a>
                 <a class="mdl-navigation__link " href="galeria.html">Galeria</a>
-                <a href="login-mobile.html" class="mdl-navigation__link ">Entrar</a>
-                <a href="cadastrar-mobile.html" class="mdl-navigation__link ">Cadastrar</a>
+
             </nav>
         </div>
 
@@ -90,34 +76,35 @@
 
             <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
                 <main class="main">
-                    <div class="mdl-card mdl-shadow--6dp" style="margin:0 auto; margin-bottom:20px; margin-top:20px;">
+                    <div class="mdl-card mdl-shadow--6dp" style="margin:0 auto; margin-bottom:20px; margin-top:50px; height: 300px;">
 
                         <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
-                            <h2 class="mdl-card__title-text">Contato</h2>
+                            <h2 class="mdl-card__title-text">Cadastro</h2>
                         </div>
 
                         <div class="form">
+
                             <div class="mdl-card__supporting-text">
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield">
-                                        <input class="mdl-textfield__input" type="text" id="username" />
-                                        <label class=" mdl-textfield__label " for="username ">Nome</label>
+                                        <div class="mdl-textfield mdl-js-textfield ">
+                                            <input class="mdl-textfield__input" type="email" id="email">
+                                            <label class="mdl-textfield__label" for="email_input">Email</label>
+                                        </div>
                                     </div>
                                     <br>
                                     <div class="mdl-textfield mdl-js-textfield ">
-                                        <input class="mdl-textfield__input " type="text " id="email " />
-                                        <label class="mdl-textfield__label " for="username ">Email</label>
+                                        <input class="mdl-textfield__input" type="password" id="password">
+                                        <label class="mdl-textfield__label" for="pass_input">Senha</label>
                                     </div>
                                     <br>
-                                    <div class="mdl-textfield mdl-js-textfield ">
-                                        <textarea rows="6" cols="60" class="mdl-textfield__input "></textarea>
-                                        <label class="mdl-textfield__label " for="mensagem ">Digite aqui sua mensagem</label>
-                                    </div>
+
                                 </form>
                             </div>
-                            <div class="mdl-card__actions mdl-card--border ">
-                                <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect ">Enviar</button>
+                            <div class="mdl-textfield mdl-js-textfield ">
+                                <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Cadastrar</button>
                             </div>
+
                         </div>
                     </div>
                     <footer class="mdl-mini-footer">
@@ -131,31 +118,57 @@
     </div>
 
 
-
     <script>
-        var app = new Vue({
-            el: '#app',
-            data: function() {
-                return {}
-            },
-            methods: {}
-        })
-    </script>
+       var app = new Vue({
+           el: '#app',
+           data: function () {
+           return {
+               name: '',
+               email: '',
+               password: '',
+               passwordRepeat: ''
+       }
+   },
+           methods: {
+               //verifica se as senhas digitadas sao iguais
+               validarSenha: function(){
+                   var senha = document.getElementById("password"),
+                   senhaRepeat = document.getElementById("passwordRepeat");
+
+                   if(senha.value != senhaRepeat.value){
+                       return false;
+                   }
+                  
+                   return true;
+               },
+               cadastrar: function () {
+                   var dados = {
+                       name: this.name,
+                       email: this.email,
+                       password: this.password,
+                   }
+
+                   $.post('http://mocs.000webhostapp.com/api/public/usuario', dados, function(response) {
+                       if (repsonse.getJSON() == 100) {
+                           $(location).attr('href', "dashboard.html");
+                       } //falta mensagens de erro
+                   });
+               }
+           }
+       })
+   </script>
 
 
-    <script>
-        var modal = document.getElementById('id01');
-        var cadmodal = document.getElementById ('id02');
-        
-        //fecha quando o user clica fora
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none ";
-            } else if (event.target == cadmodal){
-                cadmodal.style.display ="none";
-            }
-        }
-    </script>
-</body>
+   <script>
+       var modal = document.getElementById('id01');
+       //fecha quando o user clica fora
+       window.onclick = function(event) {
+           if (event.target == modal) {
+               modal.style.display = "none ";
+           }
+       }
+   </script>
 
-</html>
+
+    <body>
+  <html>
