@@ -88,13 +88,6 @@
                     if ($('.mdl-layout__obfuscator').hasClass('is-visible')) {
                         $('.mdl-layout__drawer, .mdl-layout__obfuscator').toggleClass('is-visible');
                     }
-                },
-                logout: function (){
-                    $.post('url', data).done(function(data){
-                        $(location).attr('href', "index.html");
-                    }).fail (function (error){
-                        alert("error");
-                    });
                 }
             },
             created: function () {
