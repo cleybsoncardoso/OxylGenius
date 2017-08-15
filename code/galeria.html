@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="app.min.css">
     <script src="vendor.min.js"></script>
     <script src="app.min.js"></script>
-    
+
 
 </head>
 
@@ -30,7 +30,7 @@
                         <div id="id01" class="obfuscator">
                             <login-modal class="animate-zoom"></login-modal>
                         </div>
-                        
+
                         <div class="elemento_menu"><a href="#" class="mdl-navigation__link" onclick="document.getElementById('id02').style.display='block'">Cadastrar</a></div>
                         <div id="id02" class="obfuscator">
                             <cadastrar-modal class="animate-zoom"></cadastrar-modal>
@@ -73,22 +73,19 @@
                             </div>
                         </div>
 
-                        <div class="row" id="linha" style="margin-top:20px" ready()>
+                        <div class="row" id="linha" style="margin-top:20px">
                             <div class="col-sm-3" v-for="obra in obras">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:270px; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;height: auto;background-image: url('{{obra.linkFoto}}')">
-                                    <div class="mdl-card__title">
-                                        <h2 class="mdl-card__title-text">{{obra.nome}}</h2>
-                                    </div>
-
+                                <img :src="obra.linkFoto" alt="" style="width:270px; height:270px;">
+                                <div class="mdl-card__title">
+                                    <h2 class="mdl-card__title-text">{{obra.nome}}</h2>
                                 </div>
-
                             </div>
 
                         </div>
                     </div>
 
                 </main>
-                
+
             </div>
 
         </div>
@@ -97,16 +94,16 @@
         </footer>
     </div>
 
-     <script>
+    <script>
         var modal = document.getElementById('id01');
-        var cadmodal = document.getElementById ('id02');
-        
+        var cadmodal = document.getElementById('id02');
+
         //fecha quando o user clica fora
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none ";
-            } else if (event.target == cadmodal){
-                cadmodal.style.display ="none";
+            } else if (event.target == cadmodal) {
+                cadmodal.style.display = "none";
             }
         }
     </script>
@@ -117,37 +114,37 @@
         var app = new Vue({
             el: '#app',
 
-            data() {
-                return {
-                    obras: [],
-                    searchText: '',
-                }
+            data: {
+                obras: [],
+                obrasAux: [],
+                searchText: ''
             },
-
-            ready: function(){
-                this.pegarObras();
-            },
-
             methods: {
-                pegarObras: function() {
-                    this.$https.get(URL_API + 'obra/').then(response => {
-                            this.obras = response.data;
-                            console.log(response.data);
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                            console.log(response.data);
-
-                        });
-
+                filter: function(){
+                    this.obras = this.obrasAux.filter(item=>{
+                        return item.nome.toUpperCase().indexOf(this.searchText.toUpperCase()) > -1
+                    });
                 },
-                
-            },         
+            },
+            created: function () {
+                // `this` points to the vm instance
+                $.get("http://mocs.000webhostapp.com/api/public/obra", function (data) {
+                    app.obras = data;
+                    console.log(app.obras);
+                    app.obras.map(res => {
+                        console.log(res.foto);
+                        if (res.foto && res.foto[0]) {
+                            res.linkFoto = res.foto[0].linkFoto;
+                        }
+                    });
+                    app.obrasAux = app.obras;
+                });
+            }
 
-        })
+        });
     </script>
 
-  
+
 
 
 </body>
