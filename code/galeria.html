@@ -54,28 +54,36 @@
 
             <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
                 <main class="main">
-                    <div class="container">
 
-                        <div class="jumbotron">
+                        <div class="jumbotron" style="width:35px; margin-left:200px;"> 
                             <h1>Galeria</h1>
                         </div>
 
-                        <div id="seachbar" class="card-view mdl-card mdl-shadow--6dp" style="width:500px; margin-left:650px">
+                        <div id="seachbar" class="card-view mdl-card mdl-shadow--6dp" style="width:500px; margin-left:970px"> 
                             <div class="mdl-card__title">
-                                <div class="mdl-textfield mdl-js-textfield" id="search-input">
-                                    <input class="mdl-textfield__input" type="text" id="search" v-model="searchText">
+                                <div class="mdl-textfield mdl-js-textfield" id="search-input" >
+                                    <input class="mdl-textfield__input" type="text" id="search" v-model="searchText" >
                                     <label class="mdl-textfield__label" for="search">Pesquisar</label>
                                 </div>
 
-                                <button v-on:click="pesquisarObra()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-left:10px">
+                                <button @click="filter()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" style="margin-left:10px">
                                     Pesquisar Obra
                                 </button>
                             </div>
                         </div>
+                        
+                    <div class="container">
+
+
+
+
+                        
 
                         <div class="row" id="linha" style="margin-top:20px">
-                            <div class="col-sm-3" v-for="obra in obras">
-                                <img :src="obra.linkFoto" alt="" style="width:270px; height:270px;">
+                            <div class="col-sm-3" v-for="obra in obras" style="margin-left:35px; margin-right:10px">
+                                <button v-on:click="visualizarObra(obra)" class="mdl-button mdl-js-button " style="margin-left:10px; margin-right:10px;width:270px; height:300px">
+                                    <img :src="obra.linkFoto" alt="" style="width:270px; height:300px;" align="center">
+                                </button>
                                 <div class="mdl-card__title">
                                     <h2 class="mdl-card__title-text">{{obra.nome}}</h2>
                                 </div>
@@ -112,7 +120,13 @@
                     this.obras = this.obrasAux.filter(item=>{
                         return item.nome.toUpperCase().indexOf(this.searchText.toUpperCase()) > -1
                     });
+                    console.log(this.searchtext);
                 },
+                visualizarObra: function(obra){
+                    location.href="visualizarObra.html?obra=" + obra.ID_Obra; 
+                    console.log(this.obra.ID_Obra);
+
+                }
             },
             created: function () {
                 // `this` points to the vm instance

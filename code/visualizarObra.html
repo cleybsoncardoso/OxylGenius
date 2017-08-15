@@ -141,28 +141,29 @@
 
             data() {
                 return {
-                    obra: [],
+                    obra: {}
                 }
             },
 
-            ready: function() {
-                this.pegarObra();
-            },
-
             methods: {
-                pegarObra: function() {
-                    this.$https.get(URL_API + 'obra/{id}').then(response => {
-                            this.obra = response.data;
-                            console.log(response.data);
-                        })
-                        .catch(response => {
-                            //erro ao pegar dados
-                            console.log(response.data);
-                        });
-
-                },
-
             },
+
+            created: function () {
+            let query = location.search.slice(1);
+            let id = query.split('=');
+            console.log(id[1]);
+            // `this` points to the vm instance
+            $.get("http://mocs.000webhostapp.com/api/public/obra/"+id[1], function (data) {
+                app.obra = data;
+                console.log(app.obra);
+                app.obras.map(res => {
+                    console.log(res.foto);
+                    if (res.foto && res.foto[0]) {
+                        res.linkFoto = res.foto[0].linkFoto;
+                    }
+                });
+            });
+            }
 
         })
     </script>
