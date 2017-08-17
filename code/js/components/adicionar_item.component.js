@@ -27,8 +27,16 @@ Vue.component('add-item', {
                 </div>
                 <div class="col-sm-8">
                     <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" v-model="titulo" type="text" id="obraNome">
-                        <label class="mdl-textfield__label" for="obraNome">Título da obra</label>
+                        <input class="mdl-textfield__input" v-model="nome" type="text" id="obraNome" ></textarea>
+                        <label class="mdl-textfield__label" for="obraNome">Nome da obra</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" v-model="titulo" type="text" id="obraTitulo">
+                        <label class="mdl-textfield__label" for="obraTitulo">Título da obra</label>
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <textarea class="mdl-textfield__input" v-model="marcas" type="text" rows= "3" id="obraMarcas" ></textarea>
+                        <label class="mdl-textfield__label" for="obraMarcas">Marcas e Inscrições</label>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
                         <textarea class="mdl-textfield__input" v-model="descricao" type="text" rows= "3" id="obraDescricao" ></textarea>
