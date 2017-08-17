@@ -60,7 +60,9 @@ Vue.component('add-item', {
     data: function () {
         return {
             imagem: "",
+            nome: "",
             titulo: "",
+            marcas: "",
             descricao: "",
             error: {
                 type: 'success',

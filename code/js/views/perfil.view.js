@@ -18,21 +18,25 @@ Vue.component('perfil-view', {
             <label class="mdl-textfield__label" for="username_input">Telefone</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="pass_input" v-model="conta.senha">
+            <input class="mdl-textfield__input" type="password" id="pass_input" placeholder="" v-model="conta.senha">
             <label class="mdl-textfield__label" for="pass_input">Senha Antiga</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="pass_input" v-model="conta.senhaNova">
+            <input class="mdl-textfield__input" type="password" id="pass_input" placeholder="" v-model="conta.senhaNova">
             <label class="mdl-textfield__label" for="pass_input_new">Senha Nova</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="rpass_input" v-model="conta.senhaRepit">
+            <input class="mdl-textfield__input" type="password" id="rpass_input" placeholder="" v-model="conta.senhaRepit">
             <label class="mdl-textfield__label" for="pass_input">Repetir senha</label>
+        </div>
+
+        <div class="mdl-color-text--red-500">
+            {{error}}
         </div>
     </div>
     <div class="mdl-card__actions mdl-card--border" style="display: flex">
         <div style="flex-grow: 1"></div>
-        <a v-on:click="load()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        <a :disabled="!formValido()" v-on:click="load()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
             Salvar dados
         </a>
     </div>
@@ -43,7 +47,15 @@ Vue.component('perfil-view', {
         return {
             loading: false,
             state: 'loading',
-            conta: {}
+            conta: {
+                nome: '',
+                email: '',
+                telefone: '',
+                senha: '',
+                senhaNova: '',
+                senhaRepit: ''
+            },
+            error: ''
         }
     },
     methods: {
@@ -54,40 +66,61 @@ Vue.component('perfil-view', {
                 console.log("Informe a senha antiga")
             } else {
                 this.loading = true;
-                setTimeout(() => {
-                    this.state = 'ready';
-
-                    setTimeout(() => {
-                        this.loading = false;
-                        this.state = 'loading';
-                    }, 1000);
-                }, 2000);
-
+                this.state = 'loading';
+                var t = this;
                 $.post(URL_API + 'usuario/update', this.conta)
                     .done(function (data) {
-                        console.log(data);
+                        t.state = 'ready';
+                        setInterval(function () {
+                            t.loading = false;
+                        }, 1000);
                     }).fail(function (error) {
-                        console.log(error);
+                        t.state = 'ready';
+                        setInterval(function () {
+                            t.loading = false;
+                        }, 1000);
                     });
             }
+        },
+        formValido: function () {
+            if (this.conta.nome
+                && this.conta.email
+                && this.conta.telefone
+                && this.conta.senhaNova
+                && this.conta.senhaRepit
+            ) {
+                if (this.conta.email.indexOf('@') == -1) {
+                    this.error = "Formato de email inválido";
+                    return false;
+                } else if (this.conta.senhaRepit != this.conta.senhaNova) {
+                    this.error = "As senhas não correspondem";
+                    return false;
+                } else if (!this.conta.senha && this.conta.senhaNova) {
+                    this.error = "Informe a senha antiga";
+                    return false;
+                }
+
+                this.error = "";
+                return true;
+            } else {
+                this.error = "";
+                return false;
+            }
+        },
+        getPerfil: function () {
+            let token = localStorage.getItem("token");
+            var t = this;
+            $.post(URL_API + 'usuario/perfil', { token: token })
+                .done(function (response) {
+                    if (response != 404) {
+                        t.conta = conta;
+                        t.conta.token = localStorage.getItem("token");
+                    }
+                }).fail(function (error) {
+                });
         }
     },
     created: function () {
-        perfil((conta) => {
-            this.conta = conta;
-            this.conta.token = localStorage.getItem("token");
-        });
-
+        this.getPerfil();
     }
 });
-
-function perfil(callBack) {
-    let token = localStorage.getItem("token");
-    $.post(URL_API + 'usuario/perfil', { token: token })
-        .done(function (data) {
-            console.log(data);
-            callBack(data);
-        }).fail(function (error) {
-            console.log(error);
-        });
-}

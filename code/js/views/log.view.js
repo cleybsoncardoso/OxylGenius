@@ -1,23 +1,28 @@
 Vue.component('log-view', {
     template: `
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Obra</th>
-                    <th>Tipo</th>
-                    <th>Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="logObra in logsObra">
-                    <th>{{logObra.Nome}}</th>
-                    <td>{{logObra.nome}}</td>
-                    <td>{{logObra.conteudo}}</td>
-                    <td>{{logObra.DataAlteracao}}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div id="log-view" class="card-view mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__supporting-text">
+            <h5 v-show="!logsObra.length">Não há logs disponíveis</h5>
+            <table v-show="logsObra.length" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Usuario</th>
+                        <th class="mdl-data-table__cell--non-numeric">Obra</th>
+                        <th class="mdl-data-table__cell--non-numeric">Tipo</th>
+                        <th class="mdl-data-table__cell--non-numeric">Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="logObra in logsObra">
+                        <th class="mdl-data-table__cell--non-numeric">{{logObra.Nome}}</th>
+                        <td class="mdl-data-table__cell--non-numeric">{{logObra.nome}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{logObra.conteudo}}</td>
+                        <td class="mdl-data-table__cell--non-numeric">{{logObra.DataAlteracao}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     `,
     data: function () {
         return {
@@ -27,24 +32,21 @@ Vue.component('log-view', {
         }
     },
     methods: {
+        getLogs: function () {
+            let token = localStorage.getItem("token");
+            var t = this;
+            $.post(URL_API + 'log', { token: token })
+                .done(function (log) {
+                    if (log != 404) {
+                        t.logsObra = log.obra;
+                        t.logsFuncionario = log.funcionario;
+                    }
+                }).fail(function (error) {
+                    console.log(error);
+                });
+        }
     },
     created: function () {
-        logs((log) => {
-            this.logsObra = log.obra;
-            this.logsFuncionario = log.funcionario;
-            console.log(this.logsObra);
-        });
-
+        this.getLogs();
     }
 });
-
-function logs(callBack) {
-    let token = localStorage.getItem("token");
-    $.post(URL_API + 'log', { token: token })
-        .done(function (data) {
-            console.log(data);
-            callBack(data);
-        }).fail(function (error) {
-            console.log(error);
-        });
-}

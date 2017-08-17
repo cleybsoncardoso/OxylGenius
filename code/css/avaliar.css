@@ -1,15 +1,15 @@
-#log-view{
+#avaliar-view{
     width: 100%;
-    max-width: 800px;
+    max-width: 700px;
     margin: 16px auto;
     display: block;
 }
 
-#log-view .mdl-card__supporting-text{
+#avaliar-view .mdl-card__supporting-text{
     width: 100%;
 }
 
-#log-view .mdl-textfield{
+#avaliar-view .mdl-textfield{
     width: 100%;
     display: block;
 }

@@ -46,6 +46,9 @@
                     <a class="mdl-navigation__link" href="#logs" id="logs" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons">history</i> Logs do Sistema
                     </a>
+                    <a class="mdl-navigation__link" href="#avaliar" id="avaliar" v-on:click="select($event)">
+                        <i class="mdl-color-text--grey-700 material-icons">star_half</i> Avaliar Sistema
+                    </a>
                 </nav>
             </div>
             <main id="dashboard_main" class="mdl-layout__content mdl-color--grey-300">
@@ -53,6 +56,7 @@
                 <itens-view v-show="selected.id == 'itens'"></itens-view>
                 <usuarios-view v-show="selected.id == 'usuarios'"></usuarios-view>
                 <log-view v-show="selected.id == 'logs'"></log-view>
+                <avaliar-view v-show="selected.id == 'avaliar'"></avaliar-view>
             </main>
         </div>
     </div>

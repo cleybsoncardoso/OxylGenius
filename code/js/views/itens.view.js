@@ -63,7 +63,9 @@ Vue.component('itens-view', {
             var storage = new Storage(), t = this;
             $.get(URL_API + 'obra', storage.recuperar('token').token)
                 .done(function (data) {
-                    t.obras = data;
+                    if (data != 404) {
+                        t.obras = data;
+                    }
                 }).fail(function (error) {
                 });
         }
