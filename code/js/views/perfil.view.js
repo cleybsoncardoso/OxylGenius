@@ -107,20 +107,23 @@ Vue.component('perfil-view', {
                 return false;
             }
         },
-        getPerfil: function () {
-            let token = localStorage.getItem("token");
-            var t = this;
-            $.post(URL_API + 'usuario/perfil', { token: token })
-                .done(function (response) {
-                    if (response != 404) {
-                        t.conta = conta;
-                        t.conta.token = localStorage.getItem("token");
-                    }
-                }).fail(function (error) {
-                });
-        }
     },
     created: function () {
-        this.getPerfil();
+        perfil(user=>{
+            this.conta = user;
+            this.conta.token = localStorage.getItem("token");
+        });
     }
 });
+
+
+function perfil(callback) {
+    let token = localStorage.getItem("token");
+    $.post(URL_API + 'usuario/perfil', { token: token })
+        .done(function (response) {
+            if (response != 404) {
+                callback(response);
+            }
+        }).fail(function (error) {
+        });
+}

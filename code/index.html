@@ -12,6 +12,9 @@
     <script src="vendor.min.js"></script>
     <script src="app.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script src="toast.js"></script>
+    <link rel="stylesheet" href="toast.css">
+    
 </head>
 
 <body>
@@ -64,16 +67,27 @@
                         <div class="col-md-6" style="margin-top:15px; margin-left:40px;">
                             <div class="sobre"> <span class="logo-font android-slogan">Sobre o museu</span><br><br>
                                 <p class="logo-font android-sub-slogan" style="font-size:14px; text-align:justify;">
-                                    O Museu Casa do Sertão é um dos órgãos responsáveis pelo desenvolvimento da política cultural da Universidade Estadual de Feira de Santana (UEFS), tendo uma atuação marcante no fomento e difusão da cultura local e no resgate, preservação e valorização
-                                    da cultura popular. Construído no Campus Universitário, em 1978, pelo Lions Clube de Feira de Santana, que doou o espaço à Universidade, o Museu contava, inicialmente, apenas com uma sala para exposições temporárias,
-                                    uma sala para a exposição do acervo permanente e uma pequena biblioteca.
+                                    O Museu Casa do Sertão é um dos órgãos responsáveis pelo desenvolvimento da política cultural da Universidade Estadual de
+                                    Feira de Santana (UEFS), tendo uma atuação marcante no fomento e difusão da cultura local
+                                    e no resgate, preservação e valorização da cultura popular. Construído no Campus Universitário,
+                                    em 1978, pelo Lions Clube de Feira de Santana, que doou o espaço à Universidade, o Museu
+                                    contava, inicialmente, apenas com uma sala para exposições temporárias, uma sala para
+                                    a exposição do acervo permanente e uma pequena biblioteca.
 
-                                    <br><br>Ao longo dos anos, houve um notável crescimento, tanto em termos de estrutura física quanto de acervo museológico. Novas peças foram incorporadas à coleção do Museu Casa do Sertão, a exemplo do Acervo do Couro,
-                                    que pertenceu ao Museu Regional de Arte de Feira de Santana (MRA), sendo transferido para a Casa do Sertão em 1995, após a vinculação do MRA à UEFS; e da biblioteca pessoal do Monsenhor Renato de Andrade Galvão, doada
-                                    em vida pelo sacerdote, educador, historiador e Vice-Reitor da Universidade (1979 - 1987) pouco antes de sua morte, em 1995. O acervo, que foi agregado ao Centro de Estudos Feirenses (CENEF), também criado pelo cura,
-                                    passou, posteriormente, por meio de resolução do Conselho Universitário (CONSU), a constituir a Biblioteca Setorial Monsenhor Renato de Andrade Galvão. Com 4.916 exemplares, entre livros especializados em História (sobretudo
-                                    de Feira de Santana), cultura popular e literatura de cordel; jornais dos séculos XIX e XX; manuscritos; cartas de alforria; monografias; dissertações; revistas do Instituto Histórico e Geográfico da Bahia e outros
-                                    periódicos; o acervo é, até hoje, um centro de referência para estudantes e pesquisadores.
+                                    <br><br>Ao longo dos anos, houve um notável crescimento, tanto em termos de estrutura
+                                    física quanto de acervo museológico. Novas peças foram incorporadas à coleção do Museu
+                                    Casa do Sertão, a exemplo do Acervo do Couro, que pertenceu ao Museu Regional de Arte
+                                    de Feira de Santana (MRA), sendo transferido para a Casa do Sertão em 1995, após a vinculação
+                                    do MRA à UEFS; e da biblioteca pessoal do Monsenhor Renato de Andrade Galvão, doada em
+                                    vida pelo sacerdote, educador, historiador e Vice-Reitor da Universidade (1979 - 1987)
+                                    pouco antes de sua morte, em 1995. O acervo, que foi agregado ao Centro de Estudos Feirenses
+                                    (CENEF), também criado pelo cura, passou, posteriormente, por meio de resolução do Conselho
+                                    Universitário (CONSU), a constituir a Biblioteca Setorial Monsenhor Renato de Andrade
+                                    Galvão. Com 4.916 exemplares, entre livros especializados em História (sobretudo de Feira
+                                    de Santana), cultura popular e literatura de cordel; jornais dos séculos XIX e XX; manuscritos;
+                                    cartas de alforria; monografias; dissertações; revistas do Instituto Histórico e Geográfico
+                                    da Bahia e outros periódicos; o acervo é, até hoje, um centro de referência para estudantes
+                                    e pesquisadores.
                                 </p>
                             </div>
                             <div class=" body-section mdl-typography--text-center">
@@ -96,7 +110,7 @@
         Vue.use(VueResource)
         var app = new Vue({
             el: '#app',
-            data: function() {
+            data: function () {
                 return {}
             },
             methods: {}
@@ -104,7 +118,7 @@
     </script>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.owl-carousel').owlCarousel({
                 loop: true,
                 margin: 10,
@@ -115,44 +129,40 @@
 
     <script>
         var modal = document.getElementById('id01');
-        var cadmodal = document.getElementById ('id02');
-        
+        var cadmodal = document.getElementById('id02');
+
         //fecha quando o user clica fora
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none ";
-            } else if (event.target == cadmodal){
-                cadmodal.style.display ="none";
+            } else if (event.target == cadmodal) {
+                cadmodal.style.display = "none";
             }
         }
     </script>
 
-    
+
 
     <script>
-        $(document).ready(function() {
-            $('#calendar').eCalendar({
-                weekDays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-                months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                textArrows: {
-                    previous: '<',
-                    next: '>'
-                },
-                eventTitle: '',
-                url: '',
-                events: [{
-                    title: 'Exemplo',
-                    description: 'Descricao do exemplo',
-                    datetime: new Date(2017, 6, 15, 17)
-                }, {
-                    title: 'Exemplo 2',
-                    description: 'Descricao 2',
-                    datetime: new Date(2017, 7, 14, 16)
-                }, {
-                    title: 'Evento 3',
-                    description: 'Exposição arte',
-                    datetime: new Date(2017, 7, 11, 16)
-                }]
+        //http://mocs.000webhostapp.com/api/public/noticia
+        $.get("http://mocs.000webhostapp.com/api/public/noticia", function (data) {
+            data.map(atual=>{
+                atual.title = atual.Conteudo;
+                atual.description = atual.Conteudo;
+                atual.datetime = new Date(atual.Dta_de_criacao);
+            });
+            $(document).ready(function () {
+                $('#calendar').eCalendar({
+                    weekDays: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+                    months: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    textArrows: {
+                        previous: '<',
+                        next: '>'
+                    },
+                    eventTitle: '',
+                    url: '',
+                    events: data
+                });
             });
         });
     </script>

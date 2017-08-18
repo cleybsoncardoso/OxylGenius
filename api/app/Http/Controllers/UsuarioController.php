@@ -111,7 +111,7 @@ class UsuarioController extends Controller
 
     /* 
     *  ==== Possiveis valores de Retorno ====
-    * 100 - Cadastro finalizado com sucesso
+    * 200 - Cadastro finalizado com sucesso
     * 101 - E-mail com formato invalido ou incorreto
     * 102 - E-mail já cadastrado no Banco de Dados
     * 103 - Senha e RepetirSenha nao coincidem
@@ -132,7 +132,7 @@ class UsuarioController extends Controller
             $sql = DB::INSERT('INSERT INTO usuario(Email, Senha, Nome, FotoUsuario, Tipo, ativo) VALUES (?,?,?,"https://www.portalmaritimo.com/wp-content/uploads/2010/08/anonimo.jpg","U", 1)',      //registra o usuario no BD
                 [$dados['email'], $dados['password'], $dados['nome']]);
         }
-        return response()->json(100);
+        return response()->json(200);
     }
 
     public function update(Request $request){

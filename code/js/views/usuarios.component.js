@@ -13,47 +13,25 @@ Vue.component('usuarios-view', {
         </div>
         <div class="mdl-card__actions mdl-card--border">
             <ul class="usuarios-list mdl-list">
-                <li class="mdl-list__item" style="padding: 8px 16px">
-                    <span class="mdl-list__item-primary-content">
-                        Usuário A
-                    </span>
-                    <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
-                        <i class="material-icons">assignment</i>
-                    </button>
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="mudar-funcao-0">
-                        <li class="mdl-menu__item">Função A</li>
-                        <li class="mdl-menu__item">Função B</li>
-                        <li class="mdl-menu__item">Função C</li>
-                    </ul>
-                </li>
-                <hr style="border-color: #e5e5e5; margin: 0" />
-                <li class="mdl-list__item" style="padding: 8px 16px">
-                    <span class="mdl-list__item-primary-content">
-                        Usuário B
-                    </span>
-                    <button id="mudar-funcao-1" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
-                        <i class="material-icons">assignment</i>
-                    </button>
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="mudar-funcao-1">
-                        <li class="mdl-menu__item">Função A</li>
-                        <li class="mdl-menu__item">Função B</li>
-                        <li class="mdl-menu__item">Função C</li>
-                    </ul>
-                </li>
-                <hr style="border-color: #e5e5e5; margin: 0" />
-                <li class="mdl-list__item" style="padding: 8px 16px">
-                    <span class="mdl-list__item-primary-content">
-                        Usuário C
-                    </span>
-                    <button id="mudar-funcao-2" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
-                        <i class="material-icons">assignment</i>
-                    </button>
-                    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="mudar-funcao-2">
-                        <li class="mdl-menu__item">Função A</li>
-                        <li class="mdl-menu__item">Função B</li>
-                        <li class="mdl-menu__item">Função C</li>
-                    </ul>
-                </li>
+                <div v-for="usuario in usuarios">
+                    <li class="mdl-list__item" style="padding: 8px 16px">
+                        <span class="mdl-list__item-primary-content">
+                            {{usuario.Nome}}
+                        </span>
+                        <row>
+                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
+                                U
+                            </button>
+                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
+                                F
+                            </button>
+                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
+                                G
+                            </button>
+                        </row>
+                    </li>
+                    <hr style="border-color: #e5e5e5; margin: 0" />
+                </div>
             </ul>
         </div>
     </div>
@@ -61,9 +39,23 @@ Vue.component('usuarios-view', {
     `,
     data: function () {
         return {
-            searchText: ''
+            searchText: '',
+            usuarios: []
         }
     },
     methods: {
+    },
+    created: function () {
+        usuarios(users => {
+            this.usuarios = users.usuarios;
+            console.log(this.usuarios);
+        });
     }
 });
+
+function usuarios(call) {
+    let token = localStorage.getItem("token");
+    $.get("http://mocs.000webhostapp.com/api/public/usuario?token=" + token, function (data) {
+        call(data);
+    });
+}
