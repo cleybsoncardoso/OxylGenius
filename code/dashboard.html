@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="app.min.css">
     <script src="toast.js"></script>
     <link rel="stylesheet" href="toast.css">
+    <link rel="stylesheet" href="css/tabela.css">
 </head>
 
 <body>
@@ -58,6 +59,7 @@
                 <itens-view v-show="selected.id == 'itens'"></itens-view>
                 <usuarios-view v-show="selected.id == 'usuarios'"></usuarios-view>
                 <log-view v-show="selected.id == 'logs'"></log-view>
+                <avaliarLog-view v-show="selected.id == 'avaliarLog'"></avaliarLog-view>
                 <avaliar-view v-show="selected.id == 'avaliar'"></avaliar-view>
             </main>
         </div>

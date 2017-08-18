@@ -3,24 +3,16 @@ Vue.component('log-view', {
     <div id="log-view" class="card-view mdl-card mdl-shadow--2dp">
         <div class="mdl-card__supporting-text">
             <h5 v-show="!logsObra.length">Não há logs disponíveis</h5>
-            <table v-show="logsObra.length" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width: 100%">
-                <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Usuario</th>
-                        <th class="mdl-data-table__cell--non-numeric">Obra</th>
-                        <th class="mdl-data-table__cell--non-numeric">Tipo</th>
-                        <th class="mdl-data-table__cell--non-numeric">Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="logObra in logsObra">
-                        <th class="mdl-data-table__cell--non-numeric">{{logObra.Nome}}</th>
-                        <td class="mdl-data-table__cell--non-numeric">{{logObra.nome}}</td>
-                        <td class="mdl-data-table__cell--non-numeric">{{logObra.conteudo}}</td>
-                        <td class="mdl-data-table__cell--non-numeric">{{logObra.DataAlteracao}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <table>
+            <tr>
+              <th>Month</th>
+              <th>Savings</th>
+            </tr>
+            <tr>
+              <td>January</td>
+              <td>$100</td>
+            </tr>
+          </table>
         </div>
     </div>
     `,

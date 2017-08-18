@@ -6,14 +6,17 @@ Vue.component('avaliar-view', {
         </div>
 
         <div class="mdl-card__supporting-text">
-            <div class="mdl-textfield mdl-js-textfield">
-                <textarea class="mdl-textfield__input" type="text" v-model="mensagem" rows= "3" id="avaliacao" ></textarea>
-                <label class="mdl-textfield__label" for="avaliacao">Avaliação...</label>
-            </div>
+            <row>
+                <input type="radio" name="gender" value="1" v-model="avaliacao.Nota"> 1
+                <input type="radio" name="gender" value="2" v-model="avaliacao.Nota"> 2
+                <input type="radio" name="gender" value="3" v-model="avaliacao.Nota"> 3
+                <input type="radio" name="gender" value="4" v-model="avaliacao.Nota"> 4
+                <input type="radio" name="gender" value="5" v-model="avaliacao.Nota"> 5
+            </row>
         </div>
         <div class="mdl-card__actions mdl-card--border" style="display: flex">
             <div style="flex-grow: 1"></div>
-            <a :disabled="!mensagem" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            <a @click="enviar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                 Avaliar
             </a>
         </div>
@@ -21,7 +24,28 @@ Vue.component('avaliar-view', {
     `,
     data: function () {
         return {
-            mensagem: ''
+            avaliacao: {}
         }
     },
+    methods: {
+        enviar: function () {
+            if (!this.avaliacao.Nota) {
+                $.toast('Escolha a nota');           
+            } else {
+                this.avaliacao.token = localStorage.getItem("token");
+                $.post(URL_API + 'avaliar', this.avaliacao)
+                .done(function (data) {
+                    if (data) {
+                        $.toast('Avaliado com sucesso');                        
+                    } else {
+                        $.toast('Erro ao avaliar')                        
+                    }
+                    
+                }).fail(function (error) {
+                    $.toast('Erro ao avaliar')                        
+                });
+            }
+            console.log(this.avaliacao);
+        }
+    }
 });

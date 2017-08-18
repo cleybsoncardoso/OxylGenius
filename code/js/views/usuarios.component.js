@@ -7,7 +7,7 @@ Vue.component('usuarios-view', {
                 <input class="mdl-textfield__input" type="text" id="search" v-model="searchText">
                 <label class="mdl-textfield__label" for="search">Pesquisar por um usuário</label>
             </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :disabled="!searchText" @click="filtar">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" @click="filtar">
                 Pesquisar
             </button>
         </div>
