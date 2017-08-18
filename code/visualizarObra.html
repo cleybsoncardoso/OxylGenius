@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title>Visualizar obra</title>
+    <title>MOCS - Visualizar Obra</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
@@ -13,7 +13,9 @@
     <script src="vendor.min.js"></script>
     <script src="app.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
-</head>
+    <link rel="stylesheet" href="css/slider.css">
+    
+</head>    
 
 
 <body>
@@ -51,46 +53,192 @@
 
             <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
                 <main class="main">
-                    <div class="container-fluid" style="width:100%" ready()>
-
+                    <div class="container-fluid" style="width:100%; margin-bottom:15px" align="center">
+                    
                         <header class="row">
-                            <h2 style="text-align:center">Nome da Obra: {{obra.nome}}</h2>
+                            <h2 style="text-align:center"> Nome da Obra: {{obra.nome}}</h2>                            
                         </header>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="mdl-card mdl-shadow--6dp mdl-color--grey-100" style="width:300px; height:400px; margin:auto; margin-bottom:20px; background-repeat: none; background-size: cover; background-position: center center;background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
-                                </div>
-                            </div>
-                        </div>
+
+                        
                     </div>
-                    <div class="container-fluid" style="width:100%">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="mdl-card  mdl-color--grey-100" style="text-align:center;width:100%px; margin:auto; margin-bottom:20px">
-                                    Fotógrafo da Obra:
-                                </div>
+                    
+                            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- How To Add Font Awesome Social Icons In Blog Or Website3 -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-4017969662737344"
+                                 data-ad-slot="1819950113"
+                                 data-ad-format="auto"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                            
+                                <div class="carousel" style="width:500px" align="center">
+                                    <div class="carousel-inner" >
+                                        <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
+                                        <div class="carousel-item" v-for="foto in foto">
+                                            <img :src="foto.linkFoto" alt="" style="width:270px; height:300px;" align="center">
+                                        </div>
+                                        <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
+                                        <div class="carousel-item">
+                                                <img :src="foto" alt="" style="width:270px; height:300px;" align="center">
+                                        </div>
+                                        <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
+                                        <div class="carousel-item">
+                                                <img :src="foto" alt="" style="width:270px; height:300px;" align="center">
+                                        </div>
+                                        <label for="carousel-3" class="carousel-control prev control-1">‹</label>
+                                        <label for="carousel-2" class="carousel-control next control-1">›</label>
+                                        <label for="carousel-1" class="carousel-control prev control-2">‹</label>
+                                        <label for="carousel-3" class="carousel-control next control-2">›</label>
+                                        <label for="carousel-2" class="carousel-control prev control-3">‹</label>
+                                        <label for="carousel-1" class="carousel-control next control-3">›</label>
+                                        <ol class="carousel-indicators">
+                                            <li>
+                                                <label for="carousel-1" class="carousel-bullet">•</label>
+                                            </li>
+                                            <li>
+                                                <label for="carousel-2" class="carousel-bullet">•</label>
+                                            </li>
+                                            <li>
+                                                <label for="carousel-3" class="carousel-bullet">•</label>
+                                            </li>
+                                        </ol>
+                                    </div>
                             </div>
-                        </div>
+                                
+                                
+                                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                            <!-- How To Add Font Awesome Social Icons In Blog Or Website3 -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-4017969662737344"
+                                 data-ad-slot="1819950113"
+                                 data-ad-format="auto"></ins>
+                            <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+
+                    <div class="container-fluid" style="width:100%" align="center" >
                         <div class="row">
-                            <div class="col-sm-12">
-                                <div class="mdl-card  mdl-color--grey-100" style="text-align:center;width:auto; height:auto; margin:auto; margin-bottom:20px">
-                                    Data da Foto:{{obra.dta}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="mdl-card  mdl-color--grey-100" style="text-align:center;width:auto; height:auto; margin:auto; margin-bottom:20px">
-                                    Forma de Aquisição da Obra:{{obra.Forma}}
-                                </div>
-                            </div>
-                        </div>
+                            <ul class="mdl-list" style="width:500px">
+                               <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Número do Inventário: {{obra.n_no_inventario}}
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Coleção da Obra: {{obra.colecao}}
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Título da Obra: {{obra.titulo}}
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Função da Obra: {{obra.funcao}}
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Procedência da Obra: {{obra.procedencia}}
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Altura da Obra: {{obra.Altura}}
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Largura da Obra: {{obra.Largura}}
+                                    </span>
+                                </li>   
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Materiais Constitutivos da Obra: {{obra.material}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Técnica de Fabricação da Obra: {{obra.tecnica}}
+                                    </span>
+                                </li>                                 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Autoria da Obra: {{obra.autora}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Marcas e Inscrições da Obra: {{obra.marcas}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Histórico da Obra: {{obra.historico}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Forma de Aquisição da Obra: {{obra.Forma}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Autor de Aquisição da Obra: {{obra.autor}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Iconologia da Obra: {{obra.inconologia}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Estado de Conservação da Obra: {{obra.estado}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Fotógrafo da Obra: {{obra.fotografo}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Data da Foto:{{obra.dta}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Arquivo da Foto:{{obra.arquivo}}
+                                    </span>
+                                </li> 
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Referências da Obra: {{obra.referencias}}
+                                    </span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        Data de Aquisição da Obra: {{obra.local_data}}
+                                    </span>
+                                </li>  
+
+
+ 
+                            </ul>
+ 
+                        </div>  
                         <div class="row">
                             <div class="col-sm-12">
                                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="btn1" style="margin-left:570px;">
                                    Ver imagem em 3D
                                 </button>
-                                <div id="container" style="margin-left: 450px;">
+                                <div id="container" style="margin-left: 450px; margin-bottom:50px" align="center" >
                                     <ul class="list" style="list-style-type: none;">
                                         <li id="frame"><img src="imagens/image1_1.jpg" /></li>
                                         <!--Frames do objeto 3D -->
@@ -123,10 +271,10 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <footer class="mdl-mini-footer">
-                        <div class="text-footer ">Avenida Transnordestina, s/n - Novo Horizonte CEP 44036-900 - Feira de Santana - Bahia - (75)3161-8000</div>
-                    </footer>
+            </div>
+                <footer class="mdl-mini-footer">
+                    <div class="text-footer ">Avenida Transnordestina, s/n - Novo Horizonte CEP 44036-900 - Feira de Santana - Bahia - (75)3161-8000</div>
+                </footer>
                 </main>
             </div>
 
@@ -139,30 +287,26 @@
         var app = new Vue({
             el: '#app',
 
-            data() {
-                return {
-                    obra: {}
-                }
+            data: {
+                obra: {},
+                foto: [],
             },
 
             methods: {
             },
 
             created: function () {
-            let query = location.search.slice(1);
-            let id = query.split('=');
-            console.log(id[1]);
-            // `this` points to the vm instance
-            $.get("http://mocs.000webhostapp.com/api/public/obra/"+id[1], function (data) {
-                app.obra = data;
-                console.log(app.obra);
-                app.obras.map(res => {
-                    console.log(res.foto);
-                    if (res.foto && res.foto[0]) {
-                        res.linkFoto = res.foto[0].linkFoto;
-                    }
+                let query = location.search.slice(1);
+                let id = query.split('=');
+                // `this` points to the vm instance
+                $.get("http://mocs.000webhostapp.com/api/public/obra/" + id[1], function (data) {
+                    app.obra = data;
+                    app.foto = app.obra.foto;
+                    console.log(app.obra);
+                    console.log(app.foto);
                 });
-            });
+
+
             }
 
         })
@@ -224,6 +368,18 @@
         }
     </script>
     <!-- FECha CÓDIGO DO 3D -->
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- How To Add Font Awesome Social Icons In Blog Or Website3 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-4017969662737344"
+         data-ad-slot="1819950113"
+         data-ad-format="auto"></ins>
+    <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
 
 </body>
 
