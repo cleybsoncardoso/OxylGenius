@@ -178,9 +178,7 @@ class UsuarioController extends Controller
             if ($usuario == null){
                 return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
             } else {
-                $usuario = DB::SELECT('SELECT ID, Nome, Tipo FROM usuario WHERE tokenAcesso = ?',
-                    [$dados['id']]);
-                DB::UPDATE('UPDATE usuario SET Tipo =  ? WHERE ID = ?', [$dados['tipo'], $usuario[0]->ID]);
+                DB::UPDATE('UPDATE usuario SET Tipo =  ? WHERE ID = ?', [$dados['tipo'], $dados['id']]);
                 return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
             }
         } else {

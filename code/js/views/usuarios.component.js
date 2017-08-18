@@ -7,7 +7,7 @@ Vue.component('usuarios-view', {
                 <input class="mdl-textfield__input" type="text" id="search" v-model="searchText">
                 <label class="mdl-textfield__label" for="search">Pesquisar por um usuário</label>
             </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :disabled="!searchText">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" :disabled="!searchText" @click="filtar">
                 Pesquisar
             </button>
         </div>
@@ -19,13 +19,13 @@ Vue.component('usuarios-view', {
                             {{usuario.Nome}}
                         </span>
                         <row>
-                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
+                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white" v-if="usuario.Tipo != 'U'" @click="alterar('U',usuario.ID)">
                                 U
                             </button>
-                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
+                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white" v-if="usuario.Tipo != 'F'" @click="alterar('F',usuario.ID)">
                                 F
                             </button>
-                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white">
+                            <button id="mudar-funcao-0" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-color--indigo-500 mdl-color-text--white" v-if="usuario.Tipo != 'G'" @click="alterar('G',usuario.ID)">
                                 G
                             </button>
                         </row>
@@ -40,14 +40,48 @@ Vue.component('usuarios-view', {
     data: function () {
         return {
             searchText: '',
-            usuarios: []
+            usuarios: [],
+            usuariosAux: []
+            
         }
     },
     methods: {
+        alterar: function (funcao, id) {
+            params = {
+                token: localStorage.getItem("token"),
+                tipo: funcao,
+                id: id
+            }
+            var t = this;
+            $.post(URL_API + 'usuario/updatePermissao', params)
+                .done(function (data) {
+                    if (data == 404) {
+                        $.toast('Faça o login novamente no sistema');                        
+                    } else {
+                        usuarios(users => {
+                            t.usuarios = users.usuarios;
+                            t.usuariosAux = t.usuarios;
+                            console.log(this.usuarios);
+                        });
+                        $.toast('Erro ao cadastrar');
+
+                    }
+
+                }).fail(function (error) {
+                    $.toast('Erro ao alterar funcao')
+                });
+
+        },
+        filtar: function(){
+            this.usuarios = this.usuariosAux.filter(item=>{
+                return item.Nome.toUpperCase().indexOf(this.searchText.toUpperCase()) > -1
+            });
+        }
     },
     created: function () {
         usuarios(users => {
             this.usuarios = users.usuarios;
+            this.usuariosAux = this.usuarios;
             console.log(this.usuarios);
         });
     }

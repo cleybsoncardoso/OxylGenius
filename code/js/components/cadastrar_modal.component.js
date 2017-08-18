@@ -34,15 +34,20 @@ Vue.component('cadastrar-modal', {
     },
     methods: {
         login: function () {
-            $.toast('Toast message to be shown')            
-            // console.log(this.conta);
-            // console.log(URL_API + 'usuario');
-            // $.post(URL_API + 'usuario', this.conta)
-            //     .done(function (data) {
-            //         console.log(data);
-            //     }).fail(function (error) {
-            //         console.log(error);
-            //     });
+            if (this.conta && this.conta.password && this.conta.nome && this.conta.email) {
+                $.post(URL_API + 'usuario', this.conta)
+                    .done(function (data) {
+                        if (data == 102)
+                            $.toast('Email ja esta utilizado');
+                        else
+                            $.toast('Cadastro feito com sucesso');
+
+                    }).fail(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                $.toast('preencha todos os campos')
+            }
         }
 
     }
