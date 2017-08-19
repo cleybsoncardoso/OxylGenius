@@ -29,119 +29,141 @@ Vue.component('add-item', {
                     <div class="row">
                         <div class="col-sm-8">
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" v-model="nome" type="text" id="obraNome" ></textarea>
+                                <input class="mdl-textfield__input" v-model="obra.nome" type="text" id="obraNome" ></textarea>
                                 <label class="mdl-textfield__label" for="obraNome">Nome da obra</label>
+                            </div>
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" v-model="obra.titulo" type="text" id="obraTitulo">
+                                <label class="mdl-textfield__label" for="obraTitulo">Título da obra</label>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" v-model="numeroInventario" type="number" id="obraNumeroInventario" ></textarea>
-                                <label class="mdl-textfield__label" for="obraNumeroInventario">Numero no Inventário</label>
+                                <input class="mdl-textfield__input" v-model="obra.n_no_inventario" type="number" id="obran_no_inventario" ></textarea>
+                                <label class="mdl-textfield__label" for="obran_no_inventario">Numero no Inventário</label>
                             </div>
+                            <label class="mdl-switch mdl-js-switch" for="obraEstadoAtivo">
+                                <input type="checkbox" id="obraEstadoAtivo" class="mdl-switch__input" v-model="obra.estadoAtivo">
+                                <span class="mdl-switch__label">Obra Ativa</span>
+                            </label>
                         </div>
                     </div>
                     <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" v-model="titulo" type="text" id="obraTitulo">
-                        <label class="mdl-textfield__label" for="obraTitulo">Título da obra</label>
-                    </div>
-                    <label class="mdl-radio mdl-js-radio" for="obraAtiva">
-                        <input type="radio" id="obraAtiva" class="mdl-radio__button" name="status" checked>
-                        <span class="mdl-radio__label">Obra Ativa</span>
-                    </label>
-                    <label class="mdl-radio mdl-js-radio" for="obraInativa">
-                        <input type="radio" id="obraInativa" class="mdl-radio__button" name="status">
-                        <span class="mdl-radio__label">Obra Inativa</span>
-                    </label>
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <textarea class="mdl-textfield__input" v-model="marcas" type="text" rows= "2" id="obraMarcas" ></textarea>
-                        <label class="mdl-textfield__label" for="obraMarcas">Marcas e Inscrições</label>
+                        <textarea class="mdl-textfield__input" v-model="obra.descricao" type="text" rows= "3" id="obraDescricao" ></textarea>
+                        <label class="mdl-textfield__label" for="obraDescricao">Descrição</label>
                     </div>
                 </div>
             </div>
             <div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="colecao" type="text" id="obraColecao">
+                    <textarea class="mdl-textfield__input" v-model="obra.marcas" type="text" rows= "2" id="obraMarcas" ></textarea>
+                    <label class="mdl-textfield__label" for="obraMarcas">Marcas e Inscrições</label>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" v-model="obra.colecao" type="text" id="obraColecao">
                     <label class="mdl-textfield__label" for="obraColecao">Coleção</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="funcao" type="text" id="obraFuncao">
+                    <input class="mdl-textfield__input" v-model="obra.funcao" type="text" id="obraFuncao">
                     <label class="mdl-textfield__label" for="obraFuncao">Função</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="procedencia" type="text" id="obraProcedencia">
+                    <input class="mdl-textfield__input" v-model="obra.procedencia" type="text" id="obraProcedencia">
                     <label class="mdl-textfield__label" for="obraProcedencia">Procedência</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="estado" type="text" id="obraEstado">
+                    <input class="mdl-textfield__input" v-model="obra.estado" type="text" id="obraEstado">
                     <label class="mdl-textfield__label" for="obraEstado">Estado de conservação</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" v-model="historico" type="text" rows= "3" id="obraHistorico" ></textarea>
+                    <textarea class="mdl-textfield__input" v-model="obra.historico" type="text" rows= "3" id="obraHistorico" ></textarea>
                     <label class="mdl-textfield__label" for="obraHistorico">Histórico</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" v-model="descricao" type="text" rows= "3" id="obraDescricao" ></textarea>
-                    <label class="mdl-textfield__label" for="obraDescricao">Descrição</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="iconologia" type="text" id="obraIconologia">
+                    <textarea class="mdl-textfield__input" v-model="obra.iconologia" type="text" rows="3" id="obraIconologia"></textarea>
                     <label class="mdl-textfield__label" for="obraIconologia">Iconologia</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" v-model="referencias" type="text" rows= "3" id="obraReferencias" ></textarea>
+                    <textarea class="mdl-textfield__input" v-model="obra.referencias" type="text" rows= "3" id="obraReferencias" ></textarea>
                     <label class="mdl-textfield__label" for="obraReferencias">Referências</label>
                 </div>
             </div>
             <div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="formaAquisicao" type="text" id="obraFormaAquisicao">
-                    <label class="mdl-textfield__label" for="obraFormaAquisicao">Forma de Aquisição</label>
+                    <input class="mdl-textfield__input" v-model="obra.Forma" type="text" id="obraForma">
+                    <label class="mdl-textfield__label" for="obraForma">Forma de Aquisição</label>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" v-model="obra.autor" type="text" id="obraautor">
+                            <label class="mdl-textfield__label" for="obraautor">Autor da Aquisição</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" v-model="obra.dta" type="text" id="obradta">
+                            <label class="mdl-textfield__label" for="obradta">Data de Aquisição</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="dataAquisicao" type="text" id="obraDataAquisicao">
-                    <label class="mdl-textfield__label" for="obraDataAquisicao">Data de Aquisição</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="autorAquisicao" type="text" id="obraAutorAquisicao">
-                    <label class="mdl-textfield__label" for="obraAutorAquisicao">Autor da Aquisição</label>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" v-model="observacoes" type="text" rows= "2" id="obraObservacoes"></textarea>
+                    <textarea class="mdl-textfield__input" v-model="obra.observacoes" type="text" rows= "2" id="obraObservacoes"></textarea>
                     <label class="mdl-textfield__label" for="obraObservacoes">Observações</label>
                 </div>
             </div>
             <div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="materiais" type="text" id="obraMateriais">
-                    <label class="mdl-textfield__label" for="obraMateriais">Materiais Constitutivos</label>
+                    <input class="mdl-textfield__input" v-model="obra.material" type="text" id="obramaterial">
+                    <label class="mdl-textfield__label" for="obramaterial">Materiais Constitutivos</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="tecnica" type="text" id="obraTecnica">
-                    <label class="mdl-textfield__label" for="obraTecnica">Técnica de fabricação</label>
+                    <input class="mdl-textfield__input" v-model="obra.tecnica" type="text" id="obraTecnica">
+                    <label class="mdl-textfield__label" for="obraTecnica">Técnica de Fabricação</label>
                 </div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="autoria" type="text" id="obraAutoria">
-                    <label class="mdl-textfield__label" for="obraAutoria">Autoria</label>
+                    <input class="mdl-textfield__input" v-model="obra.autora" type="text" id="obraautora">
+                    <label class="mdl-textfield__label" for="obraautora">Autoria</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" v-model="altura" type="text" id="obraAltura">
+                        <input class="mdl-textfield__input" v-model="obra.Altura" type="text" id="obraAltura">
                         <label class="mdl-textfield__label" for="obraAltura">Altura</label>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" v-model="largura" type="text" id="obraLargura">
+                        <input class="mdl-textfield__input" v-model="obra.Largura" type="text" id="obraLargura">
                         <label class="mdl-textfield__label" for="obraLargura">Largura</label>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" v-model="comprimento" type="text" id="obraComprimento">
+                        <input class="mdl-textfield__input" v-model="obra.Comprimento" type="text" id="obraComprimento">
                         <label class="mdl-textfield__label" for="obraComprimento">Comprimento</label>
                     </div>
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" v-model="obra.fotografo" type="text" id="obraFotografo">
+                            <label class="mdl-textfield__label" for="obraFotografo">Fotógrafo</label>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" v-model="obra.dataFoto" type="text" id="obraDataFoto">
+                            <label class="mdl-textfield__label" for="obraDataFoto">Data</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input"  v-model="obra.arquivoFoto" type="text" id="obraArquivoFoto">
+                    <label class="mdl-textfield__label" for="obraArquivoFoto">Arquivo</label>
                 </div>
             </div>
         </div>
@@ -150,43 +172,48 @@ Vue.component('add-item', {
                 Cancelar
             </a>
             <div style="flex-grow: 1"></div>
-            <a id="add-obra-button" :disabled="!valido()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+            <a v-on:click="cadastra()" id="add-obra-button" :disabled="!valido()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                 <span v-show="item">Salvar obra</span>
                 <span v-show="!item">Adicionar Obra</span>
             </a>
         </div>
     </div>
     `,
-    data: function () {
-        return {
-            imagem: "",
-            nome: "",
-            numeroInventario: "",
-            titulo: "",
-            marcas: "",
-            colecao: "",
-            funcao: "",
-            procedencia: "",
-            descricao: "",
-            historico: "",
-            iconologia: "",
-            estado: "",
-            referencias: "",
-            formaAquisicao: "",
-            dataAquisicao: "",
-            autorAquisicao: "",
-            observacoes: "",  
-            materiais: "",
-            tecnica: "",
-            autoria: "",
-            altura: "",
-            largura: "",
-            comprimento: "",  
-            error: {
-                type: 'success',
-                message: ''
-            }
+    var: obra = {
+        imagem: "",
+        nome: "",
+        n_no_inventario: "",
+        titulo: "",
+        estadoAtivo: "",
+        marcas: "",
+        colecao: "",
+        funcao: "",
+        procedencia: "",
+        descricao: "",
+        historico: "",
+        iconologia: "",
+        estado: "",
+        referencias: "",
+        Forma: "",
+        dta: "",
+        autor: "",
+        observacoes: "",  
+        material: "",
+        tecnica: "",
+        autora: "",
+        Altura: "",
+        Largura: "",
+        Comprimento: "",
+        fotografo: "",
+        dataFoto: "", 
+        arquivoFoto: "",
+        error: {
+            type: 'success',
+            message: ''
         }
+    },
+    data: function () {
+        return obra;
     },
     methods: {
         handleUpload: function (e, clear) {
@@ -226,6 +253,17 @@ Vue.component('add-item', {
             this.$emit('closeModalAdd');
             $('#add-item .mdl-textfield').removeClass('is-dirty');
             $('#dashboard_main').removeClass('noscroll');
+        },
+        cadastra: function () {
+            $.post(URL_API + 'obra', this.obra)
+                .done(function(data) {
+                    if(obra == 404)
+                        $.toast('Erro ao inserir a obra');
+                    else {
+                        close();
+                        $.toast('Obra cadastrada com sucesso');
+                    }
+                })
         }
     },
     watch: {
