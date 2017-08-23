@@ -129,7 +129,7 @@ class UsuarioController extends Controller
             return response()->json(102);
         } else {
             $dados['password'] = base64_encode($dados['password']);                 //codifica a senha
-            $sql = DB::INSERT('INSERT INTO usuario(Email, Senha, Nome, FotoUsuario, Tipo, ativo) VALUES (?,?,?,"https://www.portalmaritimo.com/wp-content/uploads/2010/08/anonimo.jpg","U", 1)',      //registra o usuario no BD
+            DB::INSERT('INSERT INTO usuario(Email, Senha, Nome, FotoUsuario, Tipo, ativo) VALUES (?,?,?,"https://www.portalmaritimo.com/wp-content/uploads/2010/08/anonimo.jpg","U", 1)',      //registra o usuario no BD
                 [$dados['email'], $dados['password'], $dados['nome']]);
         }
         return response()->json(200);
@@ -179,7 +179,11 @@ class UsuarioController extends Controller
                 return response()->json(404); //caso nao encontre o usuario, retorna o erro 404
             } else {
                 DB::UPDATE('UPDATE usuario SET Tipo =  ? WHERE ID = ?', [$dados['tipo'], $dados['id']]);
+                $today = date("Y-m-d");
+                DB::INSERT('INSERT INTO mudancaempregado(ID_Autor, ID_Empregado, conteudo, DataAlteracao) VALUES (?,?,?,?)',      //registra o usuario no BD
+                [$usuario[0]->ID, $dados['id'], $dados['tipo'], $today]);
                 return response()->json(true); //caso nao encontre o usuario, retorna o erro 404
+            
             }
         } else {
             return response()->json("Informe o token do usuario");

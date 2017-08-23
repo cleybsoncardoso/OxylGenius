@@ -16,13 +16,12 @@ Vue.component('add-item', {
                     </label>
                     <input id="image-input" type="file" @change="handleUpload"/>
                     <div class="imagem-preview">
-                        <div v-show="imagem" class="imagem-content" v-bind:style="{ backgroundImage: 'url(' + imagem + ')' }">
+                        <div v-show="linkfoto" class="imagem-content" v-bind:style="{ backgroundImage: 'url(' + linkfoto + ')' }">
                         </div>
-                        <button v-on:click="removeFoto()" id="remove-foto" v-show="imagem" class="remove-foto mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-button--raised">
+                        <button v-on:click="removeFoto()" id="remove-foto" v-show="linkfoto" class="remove-foto mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-button--raised">
                             <i class="material-icons">close</i>
                         </button>
                         <div class="mdl-tooltip" data-mdl-for="remove-foto">Remover foto</div>
-                        <div class="mdl-color-text--red-500" style="text-aling: center;text-transform: uppercase;margin-top: 16px">{{error.message}}</div>
                     </div>
                 </div>
                 <div class="col-sm-8">
@@ -90,7 +89,7 @@ Vue.component('add-item', {
             </div>
             <div>
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" v-model="obra.Forma" type="text" id="obraForma">
+                    <input class="mdl-textfield__input" v-model="obra.forma" type="text" id="obraForma">
                     <label class="mdl-textfield__label" for="obraForma">Forma de Aquisição</label>
                 </div>
                 <div class="row">
@@ -102,7 +101,7 @@ Vue.component('add-item', {
                     </div>
                     <div class="col-sm-4">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" v-model="obra.dta" type="text" id="obradta">
+                            <input class="mdl-textfield__input" v-model="obra.dta" type="date" id="obradta">
                             <label class="mdl-textfield__label" for="obradta">Data de Aquisição</label>
                         </div>
                     </div>
@@ -156,14 +155,10 @@ Vue.component('add-item', {
                     </div>
                     <div class="col-sm-4">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" v-model="obra.dataFoto" type="text" id="obraDataFoto">
+                            <input class="mdl-textfield__input" v-model="obra.dataFoto" type="date" id="obraDataFoto">
                             <label class="mdl-textfield__label" for="obraDataFoto">Data</label>
                         </div>
                     </div>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input"  v-model="obra.arquivoFoto" type="text" id="obraArquivoFoto">
-                    <label class="mdl-textfield__label" for="obraArquivoFoto">Arquivo</label>
                 </div>
             </div>
         </div>
@@ -180,11 +175,11 @@ Vue.component('add-item', {
     </div>
     `,
     var: obra = {
-        imagem: "",
+        linkfoto: "",
         nome: "",
         n_no_inventario: "",
         titulo: "",
-        estadoAtivo: "",
+        estadoAtivo: false,
         marcas: "",
         colecao: "",
         funcao: "",
@@ -194,10 +189,10 @@ Vue.component('add-item', {
         iconologia: "",
         estado: "",
         referencias: "",
-        Forma: "",
+        forma: "",
         dta: "",
         autor: "",
-        observacoes: "",  
+        observacoes: "",
         material: "",
         tecnica: "",
         autora: "",
@@ -205,12 +200,11 @@ Vue.component('add-item', {
         Largura: "",
         Comprimento: "",
         fotografo: "",
-        dataFoto: "", 
-        arquivoFoto: "",
-        error: {
-            type: 'success',
-            message: ''
-        }
+        dataFoto: "",
+        arquivo: "",
+        n_de_visulizacoes: 0,
+        local_data: "",
+        inconologia: "",
     },
     data: function () {
         return obra;
@@ -229,24 +223,23 @@ Vue.component('add-item', {
 
             if (permitido) {
                 reader.addEventListener('load', () => {
-                    this.imagem = reader.result;
-                    this.error.message = "";
+                    this.linkfoto = reader.result;
                 });
                 reader.readAsDataURL(files[0]);
             } else {
-                this.error.message = "Formato de imagem inválido";
+                // this.error.message = "Formato de imagem inválido";
                 this.removeFoto();
             }
         },
         removeFoto: function () {
-            this.imagem = "";
+            this.linkfoto = "";
             document.getElementById('image-input').value = "";
         },
         valido: function () {
-            return this.imagem && this.titulo && this.descricao ? true : false;
+            return this.linkfoto && this.titulo && this.descricao ? true : false;
         },
         close: function () {
-            this.imagem = "";
+            this.linkfoto = "";
             this.titulo = "";
             this.descricao = "";
             this.item = "";
@@ -255,21 +248,31 @@ Vue.component('add-item', {
             $('#dashboard_main').removeClass('noscroll');
         },
         cadastra: function () {
-            $.post(URL_API + 'obra', this.obra)
-                .done(function(data) {
-                    if(obra == 404)
+            obra.token = localStorage.getItem("token");
+            if(obra.estadoAtivo){
+                obra.estadoAtivo = 1;
+            } else {
+                obra.estadoAtivo = 0;                
+            }
+            var t = this;
+            $.post(URL_API + 'obra', obra)
+                .done(function (data) {
+                    if (data == 404)
                         $.toast('Erro ao inserir a obra');
                     else {
-                        close();
+                        obra = {};
                         $.toast('Obra cadastrada com sucesso');
+                        t.$emit('closeModalAdd');
+                        $('#add-item .mdl-textfield').removeClass('is-dirty');
+                        $('#dashboard_main').removeClass('noscroll');
                     }
-                })
+                });
         }
     },
     watch: {
         item: function () {
             if (this.item) {
-                this.imagem = this.item.imagem;
+                this.linkfoto = this.item.linkfoto;
                 this.titulo = this.item.titulo;
                 this.descricao = this.item.descricao;
                 $('#add-item .mdl-textfield').addClass('is-dirty');

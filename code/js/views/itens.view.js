@@ -4,7 +4,7 @@ Vue.component('itens-view', {
     <div id="seachbar" class="card-view mdl-card mdl-shadow--2dp">
         <div class="mdl-card__title">
             <div class="mdl-textfield mdl-js-textfield" id="search-input">
-                <input class="mdl-textfield__input" type="text" id="search" v-model="searchText">
+                <input class="mdl-textfield__input" type="text" id="search" v-model="searchText" @keyup="filtro">
                 <label class="mdl-textfield__label" for="search">Pesquisar por uma obra</label>
             </div>
 
@@ -16,8 +16,9 @@ Vue.component('itens-view', {
 
     <div class="row">
         <div class="col-sm-4" v-for="obra in obras" style="padding-bottom: 16px">
-            <div class="item mdl-card mdl-shadow--4dp" @click="openItem()">
-                <div class="obra-foto" style="background-image: url('https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg')">
+            <div class="item mdl-card mdl-shadow--4dp">
+
+                <div class="obra-foto" v-bind:style="{ backgroundImage: 'url(' + obra.linkFoto + ')' }">
                 </div>
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">{{obra.nome}}</h2>
@@ -39,7 +40,9 @@ Vue.component('itens-view', {
             searchText: '',
             openItemModal: false,
             selectedItem: '',
-            obras: []
+            obras: [],
+            obrasAux: []
+            
         }
     },
     methods: {
@@ -47,24 +50,28 @@ Vue.component('itens-view', {
             this.openItemModal = true;
             $('#dashboard_main').addClass('noscroll');
         },
-        openItem: function () {
-            this.selectedItem = {
-                imagem: "https://conexaoparis.s3.amazonaws.com/wp-content/uploads/2007/06/909.jpg",
-                titulo: "Obra A",
-                descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit Mauris sagittis pellentesque lacus eleifend lacinia"
-            }
-            this.addItem();
-        },
         modalClosed: function () {
             this.selectedItem = '';
             this.openItemModal = false
         },
+        filtro: function(){
+            this.obras = this.obrasAux.filter(item=>{
+                return item.nome.toUpperCase().indexOf(this.searchText.toUpperCase()) > -1
+            });
+        },
         getObras: function () {
-            var storage = new Storage(), t = this;
-            $.get(URL_API + 'obra', storage.recuperar('token').token)
+            var t = this;
+            $.get(URL_API + 'obra')
                 .done(function (data) {
                     if (data != 404) {
+                        data.map(item=>{
+                            if(item.foto && item.foto.length > 0){
+                                item.linkFoto = item.foto[0].linkFoto;
+                            }
+                        });
                         t.obras = data;
+                        t.obrasAux = data;
+                        console.log(data);
                     }
                 }).fail(function (error) {
                 });

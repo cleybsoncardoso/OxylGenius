@@ -28,9 +28,9 @@ class AvaliacaoController extends Controller
         } else {
             $usuario = $usuario[0]; 
             $dados['ID_Autor'] = $usuario->ID;
-
+            $today = date("Y-m-d");
             DB::INSERT('INSERT INTO avaliacao (ID_Autor, Nota, Dta) VALUES (?,?,?)',
-                [$dados['ID_Autor'], $dados['Nota'], $dados['Dta']]);
+                [$dados['ID_Autor'], $dados['Nota'], $today]);
 
             return response()->json(true); //caso cadastre
         }
@@ -59,7 +59,7 @@ class AvaliacaoController extends Controller
     }
 
     public function all(){                                           
-        $avaliacoes = DB::SELECT('SELECT * FROM avaliacao');
+        $avaliacoes = DB::SELECT('SELECT a.*, u.Nome FROM avaliacao a inner join usuario u on (a.ID_Autor = u.ID)');
         return response()->json($avaliacoes);
             
     }

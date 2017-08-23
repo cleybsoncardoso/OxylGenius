@@ -30,7 +30,7 @@
                     <div class="usuario-foto">
                         <i class="mdl-color-text--grey-700 material-icons">account_circle</i>
                     </div>
-                    <div class="usuario-nome mdl-color-text--grey-700">Username</div>
+                    <div class="usuario-nome mdl-color-text--grey-700">{{user.nome}}</div>
                     <button class="logout-button mdl-button mdl-js-button mdl-button--colored mdl-color--red-400 mdl-color-text--white">
                         Sair
                     </button>
@@ -40,13 +40,13 @@
                     <a class="mdl-navigation__link" href="#perfil" id="perfil" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons" >account_circle</i> Perfil
                     </a>
-                    <a class="mdl-navigation__link" href="#itens" id="itens" v-on:click="select($event)">
+                    <a class="mdl-navigation__link" href="#itens" id="itens" v-show="user.tipo == 'F' || user.tipo == 'G'" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons">filter_list</i> Obras
                     </a>
-                    <a class="mdl-navigation__link" href="#usuarios" id="usuarios" v-on:click="select($event)">
+                    <a class="mdl-navigation__link" href="#usuarios" id="usuarios" v-show="user.tipo == 'G'" v-on:click="select($event)">
                         <i class="mdl-color-text--grey-700 material-icons">group</i> Usuários Cadastrados
                     </a>
-                    <a class="mdl-navigation__link" href="#logs" id="logs" v-on:click="select($event)">
+                    <a class="mdl-navigation__link" href="#logs" id="logs" v-on:click="select($event)" v-show="user.tipo == 'G'">
                         <i class="mdl-color-text--grey-700 material-icons">history</i> Logs do Sistema
                     </a>
                     <a class="mdl-navigation__link" href="#avaliar" id="avaliar" v-on:click="select($event)">
@@ -69,6 +69,7 @@
             el: '#app',
             data: function () {
                 return {
+                    user: {},
                     selected: {
                         nome: 'Perfil',
                         id: 'perfil'
@@ -109,6 +110,15 @@
                         }
                     }
                 }
+                let token = localStorage.getItem("token");
+                $.post("http://mocs.000webhostapp.com/api/public/usuario/perfil", { token: token })
+                    .done(function (data) {
+                        app.user = data;
+                        console.log(app.user);
+                    }).fail(function () {
+                        alert("error");
+                    });
+
             }
         });
     </script>

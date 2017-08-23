@@ -120,11 +120,9 @@
                     this.obras = this.obrasAux.filter(item=>{
                         return item.nome.toUpperCase().indexOf(this.searchText.toUpperCase()) > -1
                     });
-                    console.log(this.searchtext);
                 },
                 visualizarObra: function(obra){
                     location.href="visualizarObra.html?obra=" + obra.ID_Obra; 
-                    console.log(this.obra.ID_Obra);
                 }
             },
             created: function () {

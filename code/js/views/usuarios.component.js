@@ -61,7 +61,6 @@ Vue.component('usuarios-view', {
                         usuarios(users => {
                             t.usuarios = users.usuarios;
                             t.usuariosAux = t.usuarios;
-                            console.log(this.usuarios);
                         });
                         $.toast('Erro ao cadastrar');
 
