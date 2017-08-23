@@ -15,8 +15,8 @@ Vue.component('itens-view', {
     </div>
 
     <div class="row">
-        <div class="col-sm-4" v-for="obra in obras" style="padding-bottom: 16px">
-            <div class="item mdl-card mdl-shadow--4dp">
+        <div class="col-sm-4" v-for="obra in obras" style="padding-bottom: 16px" @click="open(obra)">
+            <div class="item mdl-card mdl-shadow--4dp" >
 
                 <div class="obra-foto" v-bind:style="{ backgroundImage: 'url(' + obra.linkFoto + ')' }">
                 </div>
@@ -47,6 +47,11 @@ Vue.component('itens-view', {
     },
     methods: {
         addItem: function () {
+            this.openItemModal = true;
+            $('#dashboard_main').addClass('noscroll');
+        },
+        open: function(obraAtual){
+            obra = obraAtual;
             this.openItemModal = true;
             $('#dashboard_main').addClass('noscroll');
         },

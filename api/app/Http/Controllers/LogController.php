@@ -34,7 +34,7 @@ class LogController extends Controller
             if($usuario->Tipo == 'G' || $usuario->Tipo == 'F'){
                 $dados['ID_Autor'] = $usuario->ID;
 
-                $logObra = DB::SELECT('SELECT m.ID_mudancaObra, m.conteudo, m.DataAlteracao, u.Nome, o.nome FROM  mudancaobra m inner join usuario u on (u.ID = m.ID_Autor) inner join obra o on (o.ID_Obra = m.ID_Obra) order by m.DataAlteracao desc');
+                $logObra = DB::SELECT('SELECT m.ID_mudancaObra, m.conteudo, DATE_FORMAT(m.DataAlteracao, "%d/%m/%Y") as DataAlteracao, u.Nome, o.nome FROM  mudancaobra m inner join usuario u on (u.ID = m.ID_Autor) inner join obra o on (o.ID_Obra = m.ID_Obra) order by m.DataAlteracao desc');
                 $logEmprego = DB::SELECT('SELECT m.ID_mudancaEmpregado, m.conteudo, m.DataAlteracao, u.Nome as funcionario, m.ID_Empregado FROM  mudancaempregado m inner join usuario u on (u.ID = m.ID_Autor) order by m.DataAlteracao desc');
 
                 foreach($logEmprego as $user){

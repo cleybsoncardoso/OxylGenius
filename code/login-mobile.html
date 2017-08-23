@@ -74,7 +74,7 @@
 
         <div class="mdl-layout__content">
 
-            <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+            <div class="mdl-layout mdl-js-layout mdl-color--grey-100" id="app">
                 <main class="main">
                     <div class="mdl-card mdl-shadow--6dp" style="margin:0 auto; margin-bottom:20px; margin-top:50px; height: 300px;">
 
@@ -88,13 +88,13 @@
                                 <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield">
                                         <div class="mdl-textfield mdl-js-textfield ">
-                                            <input class="mdl-textfield__input" type="email" id="email">
+                                            <input class="mdl-textfield__input" type="email" id="email" v-model="name">
                                             <label class="mdl-textfield__label" for="email_input">Email</label>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="mdl-textfield mdl-js-textfield ">
-                                        <input class="mdl-textfield__input" type="password" id="password">
+                                        <input class="mdl-textfield__input" type="password" id="password" v-model="password">
                                         <label class="mdl-textfield__label" for="pass_input">Senha</label>
                                     </div>
                                     <br>
@@ -102,7 +102,7 @@
                                 </form>
                             </div>
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Entrar</button>
+                                <button type="button" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" @click="login">Entrar</button>
                             </div>
 
                         </div>
@@ -116,6 +116,41 @@
         </div>
 
     </div>
+
+    <script>
+        var app = new Vue({
+        el: '#app',
+        data: {
+            name: '',
+            password: ''
+        },
+        methods: {
+            valido: function () {
+                return this.name && this.password;
+            },
+            login: function () {
+                var params = {
+                    login: this.name,
+                    senha: this.password,
+                }
+                $.post(URL_API + 'login', params)
+                    .done(function (data) {
+                        if (data.token) {
+                            localStorage.setItem("token", data.token);
+                            location.href = "dashboard.html";
+                        } else {
+                            console.log(data);
+                            if(data == 404){
+                                // document.getElementById("alertaErro").innerHTML=`<div class="alert alert-danger" id="alert">Usuario ou senha incorreta</div>`;
+                            }
+                        }
+                    }).fail(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+        });
+    </script>
 
     <body>
   <html>

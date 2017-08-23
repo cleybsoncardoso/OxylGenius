@@ -5,12 +5,16 @@ Vue.component('log-view', {
             <h5 v-show="!logsObra.length">Não há logs disponíveis</h5>
             <table>
             <tr>
-              <th>Month</th>
-              <th>Savings</th>
+              <th>Data</th>
+              <th>Obra</th>
+              <th>Funcionário</th>
+              <th>Operação</th>
             </tr>
-            <tr>
-              <td>January</td>
-              <td>$100</td>
+            <tr v-for="log in logsObra" style="text-align: right">
+              <td>{{log.DataAlteracao}}</td>
+              <td>{{log.nome}}</td>
+              <td>{{log.Nome}}</td>
+              <td>{{log.conteudo}}</td>              
             </tr>
           </table>
         </div>
@@ -18,24 +22,20 @@ Vue.component('log-view', {
     `,
     data: function () {
         return {
-            searchText: '',
-            logsObra: [],
-            logsFuncionario: []
+            logsObra: []
         }
     },
     methods: {
         getLogs: function () {
-            let token = localStorage.getItem("token");
             var t = this;
+            let token = localStorage.getItem("token");
             $.post(URL_API + 'log', { token: token })
-                .done(function (log) {
-                    if (log != 404) {
-                        t.logsObra = log.obra;
-                        t.logsFuncionario = log.funcionario;
-                    }
-                }).fail(function (error) {
-                    console.log(error);
-                });
+            .done(function (log) {
+                t.logsObra = log.obra;
+                console.log(log.obra);
+            }).fail(function (error) {
+                console.log(error);
+            });
         }
     },
     created: function () {
